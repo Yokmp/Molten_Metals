@@ -1,4 +1,32 @@
 data:extend({
+  --------------------
+  -- STEEL SMELTING --
+  --------------------
+  {
+    type = "recipe",
+    name = "steel-plate",
+    category = "ymm_casting",
+    normal =
+    {
+      enabled = false,
+      energy_required = 16,
+      ingredients = {
+        -- {"iron-plate", 5},
+        {type="fluid", name="molten-iron", amount=40}
+      },
+      result = "steel-plate"
+    },
+    expensive =
+    {
+      enabled = false,
+      energy_required = 32,
+      ingredients = {
+        -- {"iron-plate", 10},
+        {type="fluid", name="molten-iron", amount=40}
+      },
+      result = "steel-plate"
+    }
+  },
   -----------------
   -- WASTE WATER --
   -----------------

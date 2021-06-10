@@ -2,8 +2,10 @@
 
 This Mod is written under Factorio 1.1.33.
 It inserts its data in the data stage.
-Affected are only "vanilla-ores" (iron and copper). If you want to add ores from 
-other mods just edit data.lua where you'll find the two arrays at the top of the file.
+The Steel and Electric Furnaces are replaced by this mods smelters which are Assembling Machine types.
+This means that if other Mods add recipes for furnaces they won't be accessible.
+At he moment only "vanilla-ores" (iron and copper) are affected.
+If you want to add ores from other mods just edit data.lua where you'll find the two arrays at the top of the file.
 
 ## Updates
 * Initial release
