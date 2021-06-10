@@ -224,10 +224,10 @@ data:extend(
     icon = "__Molten_Metals__/graphics/technology/advanced-smelting.png",
     effects =
     {
-      {
-        type = "unlock-recipe",
-        recipe = "advanced-smelter"
-      },
+      -- {
+      --   type = "unlock-recipe",
+      --   recipe = "advanced-smelter"
+      -- },
       {
         type = "unlock-recipe",
         recipe = "advanced-caster"
@@ -284,7 +284,9 @@ data:extend(
         recipe = "slag-pellet-recycling"
       },
     },
-    prerequisites = {"slag-powder", "advanced-smelter"},
+    prerequisites = {"slag-powder", 
+    -- "advanced-smelter"
+  },
     unit =
     {
       count = 580,

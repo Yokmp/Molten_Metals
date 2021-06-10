@@ -1,4 +1,4 @@
-
+local sounds = require("__base__.prototypes.entity.sounds")
 data:extend({
   --TODO: balancing
   -------------------------------
@@ -10,7 +10,7 @@ data:extend({
     icon = "__Molten_Metals__/graphics/icons/basic-smelter.png",
     icon_size = 32, icon_mipmaps = 4,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "basic-smelter"},
+    minable = {mining_time = 0.2, result = "steel-furnace"},
     max_health = 300,
     corpse = "steel-furnace-remnants",
     dying_explosion = "steel-furnace-explosion",
@@ -112,7 +112,7 @@ data:extend({
         west_position = {0.0, 0.0},
         animation =
         {
-          filename = "__Molten_Metals__/graphics/basic-smelter/smelter-fire.png",
+          filename = "__base__/graphics/entity/steel-furnace/steel-furnace-fire-fire.png",
           priority = "high",
           line_length = 8,
           width = 29,
@@ -122,7 +122,7 @@ data:extend({
           direction_count = 1,
           shift = util.by_pixel(-0.5, 6),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/basic-smelter/hr-smelter-fire.png",
+            filename = "__base__/graphics/entity/steel-furnace/hr-steel-furnace-fire.png",
             priority = "high",
             line_length = 8,
             width = 57,
@@ -144,7 +144,7 @@ data:extend({
         effect = "flicker", -- changes alpha based on energy source light intensity
         animation =
         {
-          filename = "__Molten_Metals__/graphics/basic-smelter/smelter-glow.png",
+          filename = "__base__/graphics/entity/steel-furnace/steel-furnace-glow.png",
           priority = "high",
           width = 60,
           height = 43,
@@ -161,7 +161,7 @@ data:extend({
         effect = "flicker", -- changes alpha based on energy source light intensity
         animation =
         {
-          filename = "__Molten_Metals__/graphics/basic-smelter/smelter-working.png",
+          filename = "__base__/graphics/entity/steel-furnace/steel-furnace-working.png",
           priority = "high",
           line_length = 8,
           width = 64,
@@ -172,7 +172,7 @@ data:extend({
           shift = util.by_pixel(0, - 4.5),
           blend_mode = "additive",
           hr_version = {
-            filename = "__Molten_Metals__/graphics/basic-smelter/hr-smelter-working.png",
+            filename = "__base__/graphics/entity/steel-furnace/hr-steel-furnace-working.png",
             priority = "high",
             line_length = 8,
             width = 130,
@@ -227,7 +227,7 @@ data:extend({
     icon = "__Molten_Metals__/graphics/icons/advanced-smelter.png",
     icon_size = 32,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 1, result = "advanced-smelter"},
+    minable = {mining_time = 1, result = "electric-furnace"},
     max_health = 350,
     corpse = "big-remnants",
     dying_explosion = "medium-explosion",
