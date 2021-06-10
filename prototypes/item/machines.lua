@@ -1,17 +1,43 @@
 
-data.raw.item["steel-furnace"].group = "furnace"
-data.raw.item["steel-furnace"].subgroup = "production-machine"
-data.raw.item["steel-furnace"].place_result = "basic-smelter"
-data.raw.item["steel-furnace"].order = "c[electric-furnace]"
-data.raw.item["electric-furnace"].group = "furnace"
-data.raw.item["electric-furnace"].subgroup = "production-machine"
-data.raw.item["electric-furnace"].place_result = "advanced-smelter"
-data.raw.item["electric-furnace"].order = "b[steel-furnace]"
+-- data.raw.item["steel-furnace"].group = "furnace"
+-- data.raw.item["steel-furnace"].subgroup = "production-machine"
+-- data.raw.item["steel-furnace"].place_result = "basic-smelter"
+-- data.raw.item["steel-furnace"].order = "c[electric-furnace]"
+-- data.raw.item["electric-furnace"].group = "furnace"
+-- data.raw.item["electric-furnace"].subgroup = "production-machine"
+-- data.raw.item["electric-furnace"].place_result = "advanced-smelter"
+-- data.raw.item["electric-furnace"].order = "b[steel-furnace]"
+
+data.raw.item["steel-furnace"].flags = {"hidden"}
+data.raw.item["electric-furnace"].flags = {"hidden"}
+data.raw["furnace"]["stone-furnace"].next_upgrade = "basic-smelter"
 
 data:extend({
   --------------
   -- MACHINES --
   --------------
+  {
+    type = "item",
+    name = "basic-smelter",
+    icon = "__base__/graphics/icons/steel-furnace.png",
+    icon_size = 64, icon_mipmaps = 4,
+    group = "furnace",
+    subgroup = "smelting-machine",
+    order = "b[basic-smelter]",
+    place_result = "basic-smelter",
+    stack_size = 50
+  },
+  {
+    type = "item",
+    name = "advanced-smelter",
+    icon = "__base__/graphics/icons/electric-furnace.png",
+    icon_size = 64, icon_mipmaps = 4,
+    group = "furnace",
+    subgroup = "smelting-machine",
+    order = "c[advanced-smelter]",
+    place_result = "advanced-smelter",
+    stack_size = 50
+  },
   {
     type = "item",
     name = "basic-caster",
@@ -32,26 +58,4 @@ data:extend({
     place_result = "advanced-caster",
     stack_size = 50
   },
-  -- {
-  --   type = "item",
-  --   name = "basic-smelter",
-  --   icon = "__base__/graphics/icons/steel-furnace.png",
-  --   icon_size = 64, icon_mipmaps = 4,
-  --   group = "furnace",
-  --   subgroup = "production-machine",
-  --   order = "c[steel-furnace]",
-  --   place_result = "basic-smelter",
-  --   stack_size = 50
-  -- },
-  -- {
-  --   type = "item",
-  --   name = "advanced-smelter",
-  --   icon = "__base__/graphics/icons/electric-furnace.png",
-  --   icon_size = 64, icon_mipmaps = 4,
-  --   group = "furnace",
-  --   subgroup = "production-machine",
-  --   order = "a[basic-smelter]",
-  --   place_result = "advanced-smelter",
-  --   stack_size = 50
-  -- },
 })

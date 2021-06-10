@@ -8,7 +8,7 @@ data:extend({
       type = "recipe",
       name = "molten-iron",
       main_product = "molten-iron",
-      category = "Y_smelting",
+      category = "ymm_smelting",
       subgroup = "raw-material",
       allow_as_intermediate = false,
       allow_intermediates = false,
@@ -52,7 +52,7 @@ data:extend({
 		{
 			type = "recipe",
 			name = "molten-iron-plate",
-			category = "Y_casting",
+			category = "ymm_casting",
       subgroup = "raw-material",
       show_amount_in_title = true,
       allow_as_intermediate = false,

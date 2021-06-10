@@ -1,9 +1,9 @@
 local sounds = require("__base__.prototypes.entity.sounds")
 data:extend({
   --TODO: balancing
-  -------------------------------
-  -- FURNACE LIQUIFICATION T1  --
-  -------------------------------
+  -----------------
+  -- FURNACE T2  --
+  -----------------
   {
     type = "assembling-machine",
     name = "basic-smelter",
@@ -38,27 +38,33 @@ data:extend({
         percent = 100
       }
     },
-    collision_box = {{ - 0.7, - 0.7}, {0.7, 0.7}},
-    selection_box = {{ - 0.8, - 1}, {0.8, 1}},
-    crafting_categories = {"Y_smelting"},
+    collision_box = {{ -0.7, -0.7}, {0.7, 0.7}},
+    selection_box = {{ -0.8, -1  }, {0.8, 1  }},
+    crafting_categories = {"ymm_smelting"},
     fast_replaceable_group = "furnace",
-		crafting_speed = 0.75,
+		crafting_speed = 2,
     source_inventory_size = 1,
     result_inventory_size = 1,
     ingredient_count = 1,
-		energy_usage = "220kW",
+		energy_usage = "90kW",
     energy_source = {
       type = "burner",
       fuel_category = "chemical",
       effectivity = 1,
-      emissions = 0.02,
+      emissions_per_minute = 4,
       fuel_inventory_size = 1,
+      light_flicker =
+      {
+        color = {0, 0, 0},
+        minimum_intensity = 0.6,
+        maximum_intensity = 0.95
+      },
       smoke =
       {
         {
           name = "smoke",
           frequency = 10,
-          position = {0.7, - 1.2},
+          position = {0.7, -1.2},
           starting_vertical_speed = 0.08,
           starting_frame_deviation = 60
         }
@@ -175,8 +181,8 @@ data:extend({
             filename = "__base__/graphics/entity/steel-furnace/hr-steel-furnace-working.png",
             priority = "high",
             line_length = 8,
-            width = 130,
-            height = 149,
+            width = 128,
+            height = 150,
             frame_count = 1,
             axially_symmetrical = false,
             direction_count = 1,
@@ -218,9 +224,9 @@ data:extend({
       }
     }
   },
-  ------------------------------
-  -- FURNACE LIQUIFICATION T3 --
-  ------------------------------
+  ----------------
+  -- FURNACE T3 --
+  ----------------
   {
     type = "assembling-machine",
     name = "advanced-smelter",
@@ -229,8 +235,12 @@ data:extend({
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 1, result = "electric-furnace"},
     max_health = 350,
-    corpse = "big-remnants",
-    dying_explosion = "medium-explosion",
+    corpse = "electric-furnace-remnants",
+    dying_explosion = "electric-furnace-explosion",
+    -- vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
+    vehicle_impact_sound = sounds.generic_impact,
+    open_sound = sounds.machine_open,
+    close_sound = sounds.machine_close,
     resistances = {
       {
         type = "fire",
@@ -240,17 +250,17 @@ data:extend({
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
     module_specification = {
-      module_slots = 1,
+      module_slots = 2,
       module_info_icon_shift = {0, 0.8}
     },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-    crafting_categories = {"Y_smelting"},
+    crafting_categories = {"ymm_smelting"},
     fast_replaceable_group = "furnace",
     crafting_speed = 1.5,
     source_inventory_size = 1,
     result_inventory_size = 1,
     ingredient_count = 1,
-    energy_usage = "200kW",
+    energy_usage = "180kW",
 		energy_source = {
 			type = "electric",
 			usage_priority = "secondary-input",
@@ -265,13 +275,15 @@ data:extend({
 				}
 			}
 		},
-    vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
     working_sound = {
-      sound = {
+      sound =
+      {
         filename = "__base__/sound/electric-furnace.ogg",
-        volume = 0.7
+        volume = 0.6
       },
-      apparent_volume = 1.5
+      audible_distance_modifier = 0.6,
+      fade_in_ticks = 4,
+      fade_out_ticks = 20
     },
     animation = {
       layers = {
@@ -293,15 +305,16 @@ data:extend({
           }
         },
         {
-          filename = "__Molten_Metals__/graphics/advanced-smelter/advanced-smelter-shadow.png",
+          filename = "__base__/graphics/entity/electric-furnace/electric-furnace-shadow.png",
           priority = "high",
           width = 129,
           height = 100,
           frame_count = 1,
           shift = {0.421875, 0},
           draw_as_shadow = true,
-          hr_version = {
-            filename = "__Molten_Metals__/graphics/advanced-smelter/hr-advanced-smelter-shadow.png",
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/electric-furnace/hr-electric-furnace-shadow.png",
             priority = "high",
             width = 227,
             height = 171,
@@ -313,47 +326,97 @@ data:extend({
         }
       }
     },
-    working_visualisations = {
+    working_visualisations =
+    {
       {
-        animation = {
-          filename = "__Molten_Metals__/graphics/advanced-smelter/advanced-smelter-heater.png",
-          priority = "high",
-          width = 25,
-          height = 15,
-          frame_count = 12,
-          animation_speed = 0.5,
-          shift = {0.015625, 0.890625},
-          hr_version = {
-            filename = "__Molten_Metals__/graphics/advanced-smelter/hr-advanced-smelter-heater.png",
-            priority = "high",
-            width = 60,
-            height = 56,
-            frame_count = 12,
-            animation_speed = 0.5,
-            shift = util.by_pixel(1.75, 32.75),
-            scale = 0.5
+        draw_as_light = true,
+        fadeout = true,
+        animation =
+        {
+          layers =
+          {
+            {
+              filename = "__base__/graphics/entity/electric-furnace/advanced-smelter-heater.png",
+              priority = "high",
+              width = 25,
+              height = 15,
+              frame_count = 12,
+              animation_speed = 0.5,
+              shift = {0.015625, 0.890625},
+              hr_version =
+              {
+                filename = "__base__/graphics/entity/electric-furnace/hr-electric-furnace-heater.png",
+                priority = "high",
+                width = 60,
+                height = 56,
+                frame_count = 12,
+                animation_speed = 0.5,
+                shift = util.by_pixel(1.75, 32.75),
+                scale = 0.5
+              }
+            },
+            {
+              filename = "__base__/graphics/entity/electric-furnace/electric-furnace-light.png",
+              blend_mode = "additive",
+              width = 104,
+              height = 102,
+              repeat_count = 12,
+              shift = util.by_pixel(0, 0),
+              hr_version =
+              {
+                filename = "__base__/graphics/entity/electric-furnace/hr-electric-furnace-light.png",
+                blend_mode = "additive",
+                width = 202,
+                height = 202,
+                repeat_count = 12,
+                shift = util.by_pixel(1, 0),
+                scale = 0.5,
+              }
+            },
           }
         },
-        light = {intensity = 0.4, size = 6, shift = {0.0, 1.0}, color = {r = 1.0, g = 1.0, b = 1.0}}
+      },
+      {
+        draw_as_light = true,
+        draw_as_sprite = false,
+        fadeout = true,
+        animation =
+        {
+          filename = "__base__/graphics/entity/electric-furnace/electric-furnace-ground-light.png",
+          blend_mode = "additive",
+          width = 82,
+          height = 64,
+          shift = util.by_pixel(4, 68),
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/electric-furnace/hr-electric-furnace-ground-light.png",
+            blend_mode = "additive",
+            width = 166,
+            height = 124,
+            shift = util.by_pixel(3, 69),
+            scale = 0.5,
+          }
+        },
       },
       {
         animation =
         {
-          filename = "__Molten_Metals__/graphics/advanced-smelter/advanced-smelter-propeller-1.png",
+          filename = "__base__/graphics/entity/electric-furnace/electric-furnace-propeller-1.png",
           priority = "high",
           width = 19,
           height = 13,
           frame_count = 4,
           animation_speed = 0.5,
-          shift = { - 0.671875, - 0.640625},
-          hr_version = {
-            filename = "__Molten_Metals__/graphics/advanced-smelter/hr-advanced-smelter-propeller-1.png",
+          shift = {-0.671875, -0.640625},
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/electric-furnace/hr-electric-furnace-propeller-1.png",
             priority = "high",
             width = 37,
             height = 25,
             frame_count = 4,
             animation_speed = 0.5,
-            shift = util.by_pixel(-20.5, - 18.5),
+            shift = util.by_pixel(-20.5, -18.5),
             scale = 0.5
           }
         }
@@ -361,21 +424,22 @@ data:extend({
       {
         animation =
         {
-          filename = "__Molten_Metals__/graphics/advanced-smelter/advanced-smelter-propeller-2.png",
+          filename = "__base__/graphics/entity/electric-furnace/electric-furnace-propeller-2.png",
           priority = "high",
           width = 12,
           height = 9,
           frame_count = 4,
           animation_speed = 0.5,
-          shift = {0.0625, - 1.234375},
-          hr_version = {
-            filename = "__Molten_Metals__/graphics/advanced-smelter/hr-advanced-smelter-propeller-2.png",
+          shift = {0.0625, -1.234375},
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/electric-furnace/hr-electric-furnace-propeller-2.png",
             priority = "high",
             width = 23,
             height = 15,
             frame_count = 4,
             animation_speed = 0.5,
-            shift = util.by_pixel(3.5, - 38),
+            shift = util.by_pixel(3.5, -38),
             scale = 0.5
           }
         }
@@ -431,7 +495,7 @@ data:extend({
       module_slots = 2
     },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-    crafting_categories = {"Y_casting"},
+    crafting_categories = {"ymm_casting"},
     fast_replaceable_group = "assembling-machine",
     animation = make_4way_animation_from_spritesheet({
       layers = {
@@ -651,7 +715,7 @@ data:extend({
     },
     module_specification = { module_slots = 3 },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-    crafting_categories = {"Y_casting"},
+    crafting_categories = {"ymm_casting"},
     fast_replaceable_group = "assembling-machine",
     animation = make_4way_animation_from_spritesheet({
       layers = {

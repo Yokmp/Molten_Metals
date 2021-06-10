@@ -7,7 +7,7 @@ data:extend({
     {
       type = "recipe",
       name = "molten-copper",
-      category = "Y_smelting",
+      category = "ymm_smelting",
       subgroup = "raw-material",
       allow_as_intermediate = false,
       allow_intermediates = false,
@@ -29,7 +29,7 @@ data:extend({
           {type = "item", name = "copper-ore", amount = 2}
         },
         results = {
-          {type = "fluid", name = "molten-copper", amount = 20, temperature= 1100},
+          {type = "fluid", name = "molten-copper", amount = 20, temperature = 1100},
           {type = "item", name = "slag-stone", amount = 3}
         }
       },
@@ -40,7 +40,7 @@ data:extend({
           {type = "item", name = "copper-ore", amount = 4}
         },
 				results = {
-          {type = "fluid", name = "molten-copper", amount = 20, temperature= 1100},
+          {type = "fluid", name = "molten-copper", amount = 20, temperature = 1100},
           {type = "item", name = "slag-stone", amount = 3}
         }
       }
@@ -51,7 +51,7 @@ data:extend({
 		{
 			type = "recipe",
 			name = "molten-copper-plate",
-			category = "Y_casting",
+			category = "ymm_casting",
       subgroup = "raw-material",
       allow_as_intermediate = false,
       allow_intermediates = false,
@@ -67,7 +67,7 @@ data:extend({
 				enabled = false,
 				energy_required = 0.8,
 				ingredients = {
-          {type = "fluid", name = "molten-copper", amount = 25, temperature= 1100},
+          {type = "fluid", name = "molten-copper", amount = 25, temperature = 1100},
           {type = "fluid", name = "water", amount = 40}
 				},
 				results = {
@@ -79,7 +79,7 @@ data:extend({
 				enabled = false,
 				energy_required = 0.8,
         ingredients = {
-				  {type = "fluid", name = "molten-copper", amount = 50, temperature= 1100},
+				  {type = "fluid", name = "molten-copper", amount = 50, temperature = 1100},
 				  {type = "fluid", name = "water", amount = 80}
         },
 				results = {

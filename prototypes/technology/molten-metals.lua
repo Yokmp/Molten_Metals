@@ -13,14 +13,14 @@ data:extend(
     icon = "__Molten_Metals__/graphics/technology/smelting.png",
     effects =
     {
-      -- {
-      --   type = "unlock-recipe",
-      --   recipe = "basic-smelter"
-      -- },
       {
         type = "unlock-recipe",
-        recipe = "steel-furnace"
+        recipe = "basic-smelter"
       },
+      -- {
+      --   type = "unlock-recipe",
+      --   recipe = "steel-furnace"
+      -- },
 	    {
         type = "unlock-recipe",
         recipe = "basic-caster"
@@ -55,6 +55,7 @@ data:extend(
     },
     order = "c-a"
   },
+--#region Unused
   ------------------------
   -- SLAG to LANDFILL   --
   -- SLAG to STONEBRICK --
@@ -177,6 +178,7 @@ data:extend(
   --   },
   --   order = "c-b"
   -- },
+  --#endregion
   ------------------------
   -- SLAG to POWDER     --
   -- POWDER to CONCRETE --
@@ -224,18 +226,18 @@ data:extend(
     icon = "__Molten_Metals__/graphics/technology/advanced-smelting.png",
     effects =
     {
-      -- {
-      --   type = "unlock-recipe",
-      --   recipe = "advanced-smelter"
-      -- },
+      {
+        type = "unlock-recipe",
+        recipe = "advanced-smelter"
+      },
       {
         type = "unlock-recipe",
         recipe = "advanced-caster"
       },
-      {
-        type = "unlock-recipe",
-        recipe = "electric-furnace"
-      },
+      -- {
+      --   type = "unlock-recipe",
+      --   recipe = "electric-furnace"
+      -- },
       -- {
       --   type = "unlock-recipe",
       --   recipe = "advanced-molten-iron"
@@ -286,6 +288,7 @@ data:extend(
     },
     prerequisites = {"slag-powder", 
     -- "advanced-smelter"
+    "advanced-material-processing-2"
   },
     unit =
     {

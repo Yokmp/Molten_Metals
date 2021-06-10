@@ -2,11 +2,11 @@ data:extend(
 {
   {
     type = "recipe-category",
-    name = "Y_smelting"
+    name = "ymm_smelting"
   },
   {
     type = "recipe-category",
-    name = "Y_casting"
+    name = "ymm_casting"
   },
   --[[
   {
