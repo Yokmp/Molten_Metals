@@ -1,0 +1,47 @@
+data:extend({
+  {
+    type = "fluid",
+    name = "molten-iron",
+    default_temperature = 1500,
+    max_temperature = 3000,
+    heat_capacity = "0.425KJ",
+    base_color = {r=210/255, g=50/255, b=0},
+    flow_color = {r=230/255, g=210/255, b=0},
+    icon = "__Molten_Metals__/graphics/icons/molten-iron.png",
+    icon_size = 64,
+    pressure_to_speed_ratio = 0.4,
+    flow_to_energy_ratio = 0.59,
+    order = "a[fluid]-f[sulfuric-acid]",
+    auto_barrel = false
+  },
+  {
+    type = "fluid",
+    name = "molten-copper",
+    default_temperature = 1100,
+    max_temperature = 2600,
+    heat_capacity = "0.259KJ",
+    base_color = {r=150/255, g=50/255, b=0},
+    flow_color = {r=230/255, g=180/255, b=0},
+    icon = "__Molten_Metals__/graphics/icons/molten-copper.png",
+    icon_size = 64,
+    pressure_to_speed_ratio = 0.4,
+    flow_to_energy_ratio = 0.59,
+    order = "a[iron-fluid]",
+    auto_barrel = false
+  },
+  {
+    type = "fluid",
+    name = "waste-water",
+    enabled = true,
+    default_temperature = 25,
+    heat_capacity = "0.1KJ",
+    base_color = {r=0.24, g=0.10, b=0.055},
+    flow_color = {r=0.80, g=0.70, b=0.39},
+    max_temperature = 100,
+    icon = "__Molten_Metals__/graphics/icons/waste-water.png",
+    icon_size = 64,
+    pressure_to_speed_ratio = 0.4,
+    flow_to_energy_ratio = 0.59,
+    order = "z"
+  },
+})
