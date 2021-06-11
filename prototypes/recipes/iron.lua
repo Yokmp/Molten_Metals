@@ -25,24 +25,24 @@ data:extend({
       icon_size = 64,
       normal = {
 				enabled = false,
-        energy_required = 1.75,
+        energy_required = 3.2,
         ingredients = {
           {type = "item", name = "iron-ore", amount = 2}
         },
         results = {
-          {type = "fluid", name = "molten-iron", amount = 20, temperature= 1500},
-          {type = "item", name = "slag-stone", amount = 3}
+          {type = "fluid", name = "molten-iron", amount = 40, temperature= 1500},
+          {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
         }
       },
       expensive = {
         enabled = false,
-        energy_required = 3.5,
+        energy_required = 3.2,
         ingredients = {
-          {type = "item", name = "iron-ore", amount = 4}
+          {type = "item", name = "iron-ore", amount = 2}
         },
 				results = {
-          {type = "fluid", name = "molten-iron", amount = 20, temperature= 1500},
-          {type = "item", name = "slag-stone", amount = 3}
+          {type = "fluid", name = "molten-iron", amount = 40, temperature= 1500},
+          {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
         }
       }
     },
@@ -69,9 +69,9 @@ data:extend({
 			icon_size = 64,
 			normal = {
 				enabled = false,
-				energy_required = 1,
+				energy_required = 3.2,
 				ingredients = {
-          {type = "fluid", name = "molten-iron", amount = 25, temperature= 1500},
+          {type = "fluid", name = "molten-iron", amount = 20, temperature= 1500},
           {type = "fluid", name = "water", amount = 40}
 				},
 				results = {
@@ -81,9 +81,9 @@ data:extend({
 			},
 			expensive = {
 				enabled = false,
-				energy_required = 1,
+				energy_required = 3.2,
         ingredients = {
-				  {type = "fluid", name = "molten-iron", amount = 50, temperature= 1500},
+				  {type = "fluid", name = "molten-iron", amount = 20, temperature= 1500},
 				  {type = "fluid", name = "water", amount = 80}
         },
 				results = {

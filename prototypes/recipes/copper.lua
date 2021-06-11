@@ -24,7 +24,7 @@ data:extend({
       icon_size = 64,
       normal = {
 				enabled = false,
-        energy_required = 1.75,
+        energy_required = 3.2,
         ingredients = {
           {type = "item", name = "copper-ore", amount = 2}
         },
@@ -35,7 +35,7 @@ data:extend({
       },
       expensive = {
         enabled = false,
-        energy_required = 3.5,
+        energy_required = 3.2,
         ingredients = {
           {type = "item", name = "copper-ore", amount = 4}
         },
@@ -65,7 +65,7 @@ data:extend({
 			icon_size = 64,
 			normal = {
 				enabled = false,
-				energy_required = 0.8,
+				energy_required = 3.2,
 				ingredients = {
           {type = "fluid", name = "molten-copper", amount = 25, temperature = 1100},
           {type = "fluid", name = "water", amount = 40}
@@ -77,7 +77,7 @@ data:extend({
 			},
 			expensive = {
 				enabled = false,
-				energy_required = 0.8,
+				energy_required = 3.2,
         ingredients = {
 				  {type = "fluid", name = "molten-copper", amount = 50, temperature = 1100},
 				  {type = "fluid", name = "water", amount = 80}

@@ -19,7 +19,7 @@ data:extend({
   {
     type = "item",
     name = "basic-smelter",
-    icon = "__base__/graphics/icons/basic-smelter.png",
+    icon = "__Molten_Metals__/graphics/icons/basic-smelter.png",
     icon_size = 64, icon_mipmaps = 4,
     group = "furnace",
     subgroup = "smelting-machine",

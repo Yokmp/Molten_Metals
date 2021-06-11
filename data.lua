@@ -4,6 +4,8 @@
 
 -- assert(1==2)
 
+require("functions")
+
 require("prototypes.categories.recipe-category")
 
 require("prototypes.item.items")

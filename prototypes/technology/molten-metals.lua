@@ -1,6 +1,9 @@
-data:extend(
-{
-  -- TODO: balancing, better integration, slag usage, wastewater
+
+table.insert( 
+  data.raw.technology["steel-processing"].effects, 
+  {type = "unlock-recipe", recipe = "recycle-waste-water"} )
+
+data:extend({
   --------------------------
   -- T1: SMELTER + CASTER --
   -- ORE to LIQUID BASIC  --

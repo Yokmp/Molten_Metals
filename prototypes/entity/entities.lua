@@ -70,6 +70,8 @@ data:extend({
         }
       }
     },
+    -- module_specification = { module_slots = 2 },
+    -- allowed_effects = {"consumption", "speed", "productivity", "pollution"},
     animation = {
       layers = {
         {
@@ -90,7 +92,7 @@ data:extend({
           }
         },
         {
-          filename = "__Molten_Metals__/graphics/basic-smelter/smelter-shadow.png",
+          filename = "__base__/graphics/entity/steel-furnace/steel-furnace-shadow.png",
           priority = "high",
           width = 139,
           height = 43,
@@ -98,7 +100,7 @@ data:extend({
           draw_as_shadow = true,
           shift = util.by_pixel(39.5, 11.5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/basic-smelter/hr-smelter-shadow.png",
+            filename = "__base__/graphics/entity/steel-furnace/hr-steel-furnace-shadow.png",
             priority = "high",
             width = 277,
             height = 85,
@@ -110,44 +112,40 @@ data:extend({
         },
       },
     },
-    working_visualisations = {
+    working_visualisations =
+    {
       {
-        north_position = {0.0, 0.0},
-        east_position = {0.0, 0.0},
-        south_position = {0.0, 0.0},
-        west_position = {0.0, 0.0},
+        draw_as_light = true,
+        fadeout = true,
+        effect = "flicker",
         animation =
         {
-          filename = "__base__/graphics/entity/steel-furnace/steel-furnace-fire-fire.png",
+          filename = "__base__/graphics/entity/steel-furnace/steel-furnace-fire.png",
           priority = "high",
           line_length = 8,
           width = 29,
           height = 40,
           frame_count = 48,
-          axially_symmetrical = false,
           direction_count = 1,
           shift = util.by_pixel(-0.5, 6),
-          hr_version = {
+          hr_version =
+          {
             filename = "__base__/graphics/entity/steel-furnace/hr-steel-furnace-fire.png",
             priority = "high",
             line_length = 8,
             width = 57,
             height = 81,
             frame_count = 48,
-            axially_symmetrical = false,
             direction_count = 1,
             shift = util.by_pixel(-0.75, 5.75),
             scale = 0.5
           }
         },
-        light = {intensity = 1, size = 1, color = {r = 1.0, g = 1.0, b = 1.0}}
       },
       {
-        north_position = {0.0, 0.0},
-        east_position = {0.0, 0.0},
-        south_position = {0.0, 0.0},
-        west_position = {0.0, 0.0},
-        effect = "flicker", -- changes alpha based on energy source light intensity
+        fadeout = true,
+        draw_as_light = true,
+        effect = "flicker",
         animation =
         {
           filename = "__base__/graphics/entity/steel-furnace/steel-furnace-glow.png",
@@ -160,37 +158,67 @@ data:extend({
         }
       },
       {
-        north_position = {0.0, 0.0},
-        east_position = {0.0, 0.0},
-        south_position = {0.0, 0.0},
-        west_position = {0.0, 0.0},
-        effect = "flicker", -- changes alpha based on energy source light intensity
+        fadeout = true,
+        draw_as_light = true,
+        effect = "flicker",
         animation =
         {
           filename = "__base__/graphics/entity/steel-furnace/steel-furnace-working.png",
           priority = "high",
-          line_length = 8,
+          line_length = 1,
           width = 64,
-          height = 75,
+          height = 74,
           frame_count = 1,
-          axially_symmetrical = false,
           direction_count = 1,
-          shift = util.by_pixel(0, - 4.5),
+          shift = util.by_pixel(0, -4),
           blend_mode = "additive",
-          hr_version = {
+          hr_version =
+          {
             filename = "__base__/graphics/entity/steel-furnace/hr-steel-furnace-working.png",
             priority = "high",
-            line_length = 8,
+            line_length = 1,
             width = 128,
             height = 150,
             frame_count = 1,
-            axially_symmetrical = false,
             direction_count = 1,
-            shift = util.by_pixel(0, - 4.25),
+            shift = util.by_pixel(0, -5),
             blend_mode = "additive",
-            scale = 0.5
+            scale = 0.5,
           }
         }
+      },
+      {
+        draw_as_light = true,
+        draw_as_sprite = false,
+        fadeout = true,
+        effect = "flicker",
+        animation =
+        {
+          filename = "__base__/graphics/entity/steel-furnace/steel-furnace-ground-light.png",
+          priority = "high",
+          line_length = 1,
+          draw_as_sprite = false,
+          width = 78,
+          height = 64,
+          frame_count = 1,
+          direction_count = 1,
+          shift = util.by_pixel(0, 48),
+          blend_mode = "additive",
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/steel-furnace/hr-steel-furnace-ground-light.png",
+            priority = "high",
+            line_length = 1,
+            draw_as_sprite = false,
+            width = 152,
+            height = 126,
+            frame_count = 1,
+            direction_count = 1,
+            shift = util.by_pixel(1, 48),
+            blend_mode = "additive",
+            scale = 0.5,
+          }
+        },
       },
     },
     water_reflection =
@@ -214,8 +242,8 @@ data:extend({
         minimum_temperature = 1100.0, -- min iron
   			maximum_temperature = 2600.0, -- max copper
         pipe_covers = pipecoverspictures(),
-        pipe_picture = assembler2pipepictures(),
-        base_area = 10,
+        pipe_picture = assembler1pipepictures(),
+        base_area = 2, -- 1 = 100
         base_level = 1,
         pipe_connections =
         {
@@ -230,7 +258,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "advanced-smelter",
-    icon = "__Molten_Metals__/graphics/icons/advanced-smelter.png",
+    icon = "__base__/graphics/icons/electric-furnace.png",
     icon_size = 32,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 1, result = "electric-furnace"},
@@ -249,14 +277,11 @@ data:extend({
     },
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
-    module_specification = {
-      module_slots = 2,
-      module_info_icon_shift = {0, 0.8}
-    },
+    module_specification = { module_slots = 2, module_info_icon_shift = {0, 0.8} },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
     crafting_categories = {"ymm_smelting"},
     fast_replaceable_group = "furnace",
-    crafting_speed = 1.5,
+    crafting_speed = 2,
     source_inventory_size = 1,
     result_inventory_size = 1,
     ingredient_count = 1,
@@ -451,7 +476,7 @@ data:extend({
         minimum_temperature = 1100.0, -- min iron
   			maximum_temperature = 2600.0, -- max copper
         pipe_covers = pipecoverspictures(),
-        pipe_picture = assembler2pipepictures(),
+        pipe_picture = assembler1pipepictures(),
         base_level = 1,
         pipe_connections =
         {
@@ -467,12 +492,21 @@ data:extend({
     type = "assembling-machine",
     name = "basic-caster",
     icon = "__Molten_Metals__/graphics/icons/basic-caster.png",
-    icon_size = 32,
+    icon_size = 32, icon_mipmaps = 4,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {hardness = 0.2, mining_time = 0.5, result = "basic-caster"},
+    crafting_categories = {"ymm_casting"},
+    fast_replaceable_group = "assembling-machine",
+    minable = {mining_time = 0.5, result = "basic-caster"},
     max_health = 300,
-    corpse = "big-remnants",
-    dying_explosion = "medium-explosion",
+    corpse = "chemical-plant-remnants",
+    dying_explosion = "chemical-plant-explosion",
+    -- corpse = "big-remnants",
+    -- dying_explosion = "medium-explosion",
+    crafting_speed = 1,
+    ingredient_count = 1,
+    vehicle_impact_sound = sounds.generic_impact,
+    open_sound = sounds.machine_open,
+    close_sound = sounds.machine_close,
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
     drawing_box = {{ - 1.5, - 1.9}, {1.5, 1.5}},
@@ -491,12 +525,8 @@ data:extend({
         }
       }
     },
-    module_specification = {
-      module_slots = 2
-    },
+    module_specification = { module_slots = 1 },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-    crafting_categories = {"ymm_casting"},
-    fast_replaceable_group = "assembling-machine",
     animation = make_4way_animation_from_spritesheet({
       layers = {
       {
@@ -639,7 +669,6 @@ data:extend({
         }
       }
     },
-    vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
     working_sound = {
       sound = { {
         filename = "__base__/sound/chemical-plant.ogg",
@@ -648,16 +677,14 @@ data:extend({
       idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.6 },
       apparent_volume = 1.5,
     },
-    crafting_speed = 1,
-    ingredient_count = 1,
-    target_temperature = 500,
+    -- target_temperature = 500,
   	fluid_boxes = {
   		{ -- back top METAL
   			production_type = "input",
   			minimum_temperature = 1100.0, -- min iron
   			maximum_temperature = 2600.0, -- max copper
   			pipe_covers = pipecoverspictures(),
-  			base_area = 10,
+  			base_area = 2,
   			base_level = -1,
   			pipe_connections = {
   				{
@@ -668,15 +695,28 @@ data:extend({
   		},
   		{ --back bottom WATER
   			production_type = "input",
-  			filter = "water",
+  			-- filter = "water",
+        maximum_temperature = 100.0,
   			pipe_covers = pipecoverspictures(),
-  			base_area = 10,
+  			base_area = 2,
   			base_level = -1,
-  			height = 2,
   			pipe_connections = {
   				{
   					type = "input",
   					position = { 1, -2}
+  				}
+  			}
+  		},
+  		{ --back bottom WATER
+  			production_type = "output",
+        maximum_temperature = 166.0,
+  			-- filter = "waste-water",
+  			pipe_covers = pipecoverspictures(),
+  			base_level = 1,
+  			pipe_connections = {
+  				{
+  					type = "output",
+  					position = { -1, 2}
   				}
   			}
   		}
@@ -692,6 +732,8 @@ data:extend({
     icon_size = 32,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {hardness = 0.2, mining_time = 0.5, result = "advanced-caster"},
+    crafting_speed = 1.5,
+    ingredient_count = 1,
     max_health = 300,
     corpse = "big-remnants",
     dying_explosion = "medium-explosion",
@@ -713,7 +755,7 @@ data:extend({
         }
       }
     },
-    module_specification = { module_slots = 3 },
+    module_specification = { module_slots = 2 },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
     crafting_categories = {"ymm_casting"},
     fast_replaceable_group = "assembling-machine",
@@ -870,23 +912,47 @@ data:extend({
       idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.6 },
       apparent_volume = 1.5,
     },
-    crafting_speed = 1.5,
-    ingredient_count = 1,
-    fluid_boxes = {
-      {
-        production_type = "input",
-        pipe_covers = pipecoverspictures(),
-        base_area = 10,
-        base_level = -1,
-        pipe_connections = {{ type = "input", position = { - 1, - 2} }}
-      },
-      {
-        production_type = "input",
-        pipe_covers = pipecoverspictures(),
-        base_area = 10,
-        base_level = -1,
-        pipe_connections = {{ type = "input", position = {1, - 2} }}
-      }
-    }
+    -- target_temperature = 500,
+  	fluid_boxes = {
+  		{ -- back top METAL
+  			production_type = "input",
+  			minimum_temperature = 1100.0, -- min iron
+  			maximum_temperature = 2600.0, -- max copper
+  			pipe_covers = pipecoverspictures(),
+  			base_area = 1,
+  			base_level = -1,
+  			pipe_connections = {
+  				{
+  					type = "input",
+  					position = { -1, -2}
+  				}
+  			}
+  		},
+  		{ --back bottom WATER
+  			production_type = "input",
+  			-- filter = "water",
+  			pipe_covers = pipecoverspictures(),
+  			base_area = 1,
+  			base_level = -1,
+  			pipe_connections = {
+  				{
+  					type = "input",
+  					position = { 1, -2}
+  				}
+  			}
+  		},
+  		{ --back bottom WATER
+  			production_type = "output",
+  			-- filter = "waste-water",
+  			pipe_covers = pipecoverspictures(),
+  			base_level = 1,
+  			pipe_connections = {
+  				{
+  					type = "output",
+  					position = { -1, 2}
+  				}
+  			}
+  		}
+  	}
   },
 })
