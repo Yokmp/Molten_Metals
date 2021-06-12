@@ -45,3 +45,26 @@ function assembler1pipepictures(tint)
     }
   }
 end
+
+function moltenmetaltint()
+  return {
+    primary   = {r = 249/255, g = 137/255, b =  32/255, a = 0}, -- boiling
+    secondary = {r = 230/255, g = 125/255, b = 125/255, a = 0}, -- mask
+    tertiary  = {r = 230/255, g = 125/255, b = 125/255, a = 0}  -- window
+  }
+end
+
+function color()
+
+  acidwater = {
+    base = {r=0.1, g=0.44, b=0.5},
+    flow = {r=0.86, g=0.64, b=0.21},
+
+    tint = {
+        primary    = {r = 0.500, g = 0.642, b = 0.261, a = 1.000}, -- #ffa342 ff orange light
+        secondary  = {r = 0.780, g = 0.322, b = 0.276, a = 1.000}, -- #ffb85f ff orange more light
+        tertiary   = {r = 0.454, g = 0.559, b = 0.776, a = 1.000}, -- #d9a892 ff skinlike
+        quaternary = {r = 0.660, g = 0.224, b = 0.112, a = 1.000}, -- #ff7e45 ff orange bright
+    }
+  }
+end

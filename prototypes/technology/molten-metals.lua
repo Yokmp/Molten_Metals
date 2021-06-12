@@ -237,6 +237,10 @@ data:extend({
         type = "unlock-recipe",
         recipe = "advanced-caster"
       },
+      {
+        type = "unlock-recipe",
+        recipe = "iron-gear-wheel-casting"
+      },
       -- {
       --   type = "unlock-recipe",
       --   recipe = "electric-furnace"

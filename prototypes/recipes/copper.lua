@@ -8,40 +8,38 @@ data:extend({
       type = "recipe",
       name = "molten-copper",
       category = "ymm_smelting",
-      subgroup = "raw-material",
+      -- subgroup = "raw-material",
       allow_as_intermediate = false,
       allow_intermediates = false,
       hidden = false,
       hide_from_player_crafting = true,
       show_amount_in_title = true,
       always_show_products = true,
-      crafting_machine_tint = {
-        primary = {r = 249/255, g = 137/255, b = 32/255, a = 0},    -- boiling
-        secondary = {r = 230/255, g = 125/255, b = 125/255, a = 0}, -- mask
-      	tertiary = {r = 230/255, g = 125/255, b = 125/255, a = 0}   -- window
-      },
-      icon = "__Molten_Metals__/graphics/icons/molten-copper.png",
-      icon_size = 64,
+      crafting_machine_tint = moltenmetaltint(),
+      -- icon = "__Molten_Metals__/graphics/icons/molten-copper.png",
+      -- icon_size = 64,
       normal = {
+      main_product = "molten-copper",
 				enabled = false,
         energy_required = 3.2,
         ingredients = {
           {type = "item", name = "copper-ore", amount = 2}
         },
         results = {
-          {type = "fluid", name = "molten-copper", amount = 20, temperature = 1100},
-          {type = "item", name = "slag-stone", amount = 3}
+          {type = "fluid", name = "molten-copper", amount = 40, temperature = 1100},
+          {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
         }
       },
       expensive = {
+        main_product = "molten-copper",
         enabled = false,
         energy_required = 3.2,
         ingredients = {
-          {type = "item", name = "copper-ore", amount = 4}
+          {type = "item", name = "copper-ore", amount = 2}
         },
 				results = {
-          {type = "fluid", name = "molten-copper", amount = 20, temperature = 1100},
-          {type = "item", name = "slag-stone", amount = 3}
+          {type = "fluid", name = "molten-copper", amount = 40, temperature = 1100},
+          {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
         }
       }
     },
@@ -52,22 +50,19 @@ data:extend({
 			type = "recipe",
 			name = "molten-copper-plate",
 			category = "ymm_casting",
-      subgroup = "raw-material",
+      -- subgroup = "raw-material",
       allow_as_intermediate = false,
       allow_intermediates = false,
       always_show_products = true,
-      crafting_machine_tint = {
-        primary = {r = 249/255, g = 137/255, b = 32/255, a = 0},    -- boiling
-        secondary = {r = 230/255, g = 125/255, b = 125/255, a = 0}, -- mask
-      	tertiary = {r = 230/255, g = 125/255, b = 125/255, a = 0}   -- window
-      },
-			icon = "__base__/graphics/icons/copper-plate.png",
-			icon_size = 64,
+      crafting_machine_tint = moltenmetaltint(),
+			-- icon = "__base__/graphics/icons/copper-plate.png",
+			-- icon_size = 64,
 			normal = {
+        main_product = "copper-plate",
 				enabled = false,
-				energy_required = 3.2,
+				energy_required = 1.6,
 				ingredients = {
-          {type = "fluid", name = "molten-copper", amount = 25, temperature = 1100},
+          {type = "fluid", name = "molten-copper", amount = 20, temperature = 1100},
           {type = "fluid", name = "water", amount = 40}
 				},
 				results = {
@@ -76,15 +71,16 @@ data:extend({
 				}
 			},
 			expensive = {
+        main_product = "copper-plate",
 				enabled = false,
-				energy_required = 3.2,
+				energy_required = 1.6,
         ingredients = {
-				  {type = "fluid", name = "molten-copper", amount = 50, temperature = 1100},
+				  {type = "fluid", name = "molten-copper", amount = 20, temperature = 1100},
 				  {type = "fluid", name = "water", amount = 80}
         },
 				results = {
 					{type = "item", name = "copper-plate", amount = 1},
-          {type = "fluid", name = "waste-water", amount = 40}
+          {type = "fluid", name = "waste-water", amount = 20}
 				}
 			}
 		},
