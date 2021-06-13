@@ -1,13 +1,12 @@
 
 -- table.insert( 
---   data.raw.technology["steel-processing"].effects, 
+--   data.raw.technology["steel-processing"].effects,
 --   {type = "unlock-recipe", recipe = "acidic-water-treatment"} )
 
 data:extend({
   --------------------------
-  -- T1: SMELTER + CASTER --
-  -- ORE to LIQUID BASIC  --
-  -- LIQUID to PLATE      --
+  --   SMELTER + CASTER   --
+  -- molten ore to plates --
   --------------------------
   {
     type = "technology",
@@ -219,9 +218,10 @@ data:extend({
   --   order = "c-a"
   -- },
   --#endregion
-  --------------------------
-  -- T3: ADVANCED_SMELTER --
-  --------------------------
+  ------------------------
+  --      ADVANCED      --
+  -- smelter and caster --
+  ------------------------
   {
     type = "technology",
     -- name = "advanced-smelter",
@@ -242,10 +242,6 @@ data:extend({
         type = "unlock-recipe",
         recipe = "advanced-caster"
       },
-      {
-        type = "unlock-recipe",
-        recipe = "iron-gear-wheel-casting"
-      },
     },
     -- prerequisites = {
       --"ingot-casting",
@@ -264,10 +260,10 @@ data:extend({
     },
     order = "c-c-b"
   },
-  --------------------
-  -- SLAG to PELLET --
-  -- PELLETS to ORE --
-  --------------------
+  -----------------
+  -- SLAG PELLET --
+  --  recycling  --
+  -----------------
   {
     type = "technology",
     name = "slag-pellet-recycling",
@@ -305,6 +301,45 @@ data:extend({
       time = 30
     },
     order = "c-c-c"
+  },
+  ------------------
+  -- IRON CASTING --
+  ------------------
+  {
+    type = "technology",
+    name = "iron-casting",
+    icon_size = 128,
+    icon = "__Molten_Metals__/graphics/technology/iron-casting.png",
+    effects =
+    {
+      {
+        type = "unlock-recipe",
+        recipe = "iron-gear-wheel-casting"
+      },
+      {
+        type = "unlock-recipe",
+        recipe = "iron-stick-casting"
+      },
+      {
+        type = "unlock-recipe",
+        recipe = "rail-casting" -- steel-processing
+      },
+    },
+    prerequisites = {
+    "production-science-pack",
+    -- "advanced-material-processing-2"
+  },
+    unit =
+    {
+      count = 250,
+      ingredients = {
+        {"automation-science-pack", 1},
+        {"logistic-science-pack", 1},
+        {"chemical-science-pack", 1},
+        {"production-science-pack", 1},
+      },
+      time = 30
+    },
+    order = "d-b-z"
   }
-}
-)
+})
