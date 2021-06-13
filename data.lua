@@ -8,7 +8,7 @@ require("functions")
 
 require("prototypes.categories.recipe-category")
 
-require("prototypes.item.items")
+require("prototypes.item.slag")
 require("prototypes.item.fluids")
 require("prototypes.item.machines")
 

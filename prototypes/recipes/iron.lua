@@ -9,16 +9,13 @@ data:extend({
       name = "molten-iron",
       main_product = "molten-iron",
       category = "ymm_smelting",
-      -- subgroup = "raw-material",
       allow_as_intermediate = false,
       allow_intermediates = false,
       hidden = false,
       hide_from_player_crafting = true,
       show_amount_in_title = true,
       always_show_products = true,
-      crafting_machine_tint = moltenmetaltint(),
-      -- icon = "__Molten_Metals__/graphics/icons/molten-iron.png",
-      -- icon_size = 64,
+      crafting_machine_tint = color.moltenmetal.tint,
       normal = {
         main_product = "molten-iron",
 				enabled = false,
@@ -51,16 +48,13 @@ data:extend({
 			type = "recipe",
 			name = "molten-iron-plate",
 			category = "ymm_casting",
-      -- subgroup = "raw-material",
       show_amount_in_title = true,
       allow_as_intermediate = false,
       allow_intermediates = false,
       hidden = false,
       hide_from_player_crafting = true,
       always_show_products = true,
-      crafting_machine_tint = moltenmetaltint(),
-			-- icon = "__base__/graphics/icons/iron-plate.png",
-			-- icon_size = 64,
+      crafting_machine_tint = color.moltenmetal.tint,
 			normal = {
         main_product = "iron-plate",
 				enabled = false,
@@ -71,7 +65,7 @@ data:extend({
 				},
 				results = {
           {type = "item",  name = "iron-plate", amount = 1},
-          {type = "fluid", name = "waste-water", amount = 20}
+          {type = "fluid", name = "steam", amount = 5, temperature = 165}
 				}
 			},
 			expensive = {
@@ -84,7 +78,7 @@ data:extend({
         },
 				results = {
 					{type = "item",  name = "iron-plate", amount = 1},
-          {type = "fluid", name = "waste-water", amount = 20}
+          {type = "fluid", name = "steam", amount = 5, temperature = 165}
 				}
 			}
 		},

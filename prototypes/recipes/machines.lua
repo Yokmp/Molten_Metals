@@ -25,7 +25,7 @@ data:extend({
     ingredients = {
       -- {"productivity-module-2", 4},
       {"steel-plate", 6},
-      -- {"advanced-circuit", 20},
+      {"advanced-circuit", 4},
       {"stone-brick", 10},
       {"pipe", 20}
     },
@@ -40,10 +40,9 @@ data:extend({
     energy_required = 3,
     enabled = false,
     ingredients = {
-      {"stone-brick", 10},
-      {"iron-gear-wheel", 15},
-      {"electronic-circuit", 5},
-      {"pipe", 15}
+      {"steel-plate", 2},
+      {"electronic-circuit", 3},
+      {"pipe", 10}
     },
     result = "basic-caster"
   },
@@ -56,10 +55,8 @@ data:extend({
     energy_required = 5,
     enabled = false,
     ingredients = {
-      -- {"basic-caster", 1},
-      {"steel-plate", 10},
-      {"advanced-circuit", 10},
-      {"stone-brick", 25},
+      {"speed-module", 2},
+      {"basic-caster", 1},
       {"pipe", 20}
     },
     result = "advanced-caster"

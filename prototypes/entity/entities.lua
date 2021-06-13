@@ -510,7 +510,7 @@ data:extend({
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
     drawing_box = {{ - 1.5, - 1.9}, {1.5, 1.5}},
-    energy_usage = "160kW",
+    energy_usage = "120kW",
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",

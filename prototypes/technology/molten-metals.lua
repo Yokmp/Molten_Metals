@@ -1,7 +1,7 @@
 
-table.insert( 
-  data.raw.technology["steel-processing"].effects, 
-  {type = "unlock-recipe", recipe = "recycle-waste-water"} )
+-- table.insert( 
+--   data.raw.technology["steel-processing"].effects, 
+--   {type = "unlock-recipe", recipe = "acidic-water-treatment"} )
 
 data:extend({
   --------------------------
@@ -16,14 +16,14 @@ data:extend({
     icon = "__Molten_Metals__/graphics/technology/smelting.png",
     effects =
     {
-      {
-        type = "unlock-recipe",
-        recipe = "basic-smelter"
-      },
       -- {
       --   type = "unlock-recipe",
       --   recipe = "steel-furnace"
       -- },
+      {
+        type = "unlock-recipe",
+        recipe = "basic-smelter"
+      },
 	    {
         type = "unlock-recipe",
         recipe = "basic-caster"
@@ -34,11 +34,11 @@ data:extend({
       },
       {
         type = "unlock-recipe",
-        recipe = "molten-iron-plate"
+        recipe = "molten-copper"
       },
       {
         type = "unlock-recipe",
-        recipe = "molten-copper"
+        recipe = "molten-iron-plate"
       },
       {
         type = "unlock-recipe",
@@ -49,14 +49,15 @@ data:extend({
     prerequisites = {"steel-processing", "logistic-science-pack"},
     unit =
     {
-      count = 80,
-      ingredients = {
+      count = 75,
+      ingredients =
+      {
         {"automation-science-pack", 1},
-        {"logistic-science-pack", 1},
+        {"logistic-science-pack", 1}
       },
       time = 30
     },
-    order = "c-a"
+    order = "c-c-a"
   },
 --#region Unused
   ------------------------
@@ -181,43 +182,43 @@ data:extend({
   --   },
   --   order = "c-b"
   -- },
-  --#endregion
   ------------------------
   -- SLAG to POWDER     --
   -- POWDER to CONCRETE --
   ------------------------
-  {
-    type = "technology",
-    name = "slag-powder",
-    icon_size = 128,
-    icon = "__Molten_Metals__/graphics/technology/slag-powder.png",
-    effects =
-    {
-      -- {
-      --   type = "unlock-recipe",
-      --   recipe = "slag-powder"
-      -- },
-      {
-        type = "unlock-recipe",
-        recipe = "slag-stone-concrete"
-      }
-    },
-    prerequisites = {
-      --"basic-slag", 
-      "concrete"},
-    unit =
-    {
-      count = 380,
-      ingredients = {
-        {"automation-science-pack", 1},
-        {"logistic-science-pack", 1},
-        {"chemical-science-pack", 1},
-        {"production-science-pack", 1}
-      },
-      time = 20
-    },
-    order = "c-a"
-  },
+  -- {
+  --   type = "technology",
+  --   name = "slag-powder",
+  --   icon_size = 128,
+  --   icon = "__Molten_Metals__/graphics/technology/slag-powder.png",
+  --   effects =
+  --   {
+  --     -- {
+  --     --   type = "unlock-recipe",
+  --     --   recipe = "slag-powder"
+  --     -- },
+  --     {
+  --       type = "unlock-recipe",
+  --       recipe = "slag-stone-concrete"
+  --     }
+  --   },
+  --   prerequisites = {
+  --     --"basic-slag", 
+  --     "concrete"},
+  --   unit =
+  --   {
+  --     count = 380,
+  --     ingredients = {
+  --       {"automation-science-pack", 1},
+  --       {"logistic-science-pack", 1},
+  --       {"chemical-science-pack", 1},
+  --       {"production-science-pack", 1}
+  --     },
+  --     time = 20
+  --   },
+  --   order = "c-a"
+  -- },
+  --#endregion
   --------------------------
   -- T3: ADVANCED_SMELTER --
   --------------------------
@@ -229,6 +230,10 @@ data:extend({
     icon = "__Molten_Metals__/graphics/technology/advanced-smelting.png",
     effects =
     {
+      -- {
+      --   type = "unlock-recipe",
+      --   recipe = "electric-furnace"
+      -- },
       {
         type = "unlock-recipe",
         recipe = "advanced-smelter"
@@ -241,37 +246,23 @@ data:extend({
         type = "unlock-recipe",
         recipe = "iron-gear-wheel-casting"
       },
-      -- {
-      --   type = "unlock-recipe",
-      --   recipe = "electric-furnace"
-      -- },
-      -- {
-      --   type = "unlock-recipe",
-      --   recipe = "advanced-molten-iron"
-      -- },
-      -- {
-      --   type = "unlock-recipe",
-      --   recipe = "advanced-molten-copper"
-      -- }
     },
     -- prerequisites = {
-      --"ingot-casting", 
+      --"ingot-casting",
       -- "advanced-material-processing-2","productivity-module-2"},
       prerequisites = {"advanced-material-processing", "chemical-science-pack"},
     unit =
     {
-      count = 600,
-      ingredients = {
+      count = 250,
+      ingredients =
+      {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-        {"chemical-science-pack", 1},
-        {"production-science-pack", 1},
-        {"utility-science-pack", 1},
-        {"space-science-pack", 1}
+        {"chemical-science-pack", 1}
       },
       time = 30
     },
-    order = "c-c"
+    order = "c-c-b"
   },
   --------------------
   -- SLAG to PELLET --
@@ -279,7 +270,7 @@ data:extend({
   --------------------
   {
     type = "technology",
-    name = "slag-pellet",
+    name = "slag-pellet-recycling",
     icon_size = 128,
     icon = "__Molten_Metals__/graphics/technology/slag-pellet.png",
     effects =
@@ -292,21 +283,26 @@ data:extend({
         type = "unlock-recipe",
         recipe = "slag-pellet-recycling"
       },
+      -- {
+      --   type = "unlock-recipe",
+      --   recipe = "acidic-water-treatment" -- steel-processing
+      -- },
     },
-    prerequisites = {"slag-powder", 
+    prerequisites = {
+    -- "slag-powder",
     -- "advanced-smelter"
+    "sulfur-processing",
     "advanced-material-processing-2"
   },
     unit =
     {
-      count = 580,
+      count = 200,
       ingredients = {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
-        {"chemical-science-pack", 1},
-        {"production-science-pack", 1}
+        {"chemical-science-pack", 1}
       },
-      time = 20
+      time = 30
     },
     order = "c-c-c"
   }
