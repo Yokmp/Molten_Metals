@@ -52,8 +52,7 @@ function MoltenIron.get_scrap_results()
 
     if value.expensive then
       local insert = {}
-      add_to_results(scrap_results, recipe, value.expensive.ingredients,
-                     "expensive")
+      add_to_results(scrap_results, recipe, value.expensive.ingredients, "expensive")
       if scrap_results[recipe] and scrap_results[recipe].expensive then
         for name, amount in pairs(scrap_results[recipe].expensive.results) do
           table.insert(insert, {
