@@ -3,7 +3,7 @@ local mod_name = "__Molten_Metals__"
 local prefix = "molten-"
 
 
-
+-- if a molten-ore has no icon it will be ignored, so no fluids, recipes, etc will be generated
 local function get_icon(name)
   local icon_path = mod_name.. "/graphics/icons/" ..prefix
   local icons = { "iron", "copper", "uranium",}
@@ -11,7 +11,7 @@ local function get_icon(name)
   for _,v in ipairs(icons) do
     if v == name then return icon_path..v..ext end
   end
-  return mod_name.. "/graphics/icons/missing-icon.png"
+  return false
 
 end
 -- log("missing-icon: "..get_icon("test"))
@@ -20,15 +20,28 @@ end
 
 local function get_ores()
   local t = {}
+  -- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
+  local temperatures = { -- {melting-point, boiling-point}    MOVE TO FUNCTIONS.LUA
+    iron={1500,3000}, copper={1100,2600}, uranium={1100,4100}, titanium={1600,3200}, lead={320,1700}, tungsten={3400,5900}
+  }
   for _, value in pairs(data.raw.item) do
     for _, p in ipairs(_pattern) do
-      if string.match(tostring(value.name), p) then
-        t[value.name] = t[value.name] or {}
-        local name = string.gsub(value.name, p, "", 1)
-        t[value.name].name = name
-        t[value.name].ore = value.name
-        t[value.name].icon = get_icon(name)
+      local name = string.gsub(value.name, p, "", 1)
+      if string.match(tostring(value.name), p) and get_icon(name) then
+        t[value.name]       = t[value.name] or {}
+        t[value.name].name  = name
+        t[value.name].ore   = value.name
+        t[value.name].icon  = get_icon(name) --or mod_name.. "/graphics/icons/missing-icon.png"
         t[value.name].order = data.raw.item[value.name].order or "z"
+        t[value.name].auto  = false
+        t[value.name].temp_default = 1500
+        t[value.name].temp_max = 2600
+        for key, temp in pairs(temperatures) do
+          if string.match(tostring(key), name) then
+            t[value.name].temp_default = temp[1]
+            t[value.name].temp_max = temp[2]
+          end
+        end
       end
     end
   end
@@ -39,11 +52,8 @@ end
 
 ---create a fluid from all found ores by ``_pattern``
 ---@param ores table
----@param order? string
----@param temperature? table
----@param bottle? boolean
 ---@return table fluid
-local function make_fluid(ores, temperature, order, bottle)
+local function make_fluid(ores)
   local fluids = {}
   temperature = temperature or {}
   for _, v in pairs(ores) do
@@ -53,13 +63,13 @@ local function make_fluid(ores, temperature, order, bottle)
       icon = v.icon,
       icon_size = 64,
       icon_mipmaps = 4,
-      default_temperature = temperature.default or 1200,
-      max_temperature = temperature.max or 3000,
+      default_temperature = v.temp_default,
+      max_temperature = v.temp_max,
       heat_capacity = temperature.capacity or "0.425KJ",
       base_color = color.moltenmetal.base,
       flow_color = color.moltenmetal.flow,
       order = v.order,
-      auto_barrel = bottle or false
+      auto_barrel = v.auto
     }
     table.insert(fluids, fluid)
   end
@@ -74,8 +84,14 @@ local function make_fluidreciepe(ores, normal, expensive, bools)
   normal = normal or {}
   expensive = expensive or {}
   bools = bools or {}
-  local _n = { enabled = normal.enabled or false, energy_required = normal.energy_required or 3.2, in_amount = normal.in_amount or 1 }
-  local _e = { enabled = expensive.enabled or false, energy_required = expensive.energy_required or 3.2, in_amount = expensive.in_amount or 1 }
+  local _n = {
+    enabled = normal.enabled or false,
+    energy_required = normal.energy_required or 3.2,
+    amount = normal.amount or 1 }
+  local _e = {
+    enabled = expensive.enabled or false,
+    energy_required = expensive.energy_required or 3.2,
+    amount = expensive.amount or 1 }
   local _b = {
     allow_as_intermediate = bools.allow_as_intermediate or false,
     allow_intermediates = bools.allow_intermediates or false,
@@ -102,11 +118,11 @@ local function make_fluidreciepe(ores, normal, expensive, bools)
         enabled = _n.enabled,
         energy_required = _n.energy_required,  -- vanilla 3.2 at speed 2
         ingredients = {         -- smelterSpeed is 2 and uses 2 ore for molten-iron worth 2 plate -> 1 smelter for 2 casters
-          {type = "item", name = v.ore, amount = _n.in_amount}
+          {type = "item", name = v.ore, amount = _n.amount}
         },
         results = {
-          {type = "fluid", name = prefix .. v.name, amount = _n.in_amount*20, temperature = data.raw.item[v.ore].default_temperature or 1200},
-          {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.ceil(_n.in_amount*1.5), probability = 0.24}
+          {type = "fluid", name = prefix .. v.name, amount = _n.amount*20, temperature = ores[v.ore].temp_default},
+          {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.ceil(_n.amount*1.5), probability = 0.24}
         }
       },
       expensive = {
@@ -114,11 +130,11 @@ local function make_fluidreciepe(ores, normal, expensive, bools)
         enabled = _e.enabled,
         energy_required = _e.energy_required,
         ingredients = {
-          {type = "item", name = v.ore, amount = _e.in_amount}
+          {type = "item", name = v.ore, amount = _e.amount}
         },
         results = {
-          {type = "fluid", name = prefix .. v.name, amount = _e.in_amount*20, temperature = data.raw.item[v.ore].default_temperature or 1200},
-          {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.ceil(_e.in_amount*1.5), probability = 0.24}
+          {type = "fluid", name = prefix .. v.name, amount = _e.amount*20, temperature = ores[v.ore].temp_default},
+          {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.ceil(_e.amount*1.5), probability = 0.24}
         }
       }
     })
@@ -126,102 +142,67 @@ local function make_fluidreciepe(ores, normal, expensive, bools)
   end
   return reciepes
 end
-log(serpent.block(make_fluidreciepe(get_ores())))
-assert(1 == 2, " D I E")
+-- log(serpent.block(make_fluidreciepe(get_ores())))
+-- assert(1 == 2, " D I E")
 
 
-local function add_to_results(scrap_results, recipe, ingredients, mode)
-  for _, v in ipairs(ingredients) do
-    for i = 1, #_types do
-      if string.match(tostring(v[1]), _types[i]) then
-        scrap_results[recipe] = scrap_results[recipe] or {}
-        scrap_results[recipe][mode] = scrap_results[recipe][mode] or {}
-        if mode ~= "results" then
-          scrap_results[recipe][mode].results =
-              scrap_results[recipe][mode].results or {}
-          local scrap = scrap_results[recipe][mode].results[_types[i] ..
-                            "-scrap"]
-          scrap_results[recipe][mode].results[_types[i] .. "-scrap"] = scrap and
-                                                                           scrap +
-                                                                           1 or
-                                                                           1
-        else
-          local scrap = scrap_results[recipe][mode][_types[i] .. "-scrap"]
-          scrap_results[recipe][mode][_types[i] .. "-scrap"] = scrap and scrap +
-                                                                   1 or 1
-        end
-        break
-      end
-    end
-  end
-end
----Returns a table which holds all items and their ingredients. If there is a difficulty it will also be included.
----@return table ``{results = {name = name, amount_min = 1, amount_max = amount}}``
-local function get_scrap_results()
-  local scrap_results = {}
+-- get_ores() = {
+--   ["iron-ore"] = {
+--     auto = false,
+--     icon = "__Molten_Metals__/graphics/icons/molten-iron.png",
+--     name = "iron",
+--     order = "e[iron-ore]",
+--     ore = "iron-ore",
+--     temp_default = 1500,
+--     temp_max = 3000
+--   },
+-- }
+
+
+---Get casting recipes
+---@param ingredient string
+---@return table
+local function get_recipes_by_ingredient(ingredient)
+  local recipes = {}
   for recipe, value in pairs(data.raw.recipe) do
 
-    if value.expensive then
-      local insert = {}
-      add_to_results(scrap_results, recipe, value.expensive.ingredients, "expensive")
-      if scrap_results[recipe] and scrap_results[recipe].expensive then
-        for name, amount in pairs(scrap_results[recipe].expensive.results) do
-          table.insert(insert, {
-            name = name,
-            amount_min = 1,
-            amount_max = amount,
-            probability = 0.24
-          })
-        end
-        scrap_results[recipe].expensive.results = insert
-      else
-        if debug then log(tostring(recipe) .. ".expensive -> not found") end
-        scrap_results[recipe] = nil
+    if value.expensive and value.expensive.ingredients then
+      if #value.expensive.ingredients == 1 and value.expensive.ingredients[1][1] == ingredient then
+        recipes[recipe] = recipes[recipe] or {}
+        recipes[recipe].expensive = recipes[recipe].expensive or {}
+        recipes[recipe].expensive = {value.expensive.ingredients[1][1], value.expensive.ingredients[1][2]}
       end
     end
 
-    if value.normal then
-      local insert = {}
-      add_to_results(scrap_results, recipe, value.normal.ingredients, "normal")
-      if scrap_results[recipe] and scrap_results[recipe].normal then
-        for name, amount in pairs(scrap_results[recipe].normal.results) do
-          table.insert(insert, {
-            name = name,
-            amount_min = 1,
-            amount_max = amount,
-            probability = 0.24
-          })
-        end
-        scrap_results[recipe].normal.results = insert
-      else
-        if debug then log(tostring(recipe) .. ".normal -> not found") end
-        scrap_results[recipe] = nil
+    if value.normal and value.normal.ingredients then
+      if #value.normal.ingredients == 1 and value.normal.ingredients[1][1] == ingredient then
+        recipes[recipe] = recipes[recipe] or {}
+        recipes[recipe].normal = recipes[recipe].normal or {}
+        recipes[recipe].normal = {value.normal.ingredients[1][1], value.normal.ingredients[1][2]}
       end
     end
 
     if value.ingredients then
-      local insert = {}
-      add_to_results(scrap_results, recipe, value.ingredients, "results")
-      if scrap_results[recipe] and scrap_results[recipe].results then
-        for name, amount in pairs(scrap_results[recipe].results) do
-          table.insert(insert, {
-            name = name,
-            amount_min = 1,
-            amount_max = amount,
-            probability = 0.24
-          })
-        end
-        scrap_results[recipe].results = insert
-      else
-        if debug then log(tostring(recipe) .. ".results -> not found") end
-        scrap_results[recipe] = nil
+      if #value.ingredients == 1 and value.ingredients[1][1] == ingredient then
+        recipes[recipe] = recipes[recipe] or {}
+
+        recipes[recipe].ingredients = {value.ingredients}
+        if value.result then recipes[recipe].results = {value.result} end
+        if type(value.result) == "string" then recipes[recipe].results[2] = 1 end
+        if value.results then recipes[recipe].results = {value.results} end
+
+
+        -- recipes[recipe].simple = recipes[recipe].simple or {}
+        -- recipes[recipe].simple.ingredients = {value.ingredients}
+        -- if value.result then recipes[recipe].simple.results = {value.result} end
+        -- if value.results then recipes[recipe].simple.results = {value.results} end
       end
     end
 
   end
-  return scrap_results
+  return recipes
 end
--- log(serpent.block(data.raw.recipe["iron-gear-wheel"], {comment = false}))
--- log(serpent.block(get_scrap_results()["iron-gear-wheel"], {comment = false}))
--- log(serpent.block(get_scrap_results()["gun-turret"], {comment = false}))
--- assert(1==2, " D I E")
+for key, value in pairs(get_ores()) do
+  log(serpent.block(get_recipes_by_ingredient(value.ore), {comment = false}))
+end
+assert(1==2, " D I E")

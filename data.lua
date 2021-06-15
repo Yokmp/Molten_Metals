@@ -8,16 +8,16 @@ require("functions")
 
 require("prototypes.categories.recipe-category")
 
-require("prototypes.item.slag")
-require("prototypes.item.fluids")
-require("prototypes.item.machines")
+-- require("prototypes.item.slag")
+-- require("prototypes.item.fluids")
+-- require("prototypes.item.machines")
 
-require("prototypes.entity.entities")
+-- require("prototypes.entity.entities")
 
-require("prototypes.recipes.copper")
-require("prototypes.recipes.iron")
-require("prototypes.recipes.machines")
-require("prototypes.recipes.recipes")
-require("prototypes.recipes.slag")
+-- require("prototypes.recipes.copper")
+-- require("prototypes.recipes.iron")
+-- require("prototypes.recipes.machines")
+-- require("prototypes.recipes.recipes")
+-- require("prototypes.recipes.slag")
 
-require("prototypes.technology.molten-metals")
+-- require("prototypes.technology.molten-metals")
