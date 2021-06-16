@@ -1,6 +1,5 @@
 mod_name = "__Molten_Metals__"
 prefix = "molten-"
-local _pattern = {"-ore"}
 ores = {}
 
 -- if a molten-ore has no icon it will be ignored, so no fluids, recipes, etc will be generated
@@ -8,55 +7,48 @@ function get_icon(name)
   local icon_path = mod_name.. "/graphics/icons/"
   local ext = ".png"
   local icons = {
+    missing = icon_path.."missing-icon"..ext,
     iron    = icon_path..prefix.."iron"..ext,
     copper  = icon_path..prefix.."copper"..ext,
     uranium = icon_path..prefix.."uranium"..ext,
   }
-  if icons.name then return {true, icons.name}
-  else
-    log("Error get_icon() :" ..icon_path..prefix..name..ext.. " not found!")
-    return {false, mod_name.."/graphics/icons/missing-icon.png"}
-  end
+  return icons[name] or icons.missing
 end
-log("missing-icon: "..get_icon("test"))
-log("molten-iron: "..get_icon("molten-iron"))
-assert(1==2, " D I E - functions.lua - get_icon()")
+assert( get_icon("test") == mod_name.. "/graphics/icons/missing-icon.png", " D I E - functions.lua - get_icon('test')")
+assert( get_icon("iron") == mod_name.. "/graphics/icons/"..prefix.."iron.png", " D I E - functions.lua - get_icon('iron')")
 
-local function get_ores()
-  -- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
-  local temperatures = { -- {melting-point, boiling-point}    MOVE TO FUNCTIONS.LUA
-    iron={1500,3000}, copper={1100,2600}, uranium={1100,4100}, titanium={1600,3200}, lead={320,1700}, tungsten={3400,5900}
-  }
-  for _, value in pairs(data.raw.item) do
-    for _, p in ipairs(_pattern) do
-      local name = string.gsub(value.name, p, "", 1)
-      if string.match(tostring(value.name), p) and get_icon(name)[1] then
-        ores[value.name]              = ores[value.name] or {}
-        ores[value.name].name         = name
-        ores[value.name].ore          = value.name
-        ores[value.name].icon         = get_icon(name)[2]
-        ores[value.name].order        = data.raw.item[value.name].order or "z"
-        ores[value.name].auto         = false
-        ores[value.name].temp_default = 1500
-        ores[value.name].temp_max     = 2600
-        ores[value.name].capacity     = "0.425KJ"
-        for key, temp in pairs(temperatures) do
-          if string.match(tostring(key), name) then
-            ores[value.name].temp_default = temp[1]
-            ores[value.name].temp_max = temp[2]
-          end
+
+local _pattern = {"-ore"}
+-- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
+local temperatures = { -- {melting-point, boiling-point}
+  iron={1500,3000}, copper={1100,2600}, uranium={1100,4100}, titanium={1600,3200}, lead={320,1700}, tungsten={3400,5900}
+}
+for _, value in pairs(data.raw.item) do
+  for _, p in ipairs(_pattern) do
+    local name = string.gsub(value.name, p, "", 1)
+    if string.match(tostring(value.name), p) then
+      ores[value.name]              = ores[value.name] or {}
+      ores[value.name].name         = name
+      ores[value.name].ore          = value.name
+      ores[value.name].icon         = get_icon(name)
+      ores[value.name].order        = data.raw.item[value.name].order or "z"
+      ores[value.name].auto         = false
+      ores[value.name].temp_default = 1500
+      ores[value.name].temp_max     = 2600
+      ores[value.name].capacity     = "0.425KJ"
+      for key, temp in pairs(temperatures) do
+        if string.match(tostring(key), name) then
+          ores[value.name].temp_default = temp[1]
+          ores[value.name].temp_max = temp[2]
         end
       end
     end
   end
-  if #ores == 0 then
-    log("functions.lua - get_ores () -> No ores found")
-  end
-  return ores
 end
-ores = get_ores()
--- log(serpent.block(ores))
--- assert(1 == 2, " D I E - functions.lua - get_ores()")
+if #ores == 0 then
+  log("functions.lua - get_ores () -> No ores found")
+end
+assert(#ores == 0, " D I E - functions.lua - get_ores()")
 
 function assembler1pipepictures(color)
   local tint = {}

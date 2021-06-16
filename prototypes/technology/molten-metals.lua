@@ -1,7 +1,10 @@
 
--- table.insert( 
---   data.raw.technology["steel-processing"].effects,
---   {type = "unlock-recipe", recipe = "acidic-water-treatment"} )
+table.insert( 
+  data.raw.technology["uranium-processing"].effects,
+  {type = "unlock-recipe", recipe = "molten-uranium"} )
+table.insert( 
+  data.raw.technology["kovarex-enrichment-process"].effects,
+  {type = "unlock-recipe", recipe = "molten-uranium-processing"} )
 
 data:extend({
   --------------------------

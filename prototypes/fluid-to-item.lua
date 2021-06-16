@@ -35,28 +35,33 @@ for ore_name, ore_values in pairs(ores) do
 
     if value.ingredients then
       if #value.ingredients == 1 and value.ingredients[1][1] == ore_name then
-
-        data.raw.recipe[recipe].category = "ymm_casting"
-        data.raw.recipe[recipe].allow_as_intermediate = false
-        data.raw.recipe[recipe].allow_intermediates = false
-        data.raw.recipe[recipe].always_show_products = true
-        data.raw.recipe[recipe].crafting_machine_tint = color.moltenmetal.tint
-        data.raw.recipe[recipe].enabled = false
-
-        data.raw.recipe[recipe].ingredients = {
+        local temp = util.copy(data.raw.recipe[recipe])
+        temp.name = prefix..recipe
+        temp.category = "ymm_casting"
+        temp.allow_as_intermediate = false
+        temp.allow_intermediates = false
+        temp.always_show_products = true
+        temp.crafting_machine_tint = color.moltenmetal.tint
+        temp.enabled = false
+        temp.subgroup = nil
+        temp.ingredients = {
           {type = "fluid", name = prefix..ore_values.name, amount = value.ingredients[1][2]*20, temperature = ore_values.temp_default},
           {type = "fluid", name = "water", amount = value.ingredients[1][2]*40}
         }
 
         if type(value.result) == "string" then
-          data.raw.recipe[recipe].results = {{name = value.result, amount = 1}}
-          data.raw.recipe[recipe].main_product = value.result
-          data.raw.recipe[recipe].result = nil
+          temp.results = {
+            {type = "item",  name = value.result, amount = 1},
+            {type = "fluid", name = "steam", amount = 5, temperature = 165}
+          }
+          temp.main_product = value.result
+          temp.result = nil
         end
-        log(serpent.block(data.raw.recipe[recipe]))
+        data:extend({temp})
+        log(serpent.block(temp))
       end
     end
   end
 end
-log(serpent.block(recipes, {comment = false}))
+-- log(serpent.block(recipes, {comment = false}))
 -- assert(1==2, " D I E - fluid-to-item.lua")

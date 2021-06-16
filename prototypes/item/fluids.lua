@@ -29,6 +29,21 @@ data:extend({
     order = "b[molten-copper]",
     auto_barrel = false
   },
+  {
+    type = "fluid",
+    name = "molten-uranium",
+    icon = "__Molten_Metals__/graphics/icons/molten-uranium.png",
+    icon_size = 64, icon_mipmaps = 4,
+    default_temperature = 1100,
+    max_temperature = 4100,
+    heat_capacity = "0.259KJ",
+    base_color = color.moltenmetal.base,
+    flow_color = color.moltenmetal.flow,
+    -- pressure_to_speed_ratio = 0.4,
+    -- flow_to_energy_ratio = 0.59,
+    order = "c[molten-uranium]",
+    auto_barrel = false
+  },
   -- {
   --   type = "fluid",
   --   name = "acidic-water",

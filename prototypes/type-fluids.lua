@@ -18,16 +18,11 @@ for _, v in pairs(ores) do
   table.insert(fluids, fluid)
 end
 if fluids then
-  log(serpent.block(fluids))
   data:extend(fluids)
-  return fluids
 else
-  log("Error fluid_type() : no fluids found!")
-  return {false, mod_name.."/graphics/icons/missing-icon.png"}
+  error("type-fluids.lua - no fluids found!")
 end
 
-log(serpent.block(fluids))
-assert(1 == 2, " D I E - type-fluids.lua")
 
 -- data:extend({
   -- {
