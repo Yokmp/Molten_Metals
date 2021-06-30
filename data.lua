@@ -22,4 +22,3 @@ require("prototypes.recipes.recipes")
 
 require("prototypes.technology.molten-metals")
 
-log(serpent.block(ores))
