@@ -1,3 +1,5 @@
+local yutil = require("prototypes.util")
+
 data:extend({
   --------------------
   -- STEEL SMELTING --
@@ -11,7 +13,7 @@ data:extend({
     hidden = false,
     hide_from_player_crafting = true,
     always_show_products = true,
-    crafting_machine_tint = color.moltenmetal.tint,
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal =
     {
       main_product = "steel-plate",
@@ -54,7 +56,7 @@ data:extend({
     hide_from_player_crafting = true, -- hidden in player screen?
     always_show_products = true,
     show_amount_in_title = true,
-    crafting_machine_tint = color.moltenmetal.tint,
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal = {
       main_product = "iron-gear-wheel",
       enabled = false,
@@ -97,7 +99,7 @@ data:extend({
     hide_from_player_crafting = true, -- hidden in player screen?
     always_show_products = true,
     show_amount_in_title = true,
-    crafting_machine_tint = color.moltenmetal.tint,
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
     ingredients = {
       -- {type = "item", name = "iron-plate", amount = 1}
       {type = "fluid", name = "molten-iron", amount = 20, temperature = 1500},
@@ -120,7 +122,7 @@ data:extend({
     hide_from_player_crafting = true, -- hidden in player screen?
     always_show_products = true,
     show_amount_in_title = true,
-    crafting_machine_tint = color.moltenmetal.tint,
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
     ingredients =
     {
       {type = "item", name = "stone", amount = 1},

@@ -1,3 +1,5 @@
+local yutil = require("prototypes.util")
+
 data:extend({
   -- TODO: balancing, powder to pellet
   -------------------------
@@ -111,7 +113,7 @@ data:extend({
     allow_intermediates = false,
     hidden = false,
     enabled = false,
-    crafting_machine_tint = color.acidwater.tint,
+    crafting_machine_tint = yutil.color.acidwater.tint,
     ingredients = {
       {type = "item", name = "slag-stone", amount = 10}
     },
@@ -155,7 +157,7 @@ data:extend({
     allow_intermediates = false,
     hidden = false,
     enabled = false,
-    crafting_machine_tint = color.acidwater.tint,
+    crafting_machine_tint = yutil.color.acidwater.tint,
     ingredients = {
       {type = "item", name = "slag-pellet", amount = 15},
       {type = "fluid", name = "sulfuric-acid", amount = 35}

@@ -1,3 +1,5 @@
+local yutil = require("prototypes.util")
+
 data:extend({
 -- TODO: balancing, STEEL
 -- T1 2:2; T2 2:3; T3 2:4
@@ -14,7 +16,7 @@ data:extend({
     hide_from_player_crafting = true,
     show_amount_in_title = true,
     always_show_products = true,
-    crafting_machine_tint = color.moltenmetal.tint,
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal = {
       main_product = "molten-iron",
       enabled = false,
@@ -53,7 +55,7 @@ data:extend({
     hidden = false,
     hide_from_player_crafting = true,
     always_show_products = true,
-    crafting_machine_tint = color.moltenmetal.tint,
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal = {
       main_product = "iron-plate",
       enabled = false,

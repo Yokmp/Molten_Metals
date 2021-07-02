@@ -1,6 +1,4 @@
 
-require("functions")
-
 require("prototypes.categories.recipe-category")
 require("prototypes.item.machines")
 require("prototypes.entity.entities")

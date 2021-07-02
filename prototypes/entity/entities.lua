@@ -1,4 +1,6 @@
 local sounds = require("__base__.prototypes.entity.sounds")
+local yutil = require("prototypes.util")
+
 data:extend({
   --TODO: balancing
   -----------------
@@ -242,7 +244,7 @@ data:extend({
         minimum_temperature = 1100.0, -- min iron
   			maximum_temperature = 2600.0, -- max copper
         pipe_covers = pipecoverspictures(),
-        pipe_picture = assembler1pipepictures(),
+        pipe_picture = yutil.assembler1pipepictures(),
         base_area = 2, -- 1 = 100
         base_level = 1,
         pipe_connections =
@@ -476,7 +478,7 @@ data:extend({
         minimum_temperature = 1100.0, -- min iron
   			maximum_temperature = 2600.0, -- max copper
         pipe_covers = pipecoverspictures(),
-        pipe_picture = assembler1pipepictures(),
+        pipe_picture = yutil.assembler1pipepictures(),
         base_level = 1,
         pipe_connections =
         {

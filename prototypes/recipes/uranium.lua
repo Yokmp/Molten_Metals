@@ -1,3 +1,5 @@
+local yutil = require("prototypes.util")
+
 data:extend({
   {
     type = "recipe",
@@ -9,7 +11,7 @@ data:extend({
     hide_from_player_crafting = true,
     show_amount_in_title = true,
     always_show_products = true,
-    crafting_machine_tint = color.moltenmetal.tint,
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal = {
       main_product = "molten-uranium",
       enabled = false,
@@ -47,7 +49,7 @@ data:extend({
     hide_from_player_crafting = true, -- hidden in player screen?
     always_show_products = true,
     show_amount_in_title = true,
-    crafting_machine_tint = color.moltenmetal.tint,
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
     ingredients = {
       {type = "fluid", name = "molten-uranium", amount = 200, temperature = 1100},
       {type = "fluid", name = "water", amount = 400}
