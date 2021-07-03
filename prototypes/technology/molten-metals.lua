@@ -40,11 +40,19 @@ data:extend({
       },
       {
         type = "unlock-recipe",
+        recipe = "molten-stone"
+      },
+      {
+        type = "unlock-recipe",
         recipe = "molten-iron-plate"
       },
       {
         type = "unlock-recipe",
         recipe = "molten-copper-plate"
+      },
+      {
+        type = "unlock-recipe",
+        recipe = "molten-stone-brick"
       },
     },
     -- prerequisites = {"logistic-science-pack"}, -- fluid-handling

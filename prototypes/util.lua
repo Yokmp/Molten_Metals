@@ -1,37 +1,58 @@
-local yutil ={}
+local yutil = {}
 
+
+-- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
+yutil.temperatures = { -- {melting-point, boiling-point}
+  iron={1500,3000}, copper={1100,2600}, stone={800,1200}, uranium={1100,4100}, titanium={1600,3200}, lead={320,1700},
+  tungsten={3400,5900}, platin={1800,3800}, lithium={180,1300}, tin={230,2600}, zinc={420,900}, aluminium={660,2500},
+  silver={960,2200}, gold={1100,3000},}
 
 
 ---@param icon_name string Icon name
----@param icon_path? string Icon path if not __Molten_Metals__ or __base__
-function yutil.get_icons(icon_name, icon_path)
+function yutil.get_icons(icon_name)--, icon_path)
   if type(icon_name) == "string" then
-    if not type(icon_path) == "string" then
-      icon_path = "__Molten_Metals__/graphics/icons/"
-    end
+    local icon_path = "__Molten_Metals__/graphics/icons/"
 
-    local _return = {}
-    -- local missing   = "__Molten_Metals__/graphics/icons/missing-icon.png"
     local icons = {
-      iron    = "molten-iron",
-      copper  = "molten-copper",
-      uranium = "molten-uranium"
+      missing   = "missing-icon",
+      iron      = "molten-iron",
+      copper    = "molten-copper",
+      stone     = "molten-stone",
+      uranium   = "molten-uranium",
+      titanium  = "molten-titanium",
+      tungsten  = "molten-tungsten",
+      lead      = "molten-lead",
     }
+    local icon = icons[icon_name] or icons.missing
+    -- if icons[icon_name] then
+      return  {
+        {
+          -- icon = icon_path..icons[icon_name]..".png",
+          icon = icon_path..icon..".png",
+          icon_size = 64, icon_mipmaps = 4,
+          scale = 0.5, shift = util.by_pixel(0, 0), tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
+        },
+      }
+    -- else
+    --   return  {
+    --     {
+    --       icon = icon_path..icon_name..".png",
+    --       icon_size = 64, icon_mipmaps = 4,
+    --       scale = 0.25, shift = {0, -8}, tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
+    --     },
+    --     {
+    --       icon = "__Molten_Metals__/graphics/icons/molten.png",
+    --       icon_size = 64, icon_mipmaps = 4,
+    --       scale = 0.5, shift = {0, 0}, tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
+    --     },
+    --     -- { -- layers won't be ordered as defined
+    --     --   icon = "__Molten_Metals__/graphics/icons/molten-base.png",
+    --     --   icon_size = 64, icon_mipmaps = 4,
+    --     --   scale = 0.5, shift = {0, -8}, tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
+    --     -- },
+    --   }
+    -- end
 
-    if not icons.icon_name then icon_path = "__base__/graphics/icons/" end
-log(icon_path..icon_name..".png")
-    return  {
-      {
-        icon = "__Molten_Metals__/graphics/icons/molten.png",
-        icon_size = 64, icon_mipmaps = 4,
-        scale = 0.5, shift = util.by_pixel(0, 0), tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
-      },
-      {
-        icon = icon_path..icon_name..".png",
-        icon_size = 64, icon_mipmaps = 4,
-        scale = 0.25, shift = util.by_pixel(0, -8), tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
-      },
-    }
   else
     error("icon_name or path is not a string")
   end

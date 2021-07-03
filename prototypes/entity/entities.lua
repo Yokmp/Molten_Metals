@@ -12,7 +12,7 @@ data:extend({
     icon = "__Molten_Metals__/graphics/icons/basic-smelter.png",
     icon_size = 32, icon_mipmaps = 4,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "steel-furnace"},
+    minable = {mining_time = 0.2, result = "basic-smelter"},
     max_health = 300,
     corpse = "steel-furnace-remnants",
     dying_explosion = "steel-furnace-explosion",
@@ -241,8 +241,8 @@ data:extend({
     fluid_boxes = {
       {
         production_type = "output",
-        minimum_temperature = 1100.0, -- min iron
-  			maximum_temperature = 2600.0, -- max copper
+        -- minimum_temperature = 150.0,
+  			-- maximum_temperature = 1500.0,
         pipe_covers = pipecoverspictures(),
         pipe_picture = yutil.assembler1pipepictures(),
         base_area = 2, -- 1 = 100
@@ -263,7 +263,7 @@ data:extend({
     icon = "__base__/graphics/icons/electric-furnace.png",
     icon_size = 32,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 1, result = "electric-furnace"},
+    minable = {mining_time = 1, result = "advanced-smelter"},
     max_health = 350,
     corpse = "electric-furnace-remnants",
     dying_explosion = "electric-furnace-explosion",
@@ -475,8 +475,8 @@ data:extend({
 		fluid_boxes = {
       {
         production_type = "output",
-        minimum_temperature = 1100.0, -- min iron
-  			maximum_temperature = 2600.0, -- max copper
+        -- minimum_temperature = 1100.0,
+  			-- maximum_temperature = 3000.0,
         pipe_covers = pipecoverspictures(),
         pipe_picture = yutil.assembler1pipepictures(),
         base_level = 1,
@@ -683,8 +683,8 @@ data:extend({
   	fluid_boxes = {
   		{ -- back top METAL
   			production_type = "input",
-  			minimum_temperature = 1100.0, -- min iron
-  			maximum_temperature = 2600.0, -- max copper
+  			-- minimum_temperature = 150.0, -- min iron
+  			-- maximum_temperature = 1500.0, -- max copper
   			pipe_covers = pipecoverspictures(),
   			base_area = 2,
   			base_level = -1,
@@ -918,8 +918,8 @@ data:extend({
   	fluid_boxes = {
   		{ -- back top METAL
   			production_type = "input",
-  			minimum_temperature = 1100.0, -- min iron
-  			maximum_temperature = 2600.0, -- max copper
+  			-- minimum_temperature = 1600.0, -- min iron
+  			-- maximum_temperature = 3000.0, -- max copper
   			pipe_covers = pipecoverspictures(),
   			base_area = 1,
   			base_level = -1,

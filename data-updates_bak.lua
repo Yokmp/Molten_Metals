@@ -2,15 +2,11 @@
 local yutil = require("prototypes.util")
 local MoltenIron = {}
 
-local use_slag = true -- TODO: setting
+local use_slag = settings.startup["ymm-enable-slag"].value
 local resource_types = {"basic-solid"}
 local resource_suffixes = {"-ore"}
 local categories = {smelting="ymm_smelting", casting="ymm_casting"}
-
--- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
-local temperatures = { -- {melting-point, boiling-point}
-  iron={1500,3000}, copper={1100,2600}, uranium={1100,4100}, titanium={1600,3200}, lead={320,1700}, tungsten={3400,5900}
-}
+local temperatures = yutil.temperatures
 
 
 local function get_minable_resouces()

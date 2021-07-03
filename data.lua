@@ -15,6 +15,7 @@ require("prototypes.recipes.slag")
 require("prototypes.item.fluids")
 require("prototypes.recipes.copper")
 require("prototypes.recipes.iron")
+require("prototypes.recipes.stone")
 require("prototypes.recipes.uranium")
 require("prototypes.recipes.recipes")
 

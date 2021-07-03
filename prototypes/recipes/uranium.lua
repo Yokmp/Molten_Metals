@@ -11,6 +11,7 @@ data:extend({
     hide_from_player_crafting = true,
     show_amount_in_title = true,
     always_show_products = true,
+    order = "m[molten-uranium]",
     crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal = {
       main_product = "molten-uranium",
@@ -20,7 +21,7 @@ data:extend({
         {type = "item", name = "uranium-ore", amount = 2}
       },
       results = {
-        {type = "fluid", name = "molten-uranium", amount = 40, temperature = 1100,},
+        {type = "fluid", name = "molten-uranium", amount = 40, temperature = yutil.temperatures.uranium[1],},
         {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
       }
     },
@@ -32,7 +33,7 @@ data:extend({
         {type = "item", name = "uranium-ore", amount = 2}
       },
       results = {
-        {type = "fluid", name = "molten-uranium", amount = 40, temperature = 1100},
+        {type = "fluid", name = "molten-uranium", amount = 40, temperature = yutil.temperatures.uranium[1]},
         {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
       }
     },
@@ -51,7 +52,7 @@ data:extend({
     show_amount_in_title = true,
     crafting_machine_tint = yutil.color.moltenmetal.tint,
     ingredients = {
-      {type = "fluid", name = "molten-uranium", amount = 200, temperature = 1100},
+      {type = "fluid", name = "molten-uranium", amount = 200, temperature = yutil.temperatures.uranium[1]},
       {type = "fluid", name = "water", amount = 400}
     },
     results = {

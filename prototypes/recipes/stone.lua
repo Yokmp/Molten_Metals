@@ -8,7 +8,7 @@ data:extend({
     ----------------------------
     {
       type = "recipe",
-      name = "molten-copper",
+      name = "molten-stone",
       category = "ymm_smelting",
       allow_as_intermediate = false,
       allow_intermediates = false,
@@ -16,29 +16,29 @@ data:extend({
       hide_from_player_crafting = true,
       show_amount_in_title = true,
       always_show_products = true,
-      order = "m[molten-copper]",
+      order = "m[molten-stone]",
       crafting_machine_tint = yutil.color.moltenmetal.tint,
       normal = {
-      main_product = "molten-copper",
+      main_product = "molten-stone",
 				enabled = false,
         energy_required = 3.2,
         ingredients = {
-          {type = "item", name = "copper-ore", amount = 2}
+          {type = "item", name = "stone", amount = 2}
         },
         results = {
-          {type = "fluid", name = "molten-copper", amount = 40, temperature = yutil.temperatures.copper[1]},
+          {type = "fluid", name = "molten-stone", amount = 40, temperature = yutil.temperatures.stone[1]},
           {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
         }
       },
       expensive = {
-        main_product = "molten-copper",
+        main_product = "molten-stone",
         enabled = false,
         energy_required = 3.2,
         ingredients = {
-          {type = "item", name = "copper-ore", amount = 2}
+          {type = "item", name = "stone", amount = 2}
         },
 				results = {
-          {type = "fluid", name = "molten-copper", amount = 40, temperature = yutil.temperatures.copper[1]},
+          {type = "fluid", name = "molten-stone", amount = 40, temperature = yutil.temperatures.stone[1]},
           {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
         }
       }
@@ -48,36 +48,36 @@ data:extend({
 		---------------------
 		{
 			type = "recipe",
-			name = "molten-copper-plate",
+			name = "molten-stone-brick",
 			category = "ymm_casting",
       allow_as_intermediate = false,
       allow_intermediates = false,
       always_show_products = true,
-      order = "m[molten-copper-plate]",
+      order = "m[molten-stone-brick]",
       crafting_machine_tint = yutil.color.moltenmetal.tint,
 			normal = {
-        main_product = "copper-plate",
+        main_product = "stone-brick",
 				enabled = false,
 				energy_required = 1.6,
 				ingredients = {
-          {type = "fluid", name = "molten-copper", amount = 20, temperature = yutil.temperatures.copper[1]},
+          {type = "fluid", name = "molten-stone", amount = 20, temperature = yutil.temperatures.stone[1]},
           {type = "fluid", name = "water", amount = 40}
 				},
 				results = {
-          {type = "item",  name = "copper-plate", amount = 1},
+          {type = "item",  name = "stone-brick", amount = 1},
           {type = "fluid", name = "steam", amount = 5, temperature = 165}
 				}
 			},
 			expensive = {
-        main_product = "copper-plate",
+        main_product = "stone-brick",
 				enabled = false,
 				energy_required = 1.6,
         ingredients = {
-				  {type = "fluid", name = "molten-copper", amount = 20, temperature = yutil.temperatures.copper[1]},
+				  {type = "fluid", name = "molten-stone", amount = 20, temperature = yutil.temperatures.stone[1]},
 				  {type = "fluid", name = "water", amount = 80}
         },
 				results = {
-					{type = "item", name = "copper-plate", amount = 1},
+					{type = "item", name = "stone-brick", amount = 1},
           {type = "fluid", name = "steam", amount = 5, temperature = 165}
 				}
 			}

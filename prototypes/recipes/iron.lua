@@ -16,6 +16,7 @@ data:extend({
     hide_from_player_crafting = true,
     show_amount_in_title = true,
     always_show_products = true,
+    order = "m[molten-iron]",
     crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal = {
       main_product = "molten-iron",
@@ -25,7 +26,7 @@ data:extend({
         {type = "item", name = "iron-ore", amount = 2}
       },
       results = {
-        {type = "fluid", name = "molten-iron", amount = 40, temperature = 1500},
+        {type = "fluid", name = "molten-iron", amount = 40, temperature = yutil.temperatures.iron[1]},
         {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
       }
     },
@@ -37,7 +38,7 @@ data:extend({
         {type = "item", name = "iron-ore", amount = 2}
       },
       results = {
-        {type = "fluid", name = "molten-iron", amount = 40, temperature = 1500},
+        {type = "fluid", name = "molten-iron", amount = 40, temperature = yutil.temperatures.iron[1]},
         {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
       }
     }
@@ -55,13 +56,14 @@ data:extend({
     hidden = false,
     hide_from_player_crafting = true,
     always_show_products = true,
+    order = "m[molten-iron-plate]",
     crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal = {
       main_product = "iron-plate",
       enabled = false,
       energy_required = 1.6, -- 3.2 at speed 2
       ingredients = {
-        {type = "fluid", name = "molten-iron", amount = 20, temperature = 1500},
+        {type = "fluid", name = "molten-iron", amount = 20, temperature = yutil.temperatures.iron[1]},
         {type = "fluid", name = "water", amount = 40}
       },
       results = {
@@ -74,7 +76,7 @@ data:extend({
       enabled = false,
       energy_required = 1.6,
       ingredients = {
-        {type = "fluid", name = "molten-iron", amount = 20, temperature = 1500},
+        {type = "fluid", name = "molten-iron", amount = 20, temperature = yutil.temperatures.iron[1]},
         {type = "fluid", name = "water", amount = 80}
       },
       results = {
