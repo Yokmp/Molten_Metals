@@ -1,39 +1,69 @@
 
 local yutil = require("prototypes.util")
-local MoltenIron = {}
+local ore_blacklist = {"iron", "copper-ore"}
 
 local use_slag = settings.startup["ymm-enable-slag"].value
+local autofill = settings.startup["ymm-allow-barreling"].value
 local resource_types = {"basic-solid"}
 local resource_suffixes = {"-ore"}
 local categories = {smelting="ymm_smelting", casting="ymm_casting"}
 local temperatures = yutil.temperatures
 
 
-local function get_minable_resouces()
-  local minable_resources = {}
-  local i = 1
 
-  for key, value in pairs(data.raw.resource) do
-    minable_resources[i] = {resource_name=key, type=value.category or "basic-solid", results={}}
-    if value.minable.result then
-      local _name = value.minable.result
-      local _type = value.minable.type or "item"
-      minable_resources[i].results = {{name=_name, type=_type}}
-    end
-    if value.minable.results then
-      for j, result in ipairs(value.minable.results) do
-        minable_resources[i].results[j] = {type=result.type, name=result.name}
+-- local resource = {
+--   ["iron-ore"] = {
+--     name = "iron-ore",
+--     type = "basic-solid",
+--     results = {
+--       {
+--         name = "iron-ore",
+--         type = "item"
+--       }
+--     }
+--   }
+-- }
+
+
+local function filter_by_blacklist(minable_resources)
+
+  for _, name in ipairs(ore_blacklist) do
+    for key, _ in pairs(minable_resources) do
+      if string.find(key, name, 1, true) then
+        minable_resources[key] = nil
       end
     end
-    i = i+1
   end
 
   return minable_resources
 end
--- log(serpent.block(get_minable_resouces()))
+local function get_minable_resouces(filter)
+  filter = filter or true
+  local minable_resources = {}
+
+  for key, value in pairs(data.raw.resource) do
+    minable_resources[key] = {name=key, type=value.category or "basic-solid", results={}}
+    if value.minable.result then
+      local _name = value.minable.result
+      local _type = value.minable.type or "item"
+      minable_resources[key].results = {{name=_name, type=_type}}
+    end
+    if value.minable.results then
+      for j, result in ipairs(value.minable.results) do
+        minable_resources[key].results[j] = {type=result.type, name=result.name}
+      end
+    end
+  end
+  if filter then return filter_by_blacklist(minable_resources)
+  else           return minable_resources
+  end
+end
+log(serpent.block(get_minable_resouces()))
 -- log(serpent.block(data.raw.resource["uranium-ore"].minable))
 -- log(data.raw.fluid["crude-oil"].type)
--- assert(1==2, "get_minable_resouces()")
+assert(1==2, "get_all_minable_resouces()")
+
+
 
 ---@param name string ore/item or fluid name
 local function is_ore(name)
@@ -187,6 +217,7 @@ local function make_categories()
 end
 make_categories()
 
+
 local function make_molten_item(item_name)
   local ore_name = get_ore_name(item_name)
   return {
@@ -200,7 +231,7 @@ local function make_molten_item(item_name)
     base_color = yutil.color.moltenmetal.base,
     flow_color = yutil.color.moltenmetal.flow,
     order = "a[molten-"..ore_name.."]",
-    auto_barrel = false
+    auto_barrel = autofill
   }
 
 end
@@ -262,3 +293,8 @@ assert(1==2, "make_smelting_recipe()")
 --  so we can cast gear-wheels and sticks
 
 
+
+--[[
+get ores filtered by ore_names  string.find(get_minable_resouces()[i].resource_name, ore_names[i], 0, true)
+
+]]
