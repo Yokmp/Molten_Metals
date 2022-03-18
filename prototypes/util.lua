@@ -3,9 +3,9 @@ local yutil = {}
 
 -- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
 yutil.temperatures = { -- {melting-point, boiling-point}
-  iron={1500,3000}, copper={1100,2600}, stone={800,1200}, uranium={1100,4100}, titanium={1600,3200}, lead={320,1700},
-  tungsten={3400,5900}, platin={1800,3800}, lithium={180,1300}, tin={230,2600}, zinc={420,900}, aluminium={660,2500},
-  silver={960,2200}, gold={1100,3000},}
+  ["iron-ore"]={1500,3000}, ["copper-ore"]={1100,2600}, ["stone"]={800,1200}, ["uranium-ore"]={1100,4100}, ["titanium-ore"]={1600,3200}, ["lead-ore"]={320,1700},
+  ["tungsten-ore"]={3400,5900}, ["platin-ore"]={1800,3800}, ["lithium-ore"]={180,1300}, ["tin-ore"]={230,2600}, ["zinc-ore"]={420,900}, ["aluminium-ore"]={660,2500},
+  ["silver-ore"]={960,2200}, ["gold-ore"]={1100,3000},}
 
 
 ---@param icon_name string Icon name
@@ -15,24 +15,24 @@ function yutil.get_icons(icon_name)--, icon_path)
 
     local icons = {
       missing   = "missing-icon",
-      iron      = "molten-iron",
-      copper    = "molten-copper",
-      stone     = "molten-stone",
-      uranium   = "molten-uranium",
-      titanium  = "molten-titanium",
-      tungsten  = "molten-tungsten",
-      lead      = "molten-lead",
+      iron      = "molten-iron-ore",
+      copper    = "molten-copper-ore",
+      stone     = "molten-stone-ore",
+      uranium   = "molten-uranium-ore",
+      titanium  = "molten-titanium-ore",
+      tungsten  = "molten-tungsten-ore",
+      lead      = "molten-lead-ore",
     }
     local icon = icons[icon_name] or icons.missing
     -- if icons[icon_name] then
-      return  {
-        {
-          -- icon = icon_path..icons[icon_name]..".png",
-          icon = icon_path..icon..".png",
-          icon_size = 64, icon_mipmaps = 4,
-          scale = 0.5, shift = util.by_pixel(0, 0), tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
-        },
-      }
+    return  {
+      {
+        -- icon = icon_path..icons[icon_name]..".png",
+        icon = icon_path..icon..".png",
+        icon_size = 64, icon_mipmaps = 4,
+        scale = 0.5, shift = util.by_pixel(0, 0), tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
+      },
+    }
     -- else
     --   return  {
     --     {
