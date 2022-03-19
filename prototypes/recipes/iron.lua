@@ -68,7 +68,7 @@ data:extend({
       },
       results = {
         {type = "item",  name = "iron-plate", amount = 1},
-        {type = "fluid", name = "steam", amount = 5, temperature = 165}
+        {type = "fluid", name = "steam", amount = 10, temperature = 165}
       }
     },
     expensive = {
@@ -81,7 +81,7 @@ data:extend({
       },
       results = {
         {type = "item",  name = "iron-plate", amount = 1},
-        {type = "fluid", name = "steam", amount = 5, temperature = 165}
+        {type = "fluid", name = "steam", amount = 10, temperature = 165}
       }
     }
   },

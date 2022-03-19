@@ -1,11 +1,12 @@
 
 local yutil = require("prototypes.util")
-require("prototypes.casting-recipes")
+require("prototypes.recipes.smelting-recipes")
+require("prototypes.recipes.casting-recipes")
+require("prototypes.recipes.recipe-util")
 local blacklist = {
   ores = {"coal"},
   recipes = {"concrete"}}
 
-local use_slag = settings.startup["ymm-enable-slag"].value
 local autofill = settings.startup["ymm-allow-barreling"].value
 
 local temperatures = yutil.temperatures
@@ -201,17 +202,6 @@ end
 -- assert(1==2, "make_molten_item()")
 
 
-local function get_molten_recipe_results(ore_name)
-  local _return = {{type = "fluid", name = "molten-"..ore_name, amount = 40, temperature = temperatures[ore_name][1] or 1100}}
-  local slag = {type = "item", name = "slag-stone", amount_min = 1, amount_max = 3, probability = 0.24}
-
-  if use_slag then table.insert(_return, slag) end
-  return _return
-end
--- log(serpent.block(get_molten_recipe_results("iron-ore")))
--- assert(1==2, "get_molten_recipe_results()")
-
-
 ---Returns a table containing if and when a recipe is enabled
 ---@param recipe_name string
 ---@return table
@@ -249,44 +239,7 @@ log(serpent.block( get_tech_recipe_enabled("tank") ))
 assert(1==2, "get_tech_recipe_enabled()")
 
 
----Returns a smelting recipe for the given ore
----@param ore_name string
----@return table
-function get_molten_recipe(ore_name) --rewrite direct
 
-  return {
-    type = "recipe",
-    name = "molten-"..ore_name,
-    category = categories.smelting,
-    allow_as_intermediate = false,
-    allow_intermediates = false,
-    hidden = false,
-    hide_from_player_crafting = true,
-    show_amount_in_title = true,
-    always_show_products = true,
-    crafting_machine_tint = yutil.color.moltenmetal.tint,
-    normal = {
-      main_product = "molten-"..ore_name,
-      enabled = false,
-      energy_required = 3.2,
-      ingredients = {
-        {type = "item", name = ore_name, amount = 2}
-      },
-      results = get_molten_recipe_results(ore_name)
-    },
-    expensive = {
-      main_product = "molten-"..ore_name,
-      enabled = false,
-      energy_required = 3.2,
-      ingredients = {
-        {type = "item", name = ore_name, amount = 2}
-      },
-      results = get_molten_recipe_results(ore_name)
-    }
-  }
-end
--- log(serpent.block(get_molten_recipe( "iron-ore")))
--- assert(1==2, "get_molten_recipe()")
 
 
 
