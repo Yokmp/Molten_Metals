@@ -1,3 +1,4 @@
+-- require('__debugadapter__/debugadapter.lua')
 
 ---create the categories for molten metals
 categories = {smelting="ymm_smelting", casting="ymm_casting"}
@@ -7,7 +8,20 @@ data:extend({
 })
 
 require("functions")
+require("prototypes.item.machines")
+require("prototypes.item.slag")
+require("prototypes.item.fluids")
 
+require("prototypes.entity.entities")
+
+require("prototypes.recipes.machines")
+require("prototypes.recipes.slag")
+require("prototypes.recipes.copper")
+require("prototypes.recipes.iron")
+require("prototypes.recipes.stone")
+require("prototypes.recipes.uranium")
+
+require("prototypes.technology.molten-metals")
 
 -- local ore_list = {"iron-ore", "copper-ore", "stone", "uranium-ore"}
 

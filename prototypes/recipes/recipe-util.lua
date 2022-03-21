@@ -1,7 +1,132 @@
+local yutil = require("prototypes.util")
+local use_slag = settings.startup["ymm-enable-slag"].value
 
-------------
--- RECIPE --
-------------
+
+---Creates a smelting recipe, _ore-name_ to _molten-ore-name_
+---@param ore_name string also determines the main product
+---@param amount_in table {normal, expensive}
+---@param amount_out table {normal, expensive}
+---@param energy table {normal, expensive}
+---@return table
+function make_new_smelting_recipe(ore_name, amount_in, amount_out, energy)
+  amount_in = amount_in or {2,2}
+  amount_out = amount_out or {40,40}
+  energy = energy or {0.5,0.5} --{3.2,3.2}
+  local temperature = yutil.temperatures[ore_name] or 1100
+
+  local recipe =  {
+    type = "recipe",
+    name = "molten-"..ore_name,
+    category = categories.smelting,
+    allow_as_intermediate = false,
+    allow_intermediates = false,
+    hidden = false,
+    hide_from_player_crafting = true,
+    show_amount_in_title = true,
+    always_show_products = true,
+    order = "m[molten-"..ore_name.."]",
+    crafting_machine_tint = yutil.color.moltenmetal.tint,
+    normal = {
+      main_product = "molten-"..ore_name,
+      enabled = false,
+      energy_required = energy[1],
+      ingredients = {
+        {type = "item", name = ore_name, amount = amount_in[1]}
+      },
+      results = {
+        {type = "fluid", name = "molten-"..ore_name, amount = amount_out[1], temperature = temperature[1]}
+      }
+    },
+    expensive = {
+      main_product = "molten-"..ore_name,
+      enabled = false,
+      energy_required = energy[2],
+      ingredients = {
+        {type = "item", name = ore_name, amount = amount_in[2]}
+      },
+      results = {
+        {type = "fluid", name = "molten-"..ore_name, amount = amount_out[2], temperature = temperature[1]}
+      }
+    }
+  }
+  if use_slag then
+    local slag_normal = {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.floor(amount_out[1]/10), probability = 0.24}
+    local slag_expensive = {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.floor(amount_out[2]/10), probability = 0.24}
+    table.insert(recipe.normal.results, slag_normal)
+    table.insert(recipe.expensive.results, slag_expensive)
+  end
+
+  data:extend({recipe})
+end
+-- make_new_smelting_recipe( "iron-ore", {2,2}, {40,40}, {3.2,3.2})
+-- log(serpent.block(data.raw.recipe["molten-iron"]))
+-- make_new_smelting_recipe( "iron-ore")
+-- log(serpent.block(data.raw.recipe["molten-iron-ore"]))
+-- error("make_new_smelting_recipe()")
+
+---Creates a new casting recipe
+---@param ore_name string recipe and ingredient name (molten-result-name)
+---@param result_name string also sets the main product
+---@param amount_in table {normal, expensive}
+---@param amount_out table {normal, expensive}
+---@param energy table {normal, expensive}
+function make_new_casting_recipe(ore_name, result_name, amount_in, amount_out, energy)
+  amount_in = amount_in or {20,20}
+  amount_out = amount_out or {1,1}
+  energy = energy or {0.5,0.5} --{1.6,1.6}
+  temperature = yutil.temperatures[ore_name] or 1100
+
+data:extend({{
+  type = "recipe",
+  name = "molten-"..result_name,
+  category = categories.casting,
+  show_amount_in_title = true,
+  allow_as_intermediate = false,
+  allow_intermediates = false,
+  hidden = false,
+  hide_from_player_crafting = true,
+  always_show_products = true,
+  order = "m[molten-"..result_name.."]",
+  crafting_machine_tint = yutil.color.moltenmetal.tint,
+  normal = {
+    main_product = result_name,
+    enabled = false,
+    energy_required = energy[1], -- 1.6 (3.2 at speed 2)
+    ingredients = {
+      {type = "fluid", name = "molten-"..ore_name, amount = amount_in[1], temperature = temperature[1]},
+      {type = "fluid", name = "water", amount = 40}
+    },
+    results = {
+      {type = "item",  name = result_name, amount = amount_out[1]},
+      {type = "fluid", name = "steam", amount = 10, temperature = 165}
+    }
+  },
+  expensive = {
+    main_product = result_name,
+    enabled = false,
+    energy_required = energy[2],
+    ingredients = {
+      {type = "fluid", name = "molten-"..ore_name, amount = amount_in[2], temperature = temperature[1]},
+      {type = "fluid", name = "water", amount = 80}
+    },
+    results = {
+      {type = "item",  name = result_name, amount = amount_out[2]},
+      {type = "fluid", name = "steam", amount = 10, temperature = 165}
+    }
+  }
+}})
+end
+-- make_new_casting_recipe("iron-ore", "iron-plate", {20,20}, {1,1}, {1.6,1.6})
+-- log(serpent.block(data.raw.recipe["molten-iron-plate"]))
+-- make_new_casting_recipe("iron-ore", "iron-plate")
+-- log(serpent.block(data.raw.recipe["molten-iron-plate"]))
+-- error("make_new_smelting_recipe()")
+
+
+    ------------
+    -- HELPER --
+    ------------
+
 
 ---Enable or disable a recipe/difficulty
 ---@param recipe_name string
@@ -72,38 +197,5 @@ end
 -- error("recipe_set_result_temperature()")
 
 
-----------------
--- TECHNOLOGY --
-----------------
 
----Adds a recipe as effect to a technology
----@param technology_name string
----@param recipe_name string
-function technology_add_effect(technology_name, recipe_name) --TODO add difficulty
-  if data.raw.technology[technology_name] and data.raw.technology[technology_name].effects then
-    table.insert(data.raw.technology[technology_name].effects, { type = "unlock-recipe", recipe = recipe_name })
-    log("added "..recipe_name.." to ".. technology_name)
-  else
-    log("Unknown technology or missing key: "..tostring(technology_name))
-  end
-end
--- technology_add_effect("tank", "test-recipe")
--- log(serpent.block(data.raw.technology["tank"]))
--- error("technology_add_effect()")
-
-function technology_remove_effect(technology_name, recipe_name)
-  if data.raw.technology[technology_name] and data.raw.technology[technology_name].effects then
-    for index, value in ipairs(data.raw.technology[technology_name].effects) do
-      if value.recipe == recipe_name then
-        table.remove(data.raw.technology[technology_name].effects, index)
-        log("removed "..recipe_name.." from ".. technology_name)
-      end
-    end
-  else
-    log("Unknown technology or missing key: "..tostring(technology_name))
-  end
-end
--- technology_remove_effect("tank", "cannon-shell")
--- log(serpent.block(data.raw.technology["tank"]))
--- error("technology_remove_effect()")
 

@@ -3,6 +3,7 @@ local yutil = require("prototypes.util")
 require("prototypes.recipes.smelting-recipes")
 require("prototypes.recipes.casting-recipes")
 require("prototypes.recipes.recipe-util")
+require("prototypes.technology.molten-metals")
 local blacklist = {
   ores = {"coal"},
   recipes = {"concrete"}}
@@ -200,43 +201,6 @@ function make_molten_item(ore_name)
 end
 -- log(serpent.block(make_molten_item("uranium-ore")))
 -- assert(1==2, "make_molten_item()")
-
-
----Returns a table containing if and when a recipe is enabled
----@param recipe_name string
----@return table
-function get_tech_recipe_enabled(recipe_name)
-  local _techs = {}
-
-  for _, value in pairs(data.raw.technology) do
-    if value.effects then
-      for _, effect in ipairs(value.effects) do
-        if effect.recipe and effect.recipe == recipe_name then
-          _techs.effects = false
-        end
-      end
-    end
-    if value.normal and value.normal.effects then
-      for _, effect in ipairs(value.effects.normal) do
-        if effect.recipe and effect.recipe == recipe_name then
-          _techs.normal = false
-        end
-      end
-    end
-    if value.expensive and value.expensive.effects then
-      for _, effect in ipairs(value.effects.expensive) do
-        if effect.recipe and effect.recipe == recipe_name then
-          _techs.expensive = false
-        end
-      end
-    end
-  end
-
-  return _techs
-end
-log(serpent.block( get_tech_recipe_enabled("iron-ore") ))
-log(serpent.block( get_tech_recipe_enabled("tank") ))
-assert(1==2, "get_tech_recipe_enabled()")
 
 
 

@@ -1,6 +1,6 @@
 local yutil = require("prototypes.util")
 local autofill = settings.startup["ymm-allow-barreling"].value
-local ore_names = {"iron", "copper", "stone", "uranium"}
+local ore_names = {"iron-ore", "copper-ore", "stone", "uranium-ore"}
 
 local function make_molten_fluid(name)
 

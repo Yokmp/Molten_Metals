@@ -1,74 +1,37 @@
+require("technology-util")
 
-table.insert( 
-  data.raw.technology["uranium-processing"].effects,
-  {type = "unlock-recipe", recipe = "molten-uranium"} )
-table.insert( 
-  data.raw.technology["kovarex-enrichment-process"].effects,
-  {type = "unlock-recipe", recipe = "molten-uranium-processing"} )
+technology_add_effect("uranium-processing", "molten-uranium-ore")
+technology_add_effect("uranium-processing", "molten-uranium-238")
+technology_add_effect("kovarex-enrichment-process", "molten-uranium-235")
+
+local replace_steel_furnace = settings.startup["ymm-replace-steel-furnace"].value
+local replace_electric_furnace = settings.startup["ymm-replace-steel-furnace"].value
+
+local tech = "advanced-material-processing"
+data.raw.technology[tech].icon = "__Molten_Metals__/graphics/technology/smelting.png"
+data.raw.technology[tech].icon_size = 128
+if replace_steel_furnace then technology_remove_effect(tech, "steel-furnace") end
+technology_add_effect(tech, "basic-smelter")
+technology_add_effect(tech, "basic-caster")
+technology_add_effect(tech, "molten-iron-ore")
+technology_add_effect(tech, "molten-copper-ore")
+technology_add_effect(tech, "molten-stone")
+technology_add_effect(tech, "molten-iron-plate")
+technology_add_effect(tech, "molten-copper-plate")
+technology_add_effect(tech, "molten-stone-brick")
+
+tech = "advanced-material-processing-2"
+data.raw.technology[tech].icon = "__Molten_Metals__/graphics/technology/advanced-smelting.png"
+data.raw.technology[tech].icon_size = 128
+if replace_electric_furnace then technology_remove_effect(tech, "electric-furnace") end
+technology_add_effect(tech, "advanced-smelter")
+technology_add_effect(tech, "advanced-caster")
+
+-- log(serpent.block(data.raw.technology["advanced-material-processing-2"]))
+-- error("TECHNOLOGY")
 
 data:extend({
-  --------------------------
-  --   SMELTER + CASTER   --
-  -- molten ore to plates --
-  --------------------------
-  {
-    type = "technology",
-    name = "advanced-material-processing",
-    icon_size = 128,
-    icon = "__Molten_Metals__/graphics/technology/smelting.png",
-    effects =
-    {
-      -- {
-      --   type = "unlock-recipe",
-      --   recipe = "steel-furnace"
-      -- },
-      {
-        type = "unlock-recipe",
-        recipe = "basic-smelter"
-      },
-	    {
-        type = "unlock-recipe",
-        recipe = "basic-caster"
-      },
-	    {
-        type = "unlock-recipe",
-        recipe = "molten-iron"
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "molten-copper"
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "molten-stone"
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "molten-iron-plate"
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "molten-copper-plate"
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "molten-stone-brick"
-      },
-    },
-    -- prerequisites = {"logistic-science-pack"}, -- fluid-handling
-    prerequisites = {"steel-processing", "logistic-science-pack"},
-    unit =
-    {
-      count = 75,
-      ingredients =
-      {
-        {"automation-science-pack", 1},
-        {"logistic-science-pack", 1}
-      },
-      time = 30
-    },
-    order = "c-c-a"
-  },
+
 --#region Unused
   ------------------------
   -- SLAG to LANDFILL   --
@@ -229,48 +192,7 @@ data:extend({
   --   order = "c-a"
   -- },
   --#endregion
-  ------------------------
-  --      ADVANCED      --
-  -- smelter and caster --
-  ------------------------
-  {
-    type = "technology",
-    -- name = "advanced-smelter",
-    name = "advanced-material-processing-2",
-    icon_size = 128,
-    icon = "__Molten_Metals__/graphics/technology/advanced-smelting.png",
-    effects =
-    {
-      -- {
-      --   type = "unlock-recipe",
-      --   recipe = "electric-furnace"
-      -- },
-      {
-        type = "unlock-recipe",
-        recipe = "advanced-smelter"
-      },
-      {
-        type = "unlock-recipe",
-        recipe = "advanced-caster"
-      },
-    },
-    -- prerequisites = {
-      --"ingot-casting",
-      -- "advanced-material-processing-2","productivity-module-2"},
-      prerequisites = {"advanced-material-processing", "chemical-science-pack"},
-    unit =
-    {
-      count = 250,
-      ingredients =
-      {
-        {"automation-science-pack", 1},
-        {"logistic-science-pack", 1},
-        {"chemical-science-pack", 1}
-      },
-      time = 30
-    },
-    order = "c-c-b"
-  },
+ 
   -----------------
   -- SLAG PELLET --
   --  recycling  --
@@ -325,15 +247,19 @@ data:extend({
     {
       {
         type = "unlock-recipe",
-        recipe = "iron-gear-wheel-casting"
+        recipe = "molten-iron-gear-wheel"
       },
       {
         type = "unlock-recipe",
-        recipe = "iron-stick-casting"
+        recipe = "molten-iron-stick"
       },
       {
         type = "unlock-recipe",
-        recipe = "rail-casting" -- steel-processing
+        recipe = "molten-rail" -- steel-processing
+      },
+      {
+        type = "unlock-recipe",
+        recipe = "molten-copper-cable"
       },
     },
     prerequisites = {

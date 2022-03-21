@@ -15,13 +15,13 @@ function yutil.get_icons(icon_name)--, icon_path)
 
     local icons = {
       missing   = "missing-icon",
-      iron      = "molten-iron-ore",
-      copper    = "molten-copper-ore",
-      stone     = "molten-stone-ore",
-      uranium   = "molten-uranium-ore",
-      titanium  = "molten-titanium-ore",
-      tungsten  = "molten-tungsten-ore",
-      lead      = "molten-lead-ore",
+      ["iron-ore"]      = "molten-iron-ore",
+      ["copper-ore"]    = "molten-copper-ore",
+      stone             = "molten-stone",
+      ["uranium-ore"]   = "molten-uranium-ore",
+      ["titanium-ore"]  = "molten-titanium-ore",
+      ["tungsten-ore"]  = "molten-tungsten-ore",
+      ["lead-ore"]      = "molten-lead-ore",
     }
     local icon = icons[icon_name] or icons.missing
     -- if icons[icon_name] then
