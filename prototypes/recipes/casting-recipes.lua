@@ -10,9 +10,22 @@ make_new_casting_recipe("iron-ore", "rail", {120,120}, {2,2}, {0.5,0.5})
 -- table.insert(data.raw.recipe["molten-rail"].ingredients, {type = "item", name = "stone", amount = 1})
 make_new_casting_recipe("stone", "stone-brick", {20,20}, {1,1}, {1.6,1.6})
 make_new_casting_recipe("uranium-ore", "uranium-238", {200,200}, {1,1}, {12,12})
-make_new_casting_recipe("uranium-ore", "uranium-235", {200,200}, {1,1}, {12,12})
-data.raw.recipe["molten-uranium-238"].results = {
+make_new_casting_recipe("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, {12,12})
+data.raw.recipe["molten-uranium-238"].normal.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},
   {type = "fluid", name = "steam", amount = 200, temperature = 165}
 }
+data.raw.recipe["molten-uranium-238"].expensive.results = {
+  {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
+  {type = "item", name = "uranium-235", amount = 1, probability = 0.007},
+  {type = "fluid", name = "steam", amount = 200, temperature = 165}
+}
+
+-- out/probability = multiplier
+-- 1.00704934541793
+-- 142.857142857143
+-- in*multiplier
+-- 201.409869083585
+-- 28571.4285714286
+-- ore to u235 ratio but its to much since there will be no u-238

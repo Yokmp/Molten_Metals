@@ -255,7 +255,7 @@ data:extend({
       },
       {
         type = "unlock-recipe",
-        recipe = "molten-rail" -- steel-processing
+        recipe = "molten-rail" -- steel-processing (basic-smelter prerequisite)
       },
       {
         type = "unlock-recipe",

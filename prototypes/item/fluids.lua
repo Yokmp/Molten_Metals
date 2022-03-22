@@ -1,39 +1,40 @@
 local yutil = require("prototypes.util")
 local autofill = settings.startup["ymm-allow-barreling"].value
-local ore_names = {"iron-ore", "copper-ore", "stone", "uranium-ore"}
 
-local function make_molten_fluid(name)
+
+function make_molten_fluid(ore_name)
 
   data:extend({{
     type = "fluid",
-    name = "molten-"..name,
-    icons = yutil.get_icons(name),
-    default_temperature = yutil.temperatures[name][1],
-    max_temperature = yutil.temperatures[name][2],
+    name = "molten-"..ore_name,
+    icons = yutil.get_icons(ore_name),
+    default_temperature = yutil.temperatures[ore_name][1] or 1100,
+    max_temperature = yutil.temperatures[ore_name][2] or 2600,
     heat_capacity = "0.425KJ",
     base_color = yutil.color.moltenmetal.base,
     flow_color = yutil.color.moltenmetal.flow,
-    order = "m[molten-"..name.."]",
+    order = "m[molten-"..ore_name.."]",
     auto_barrel = autofill
   }})
 end
 
-for _, name in ipairs(ore_names) do
-  make_molten_fluid(name)
-end
+make_molten_fluid("iron-ore")
+make_molten_fluid("copper-ore")
+make_molten_fluid("stone")
+make_molten_fluid("uranium-ore")
 
 
 -- data:extend({
 --   {
 --     type = "fluid",
---     name = "acidic-water",
---     icon = "__Molten_Metals__/graphics/icons/acidic-water.png",
+--     name = "waste-water",
+--     icon = "__Molten_Metals__/graphics/icons/waste-water.png",
 --     icon_size = 64, icon_mipmaps = 4,
 --     default_temperature = 80,
 --     max_temperature = 100,
 --     heat_capacity = "0.1KJ",
---     base_color = color.acidwater.base,
---     flow_color = color.acidwater.flow,
+--     base_color = color.wastewater.base,
+--     flow_color = color.wastewater.flow,
 --     order = "z"
 --   },
 -- })

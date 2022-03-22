@@ -8,12 +8,16 @@ data:extend({
 })
 
 require("functions")
+
 require("prototypes.item.machines")
 require("prototypes.item.slag")
 require("prototypes.item.fluids")
 
 require("prototypes.entity.entities")
 
+require("prototypes.recipes.recipe-util")
+require("prototypes.recipes.smelting-recipes")
+require("prototypes.recipes.casting-recipes")
 require("prototypes.recipes.machines")
 require("prototypes.recipes.slag")
 require("prototypes.recipes.copper")
@@ -23,7 +27,15 @@ require("prototypes.recipes.uranium")
 
 require("prototypes.technology.molten-metals")
 
+
+
+
+
+
 -- local ore_list = {"iron-ore", "copper-ore", "stone", "uranium-ore"}
+
+-- log(serpent.block(get_minable_resouces()))
+-- error("TEST")
 
 --[[
   get a list of all basic-solid ores (done in functions.lua)

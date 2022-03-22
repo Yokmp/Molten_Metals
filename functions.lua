@@ -1,25 +1,10 @@
 
 local yutil = require("prototypes.util")
-require("prototypes.recipes.smelting-recipes")
-require("prototypes.recipes.casting-recipes")
-require("prototypes.recipes.recipe-util")
-require("prototypes.technology.molten-metals")
 local blacklist = {
   ores = {"coal"},
-  recipes = {"concrete"}}
+  recipes = {"concrete"}
+}
 
-local autofill = settings.startup["ymm-allow-barreling"].value
-
-local temperatures = yutil.temperatures
-
-
-
-
-
-
-
-
--- table used by like all functions:
 -- {
 --   ["key-name"] = {
 --     name = "resource-name",
@@ -92,7 +77,7 @@ end
 -- assert(1==2, "is_ore()")
 
 
----Returns a list of all recipes using the given ingrdient
+---Returns a list of all recipes using the given ingredient
 ---@param item_name string
 ---@return table table List of recipe names
 function get_recipes_byingredient(item_name)
@@ -182,29 +167,6 @@ end
 -- log(serpent.block( get_recipe_results( "tank" ) ))
 -- log(serpent.block( get_recipe_results( "iron-plate" ) ))
 -- assert(1==2, "get_recipe_results()")
-
-
-function make_molten_item(ore_name)
-  return {
-    type = "fluid",
-    name = "molten-"..ore_name,
-    icons = yutil.get_icons("molten"..ore_name),
-    -- icon_size = 64, icon_mipmaps = 4,
-    default_temperature = temperatures[ore_name][1] or 1100,
-    max_temperature = temperatures[ore_name][2] or 2600,
-    heat_capacity = "0.425KJ",
-    base_color = yutil.color.moltenmetal.base,
-    flow_color = yutil.color.moltenmetal.flow,
-    order = "a[molten-"..ore_name.."]",
-    auto_barrel = autofill
-  }
-end
--- log(serpent.block(make_molten_item("uranium-ore")))
--- assert(1==2, "make_molten_item()")
-
-
-
-
 
 
 -- get every recipe which has the ore as ingredient

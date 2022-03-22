@@ -1,19 +1,11 @@
 
--- data.raw.item["steel-furnace"].group = "furnace"
--- data.raw.item["steel-furnace"].subgroup = "production-machine"
--- data.raw.item["steel-furnace"].place_result = "basic-smelter"
--- data.raw.item["steel-furnace"].order = "c[electric-furnace]"
--- data.raw.item["electric-furnace"].group = "furnace"
--- data.raw.item["electric-furnace"].subgroup = "production-machine"
--- data.raw.item["electric-furnace"].place_result = "advanced-smelter"
--- data.raw.item["electric-furnace"].order = "b[steel-furnace]"
-
-local replace_steel_furnace = settings.startup["ymm-replace-steel-furnace"].value
-local replace_electric_furnace = settings.startup["ymm-replace-steel-furnace"].value
-
-if replace_steel_furnace then data.raw.item["steel-furnace"].flags = {"hidden"} end
-if replace_electric_furnace then data.raw.item["electric-furnace"].flags = {"hidden"} end
-data.raw["furnace"]["stone-furnace"].next_upgrade = "basic-smelter"
+if settings.startup["ymm-replace-steel-furnace"].value then
+  data.raw.item["steel-furnace"].flags = {"hidden"}
+  data.raw["furnace"]["stone-furnace"].next_upgrade = "basic-smelter"
+end
+if settings.startup["ymm-replace-steel-furnace"].value then
+  data.raw.item["electric-furnace"].flags = {"hidden"}
+end
 
 data:extend({
   --------------

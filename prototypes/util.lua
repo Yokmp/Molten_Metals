@@ -151,7 +151,7 @@ yutil.color = {
       tertiary  = {r = 230 / 255, g = 125 / 255, b = 125 / 255, a = 0}  -- window
     }
   },
-  acidwater = {
+  wastewater = {
     base = {r = 0.1,  g = 0.44, b = 0.5 },
     flow = {r = 0.86, g = 0.64, b = 0.21},
     tint = {
