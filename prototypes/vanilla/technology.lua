@@ -1,35 +1,3 @@
-require("technology-util")
-
-technology_add_effect("uranium-processing", "molten-uranium-ore")
-technology_add_effect("uranium-processing", "molten-uranium-238")
-technology_add_effect("kovarex-enrichment-process", "molten-uranium-235")
-
-local replace_steel_furnace = settings.startup["ymm-replace-steel-furnace"].value
-local replace_electric_furnace = settings.startup["ymm-replace-steel-furnace"].value
-
-local tech = "advanced-material-processing"
-data.raw.technology[tech].icon = "__Molten_Metals__/graphics/technology/smelting.png"
-data.raw.technology[tech].icon_size = 128
-if replace_steel_furnace then technology_remove_effect(tech, "steel-furnace") end
-technology_add_effect(tech, "basic-smelter")
-technology_add_effect(tech, "basic-caster")
-technology_add_effect(tech, "molten-iron-ore")
-technology_add_effect(tech, "molten-copper-ore")
-technology_add_effect(tech, "molten-stone")
-technology_add_effect(tech, "molten-iron-plate")
-technology_add_effect(tech, "molten-copper-plate")
-technology_add_effect(tech, "molten-stone-brick")
-
-tech = "advanced-material-processing-2"
-data.raw.technology[tech].icon = "__Molten_Metals__/graphics/technology/advanced-smelting.png"
-data.raw.technology[tech].icon_size = 128
-if replace_electric_furnace then technology_remove_effect(tech, "electric-furnace") end
-technology_add_effect(tech, "advanced-smelter")
-technology_add_effect(tech, "advanced-caster")
-
--- log(serpent.block(data.raw.technology["advanced-material-processing-2"]))
--- error("TECHNOLOGY")
-
 data:extend({
 
 --#region Unused
@@ -214,7 +182,7 @@ data:extend({
       },
       -- {
       --   type = "unlock-recipe",
-      --   recipe = "acidic-water-treatment" -- steel-processing
+      --   recipe = "waste-water-treatment" -- steel-processing
       -- },
     },
     prerequisites = {

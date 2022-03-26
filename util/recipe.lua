@@ -1,22 +1,24 @@
-local yutil = require("prototypes.util")
+
 local use_slag = settings.startup["ymm-enable-slag"].value
 
 
 ---Creates a smelting recipe, _ore-name_ to _molten-ore-name_
 ---@param ore_name string also determines the main product
----@param amount_in table {normal, expensive}
----@param amount_out table {normal, expensive}
----@param energy table {normal, expensive}
----@return table
-function make_new_smelting_recipe(ore_name, amount_in, amount_out, energy)
+---@param amount_in? table {normal, expensive}
+---@param amount_out? table {normal, expensive}
+---@param energy? table {normal, expensive}
+---@param enabled? table {normal, expensive}
+function make_new_smelting_recipe(ore_name, amount_in, amount_out, energy, enabled)
   amount_in = amount_in or {2,2}
   amount_out = amount_out or {40,40}
   energy = energy or {0.5,0.5} --{3.2,3.2}
-  local temperature = yutil.temperatures[ore_name] or 1100
+  enabled = enabled or {false, false}
+  local temperature = yutil.ore_definition(ore_name, "temperature").min
 
   local recipe =  {
     type = "recipe",
     name = "molten-"..ore_name,
+    localised_name = {"", {"item-name."..ore_name}, " ", {"item-name.smelting"}},
     category = categories.smelting,
     allow_as_intermediate = false,
     allow_intermediates = false,
@@ -28,24 +30,24 @@ function make_new_smelting_recipe(ore_name, amount_in, amount_out, energy)
     crafting_machine_tint = yutil.color.moltenmetal.tint,
     normal = {
       main_product = "molten-"..ore_name,
-      enabled = false,
+      enabled = enabled[1],
       energy_required = energy[1],
       ingredients = {
         {type = "item", name = ore_name, amount = amount_in[1]}
       },
       results = {
-        {type = "fluid", name = "molten-"..ore_name, amount = amount_out[1], temperature = temperature[1]}
+        {type = "fluid", name = "molten-"..ore_name, amount = amount_out[1], temperature = temperature}
       }
     },
     expensive = {
       main_product = "molten-"..ore_name,
-      enabled = false,
+      enabled = enabled[2],
       energy_required = energy[2],
       ingredients = {
         {type = "item", name = ore_name, amount = amount_in[2]}
       },
       results = {
-        {type = "fluid", name = "molten-"..ore_name, amount = amount_out[2], temperature = temperature[1]}
+        {type = "fluid", name = "molten-"..ore_name, amount = amount_out[2], temperature = temperature}
       }
     }
   }
@@ -67,18 +69,21 @@ end
 ---Creates a new casting recipe
 ---@param ore_name string recipe and ingredient name (molten-result-name)
 ---@param result_name string also sets the main product
----@param amount_in table {normal, expensive}
----@param amount_out table {normal, expensive}
----@param energy table {normal, expensive}
-function make_new_casting_recipe(ore_name, result_name, amount_in, amount_out, energy)
+---@param amount_in? table {normal, expensive}
+---@param amount_out? table {normal, expensive}
+---@param energy? table {normal, expensive}
+---@param enabled? table {normal, expensive}
+function make_new_casting_recipe(ore_name, result_name, amount_in, amount_out, energy, enabled)
   amount_in = amount_in or {20,20}
   amount_out = amount_out or {1,1}
   energy = energy or {0.5,0.5} --{1.6,1.6}
-  temperature = yutil.temperatures[ore_name] or 1100
+  enabled = enabled or {false, false}
+  temperature = yutil.ore_definition(ore_name, "temperature").min
 
 data:extend({{
   type = "recipe",
   name = "molten-"..result_name,
+  localised_name = {"", {"item-name."..result_name}, " ", {"item-name.casting"}},
   category = categories.casting,
   show_amount_in_title = true,
   allow_as_intermediate = false,
@@ -90,10 +95,10 @@ data:extend({{
   crafting_machine_tint = yutil.color.moltenmetal.tint,
   normal = {
     main_product = result_name,
-    enabled = false,
+    enabled = enabled[1],
     energy_required = energy[1], -- 1.6 (3.2 at speed 2)
     ingredients = {
-      {type = "fluid", name = "molten-"..ore_name, amount = amount_in[1], temperature = temperature[1]},
+      {type = "fluid", name = "molten-"..ore_name, amount = amount_in[1], temperature = temperature},
       {type = "fluid", name = "water", amount = 40}
     },
     results = {
@@ -103,10 +108,10 @@ data:extend({{
   },
   expensive = {
     main_product = result_name,
-    enabled = false,
+    enabled = enabled[2],
     energy_required = energy[2],
     ingredients = {
-      {type = "fluid", name = "molten-"..ore_name, amount = amount_in[2], temperature = temperature[1]},
+      {type = "fluid", name = "molten-"..ore_name, amount = amount_in[2], temperature = temperature},
       {type = "fluid", name = "water", amount = 80}
     },
     results = {
@@ -135,6 +140,7 @@ function recipe_set_enabled(recipe_name, enabled)
   if data.raw.recipe[recipe_name] then
     data.raw.recipe[recipe_name].normal.enabled = enabled[1]
     data.raw.recipe[recipe_name].expensive.enabled = enabled[2]
+    if logging then log(recipe_name.." enabled: ".. tostring(enabled[1]) ..", ".. tostring(enabled[2])) end
   else
     log("Unknown recipe: "..tostring(recipe_name))
   end

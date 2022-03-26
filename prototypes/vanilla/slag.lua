@@ -1,6 +1,38 @@
-local yutil = require("prototypes.util")
-
 data:extend({
+  ----------
+  -- ITEM --
+  ----------
+  {
+    type = "item",
+    name = "slag-stone",
+    icon = "__Molten_Metals__/graphics/icons/slag-stone.png",
+    icon_size = 32,
+
+    subgroup = "terrain",
+    order = "f[copper-ore]",
+    stack_size = 100
+  },
+  -- {
+  --   type = "item",
+  --   name = "slag-powder",
+  --   icon = "__Molten_Metals__/graphics/icons/slag-powder.png",
+  --   icon_size = 32,
+
+  --   subgroup = "intermediate-product",
+  --   order = "c[iron-gear-wheel]",
+  --   stack_size = 200
+  -- },
+  {
+    type = "item",
+    name = "slag-pellet",
+    icon = "__Molten_Metals__/graphics/icons/slag-pellet.png",
+    icon_size = 32,
+
+    subgroup = "intermediate-product",
+    order = "c[iron-gear-wheel]",
+    stack_size = 200
+  },
+--#region unused
   -- TODO: balancing, powder to pellet
   -------------------------
   -- SLAG TO LANDFILL T1 --
@@ -95,9 +127,10 @@ data:extend({
   --     {type = "item", name = "concrete", amount = 10}
   --   }
   -- },
-  ---------------------
-  -- SLAG TO PELLETS --
-  ---------------------
+--#endregion unused
+  -------------
+  -- RECIPES --
+  -------------
   {
     type = "recipe",
     name = "slag-pellet",
@@ -121,9 +154,6 @@ data:extend({
       {type = "item", name = "slag-pellet", amount = 5}
     }
   },
-  -------------------------
-  -- PELLETS TO RARE-ORE --
-  -------------------------
   {
     type = "recipe",
     name = "slag-pellet-recycling",

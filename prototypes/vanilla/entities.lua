@@ -1,8 +1,7 @@
 local sounds = require("__base__.prototypes.entity.sounds")
-local yutil = require("prototypes.util")
 
 data:extend({
-  --TODO: balancing
+  --TODO: balancing, Caster need some smoke
   -----------------
   -- FURNACE T2  --
   -----------------

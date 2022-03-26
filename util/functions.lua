@@ -1,10 +1,4 @@
 
-local yutil = require("prototypes.util")
-local blacklist = {
-  ores = {"coal"},
-  recipes = {"concrete"}
-}
-
 -- {
 --   ["key-name"] = {
 --     name = "resource-name",
@@ -20,7 +14,7 @@ local blacklist = {
 
 
 ---returns a table containing all minable recources(*basic-solid only!*); removes the ones specified in the **blacklist**
----@param filter boolean
+---@param filter? boolean
 ---@return table
 function get_minable_resouces(filter)
   filter = filter or true
@@ -56,7 +50,7 @@ function get_minable_resouces(filter)
   end
 end
 -- log(serpent.block(get_minable_resouces()))
--- assert(1==2, "get_all_minable_resouces()")
+-- error("get_all_minable_resouces()")
 
 
 ---returns wether or not a given resource is minable

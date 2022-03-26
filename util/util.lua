@@ -1,62 +1,48 @@
 local yutil = {}
 
+-- TODO icon composer for Techs!
 
--- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
-yutil.temperatures = { -- {melting-point, boiling-point}
-  ["iron-ore"]={1500,3000}, ["copper-ore"]={1100,2600}, ["stone"]={800,1200}, ["uranium-ore"]={1100,4100}, ["titanium-ore"]={1600,3200}, ["lead-ore"]={320,1700},
-  ["tungsten-ore"]={3400,5900}, ["platin-ore"]={1800,3800}, ["lithium-ore"]={180,1300}, ["tin-ore"]={230,2600}, ["zinc-ore"]={420,900}, ["aluminium-ore"]={660,2500},
-  ["silver-ore"]={960,2200}, ["gold-ore"]={1100,3000},}
-
-
----@param icon_name string Icon name
-function yutil.get_icons(icon_name)--, icon_path)
-  if type(icon_name) == "string" then
-    local icon_path = "__Molten_Metals__/graphics/icons/"
-
-    local icons = {
-      missing   = "missing-icon",
-      ["iron-ore"]      = "molten-iron-ore",
-      ["copper-ore"]    = "molten-copper-ore",
-      stone             = "molten-stone",
-      ["uranium-ore"]   = "molten-uranium-ore",
-      ["titanium-ore"]  = "molten-titanium-ore",
-      ["tungsten-ore"]  = "molten-tungsten-ore",
-      ["lead-ore"]      = "molten-lead-ore",
-    }
-    local icon = icons[icon_name] or icons.missing
-    -- if icons[icon_name] then
-    return  {
-      {
-        -- icon = icon_path..icons[icon_name]..".png",
-        icon = icon_path..icon..".png",
-        icon_size = 64, icon_mipmaps = 4,
-        scale = 0.5, shift = util.by_pixel(0, 0), tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
-      },
-    }
-    -- else
-    --   return  {
-    --     {
-    --       icon = icon_path..icon_name..".png",
-    --       icon_size = 64, icon_mipmaps = 4,
-    --       scale = 0.25, shift = {0, -8}, tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
-    --     },
-    --     {
-    --       icon = "__Molten_Metals__/graphics/icons/molten.png",
-    --       icon_size = 64, icon_mipmaps = 4,
-    --       scale = 0.5, shift = {0, 0}, tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
-    --     },
-    --     -- { -- layers won't be ordered as defined
-    --     --   icon = "__Molten_Metals__/graphics/icons/molten-base.png",
-    --     --   icon_size = 64, icon_mipmaps = 4,
-    --     --   scale = 0.5, shift = {0, -8}, tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
-    --     -- },
-    --   }
-    -- end
-
-  else
-    error("icon_name or path is not a string")
-  end
+function yutil.get_icon(icon_name, type, icon_size, mipmaps, scale)
+  type = type or "icons"
+  return {
+    icon = "__Molten_Metals__/graphics/"..type.."/"..icon_name..".png",
+    icon_size = icon_size or 64,
+    icon_mipmaps = mipmaps or 4,
+    scale = scale or 0.5,
+    shift = util.by_pixel(0, 0), tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
+  }
 end
+
+function yutil.ore_definition(ore_name, definition)
+-- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
+-- temperature = {melting-point, boiling-point}
+  local definitions = {
+    ["missing"]       = {temperature = {min=1100,max=2600}, icon = {}},
+    ["iron-ore"]      = {temperature = {min=1500,max=3000}, icon = {}},
+    ["copper-ore"]    = {temperature = {min=1100,max=2600}, icon = {}},
+    ["stone"]         = {temperature = {min=800,max=1200}, icon = {}},
+    ["uranium-ore"]   = {temperature = {min=1100,max=4100}, icon = {}},
+    -- ["titanium-ore"]  = {temperature = {min=1600,max=3200}, icon = {}},
+    ["lead-ore"]      = {temperature = {min=320,max=1700}, icon = {}},
+    -- ["tungsten-ore"]  = {temperature = {min=3400,max=5900}, icon = {}},
+    -- ["platin-ore"]    = {temperature = {min=1800,max=3800}, icon = {}},
+    -- ["lithium-ore"]   = {temperature = {min=180,max=1300}, icon = {}},
+    -- ["tin-ore"]       = {temperature = {min=230,max=2600}, icon = {}},
+    -- ["zinc-ore"]      = {temperature = {min=420,max=900}, icon = {}},
+    ["aluminum-ore"]  = {temperature = {min=660,max=2500}, icon = {}},
+    -- ["aluminium-ore"] = {temperature = {min=660,max=2500}, icon = {}},
+    -- ["silver-ore"]    = {temperature = {min=960,max=2200}, icon = {}},
+    -- ["gold-ore"]      = {temperature = {min=1100,max=3000}, icon = {}},
+  }
+
+if not definitions[ore_name] then ore_name = "missing" end
+definitions[ore_name].icon = yutil.get_icon("molten-"..ore_name)
+
+if definition == "temperature" then return definitions[ore_name].temperature end
+if definition == "icon" then return definitions[ore_name].icon end
+return definitions[ore_name]
+end
+
 
 
 
@@ -69,7 +55,7 @@ function yutil.add_pairs(_table)
   if type(_t) == "table" and _t[1] then --they can be empty and would be "valid" until ...
     if _t.name then return _t end       --ignore if it has pairs already
     if type(_t[1]) ~= "string" then error(" First value must be 'string'") end
-    if type(_t[2]) ~= "number" then _t[2] = 1 end
+    if type(_t[2]) ~= "number" then _t[2] = 1 end -- this is risky
     return { name = _t[1], amount = _t[2] or 1}
   elseif type(_t) == "string" then
     log(" Warning: add_pairs("..type(_t[1])..", "..type(_t[2])..") - implicitly set value - amount = 1")
@@ -80,9 +66,9 @@ function yutil.add_pairs(_table)
 end
 
 
----@return any any returns _nil_ if table doesn't exists or _false_ if empty else returns _true_
+---@return boolean ... returns _false_ if table doesn't exists or is empty, else returns _true_
 function yutil.check_table(table)
-  if not table then return nil end
+  if not table then return false end
   if not next(table) then return false end
   return true
 end

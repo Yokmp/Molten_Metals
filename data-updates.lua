@@ -1,5 +1,7 @@
 -- require('__debugadapter__/debugadapter.lua')
 
+logging = true
+
 ---create the categories for molten metals
 categories = {smelting="ymm_smelting", casting="ymm_casting"}
 data:extend({
@@ -7,50 +9,25 @@ data:extend({
   { type = "recipe-category", name = categories.casting },
 })
 
-require("functions")
 
-require("prototypes.item.machines")
-require("prototypes.item.slag")
-require("prototypes.item.fluids")
+require("util.functions")
+blacklist = {
+  ores = {"coal"},
+  recipes = {"concrete"}
+}
+ore = get_minable_resouces()
+yutil = require("util.util")
 
-require("prototypes.entity.entities")
+require("util.fluids")
+require("util.recipe")
+require("util.technology")
 
-require("prototypes.recipes.recipe-util")
-require("prototypes.recipes.smelting-recipes")
-require("prototypes.recipes.casting-recipes")
-require("prototypes.recipes.machines")
-require("prototypes.recipes.slag")
-require("prototypes.recipes.copper")
-require("prototypes.recipes.iron")
-require("prototypes.recipes.stone")
-require("prototypes.recipes.uranium")
-
-require("prototypes.technology.molten-metals")
-
+require("prototypes.vanilla.entities")
+require("prototypes.vanilla.machines")
+require("prototypes.vanilla.slag")
+require("prototypes.vanilla.technology")
+require("prototypes.vanilla.create")
 
 
 
-
-
--- local ore_list = {"iron-ore", "copper-ore", "stone", "uranium-ore"}
-
--- log(serpent.block(get_minable_resouces()))
--- error("TEST")
-
---[[
-  get a list of all basic-solid ores (done in functions.lua)
-
-  NO automation of the whole process as there arte to many edge cases when mods are involved
-
-  generate a recipe for the molten ores
-  generate a recipe for casting
-  - get every item which uses the ores as ingredients (could be hard if a mod uses them for like refining)
-  - generate the recipe
-  handle slag
-
-  replace the iron furnace with the new one
-  add caster machines
-  modify the technologies
-  - write some functions to do that (no automation)
-]]
-
+require("prototypes.mods.bz-mods")

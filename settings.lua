@@ -1,14 +1,30 @@
-local resources = {"iron-ore", "copper-ore", "stone", "uranium-ore"}
-for i, name in ipairs(resources) do
+local ores = {"iron-ore", "copper-ore", "stone", "uranium-ore"}
+
+-- brevven
+if mods["bzaluminum"] then
+    table.insert(ores, "aluminum-ore")
+end
+if mods["bztitanium"] then
+    table.insert(ores, "titanium-ore")
+end
+if mods["bzlead"] then
+    table.insert(ores, "lead-ore")
+end
+if mods["bztungsten"] then
+    table.insert(ores, "tungsten-ore")
+end
+
+
+for i, name in ipairs(ores) do
     data:extend({
         {
             type = "bool-setting",
             name = "ymm-use-"..name,
             setting_type = "startup",
-            default_value = false,
+            default_value = true,
             order = "d"..i,
-            localised_name = {"item-name."..name},
-            localised_description = {"[item="..name.."]"},
+            localised_name = {"", "[item="..name.."]", " - ", {"item-name."..name}, " ", {"item-name.smelting"}},
+            -- localised_description = {"", "[item="..name.."]"},
         }
     })
 end
@@ -44,3 +60,19 @@ data:extend({
       order = "d"
   },
 })
+
+
+-- local _settings
+-- for name, value in pairs(settings.startup) do
+--     if string.find(tostring(name), "ymm-", 0, true) then
+--         -- name = string.match(name, "^%w+%-%w+%-(%w+)")
+--         local _t = {}
+--         for word in string.gmatch(name, "[^-]+") do
+--             table.insert(_t, tonumber(word) or word)
+--         end
+--         name = _t[4] and _t[3].."-".._t[4] or _t[3]
+--         _settings[tostring(name)] = value.value
+--     end
+-- end
+-- log(serpent.block(_settings))
+-- error()
