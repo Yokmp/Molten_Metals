@@ -3,6 +3,8 @@
 -- 'License: Free for all, but not sell. Or give me money, if you sold it.'
 -- 'darkfrei'
 
+--TODO update to 1.0
+
 local recipes = data.raw.recipe
 
 local items = {}
@@ -67,7 +69,7 @@ function check_recipe_handler (handler, recipe_name)
 	end
 	return must_be_deleted
 end
-
+log("Checking for bad recipes")
 for recipe_name, recipe_prototype in pairs (recipes) do
 	local must_be_deleted = false
 	if recipe_prototype.normal and recipe_prototype.expensive then

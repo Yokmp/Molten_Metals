@@ -1,15 +1,16 @@
 local sounds = require("__base__.prototypes.entity.sounds")
 
 data:extend({
-  --TODO: balancing, Caster need some smoke
+  --//TODO: balancing, Caster need some smoke
   -----------------
   -- FURNACE T2  --
   -----------------
   {
     type = "assembling-machine",
     name = "basic-smelter",
-    icon = "__Molten_Metals__/graphics/icons/basic-smelter.png",
-    icon_size = 32, icon_mipmaps = 4,
+    -- icon = "__Molten_Metals__/graphics/icons/basic-smelter.png",
+    -- icon_size = 32, icon_mipmaps = 4,
+    icons = {icons:get("basic_smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "basic-smelter"},
     max_health = 300,
@@ -41,7 +42,7 @@ data:extend({
     },
     collision_box = {{ -0.7, -0.7}, {0.7, 0.7}},
     selection_box = {{ -0.8, -1  }, {0.8, 1  }},
-    crafting_categories = {"ymm_smelting"},
+    crafting_categories = {categories.smelting},
     fast_replaceable_group = "furnace",
 		crafting_speed = 2,
     source_inventory_size = 1,
@@ -280,7 +281,7 @@ data:extend({
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
     module_specification = { module_slots = 2, module_info_icon_shift = {0, 0.8} },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-    crafting_categories = {"ymm_smelting"},
+    crafting_categories = {categories.smelting},
     fast_replaceable_group = "furnace",
     crafting_speed = 2,
     source_inventory_size = 1,
@@ -492,10 +493,9 @@ data:extend({
   {
     type = "assembling-machine",
     name = "basic-caster",
-    icon = "__Molten_Metals__/graphics/icons/basic-caster.png",
-    icon_size = 32, icon_mipmaps = 4,
+    icons = {icons:get("basic_caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    crafting_categories = {"ymm_casting"},
+    crafting_categories = {categories.casting},
     fast_replaceable_group = "assembling-machine",
     minable = {mining_time = 0.5, result = "basic-caster"},
     max_health = 300,
@@ -729,8 +729,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "advanced-caster",
-    icon = "__Molten_Metals__/graphics/icons/advanced-caster.png",
-    icon_size = 32,
+    icons = {icons:get("advanced_caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {hardness = 0.2, mining_time = 0.5, result = "advanced-caster"},
     crafting_speed = 1.5,
@@ -758,7 +757,7 @@ data:extend({
     },
     module_specification = { module_slots = 2 },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-    crafting_categories = {"ymm_casting"},
+    crafting_categories = {categories.casting},
     fast_replaceable_group = "assembling-machine",
     animation = make_4way_animation_from_spritesheet({
       layers = {

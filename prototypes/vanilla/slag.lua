@@ -5,9 +5,7 @@ data:extend({
   {
     type = "item",
     name = "slag-stone",
-    icon = "__Molten_Metals__/graphics/icons/slag-stone.png",
-    icon_size = 32,
-
+    icons = {icons:get("slag")},
     subgroup = "terrain",
     order = "f[copper-ore]",
     stack_size = 100
@@ -15,9 +13,7 @@ data:extend({
   -- {
   --   type = "item",
   --   name = "slag-powder",
-  --   icon = "__Molten_Metals__/graphics/icons/slag-powder.png",
-  --   icon_size = 32,
-
+    -- icons = icons:get("powder"),
   --   subgroup = "intermediate-product",
   --   order = "c[iron-gear-wheel]",
   --   stack_size = 200
@@ -25,15 +21,13 @@ data:extend({
   {
     type = "item",
     name = "slag-pellet",
-    icon = "__Molten_Metals__/graphics/icons/slag-pellet.png",
-    icon_size = 32,
-
+    icons = {icons:get("pellet")},
     subgroup = "intermediate-product",
     order = "c[iron-gear-wheel]",
     stack_size = 200
   },
 --#region unused
-  -- TODO: balancing, powder to pellet
+  --//TODO: balancing, powder to pellet
   -------------------------
   -- SLAG TO LANDFILL T1 --
   -------------------------
@@ -69,8 +63,7 @@ data:extend({
   --   crafting_machine_tint = { primary = {r = 0.9, g = 0.5, b = 0.5, a = 0},   -- boiling
   --                             secondary = {r = 0.9, g = 0.5, b = 0.5, a = 0}, -- mask
   --                             tertiary = {r = 0.9, g = 0.5, b = 0.5, a = 0} },-- window
-  --   icon = "__Molten_Metals__/graphics/icons/slag-brick.png",
-  --   icon_size = 32,
+  --   icons = icons:get("brick"),
   --   enabled = false,
   --   energy_required = 3.5,
   --   ingredients = {
@@ -90,8 +83,7 @@ data:extend({
   --   category = "crafting",
   --   subgroup = "intermediate-product",
   --   hide_from_player_crafting = true,
-  --   icon = "__Molten_Metals__/graphics/icons/slag-powder.png",
-  --   icon_size = 32,
+  --   icons = icons:get("powder"),
   --   enabled = false,
   --   energy_required = 2,
   --   ingredients = {
@@ -107,8 +99,7 @@ data:extend({
   -- {
   --   type = "recipe",
   --   name = "slag-stone-concrete",
-  --   icon = "__Molten_Metals__/graphics/icons/slag-concrete.png",
-  --   icon_size = 32,
+    -- icons = icons:get("concrete"),
   --   category = "crafting-with-fluid",
   --   energy_required = 1,
   --   show_amount_in_title = true,
@@ -134,8 +125,7 @@ data:extend({
   {
     type = "recipe",
     name = "slag-pellet",
-    icon = "__Molten_Metals__/graphics/icons/slag-pellet.png",
-    icon_size = 32,
+    icons = {icons:get("pellet")},
     category = "crafting",
     subgroup = "intermediate-product",
     energy_required = 1,
@@ -157,19 +147,9 @@ data:extend({
   {
     type = "recipe",
     name = "slag-pellet-recycling",
-    icons = { -- looks bad
-      {
-        icon = "__Molten_Metals__/graphics/icons/slag-pellet.png",
-        icon_size = 32,
-        -- scale = 0.5,
-        shift = {0, -3}
-      },
-      {
-        icon = "__Molten_Metals__/graphics/icons/filter.png",
-        icon_size = 32,
-        scale = 1,
-        shift = {7, 8}
-      },
+    icons = {
+      icons:get("pellet", 1, {0, -3}),
+      icons:get("filter", 0.5, {7,  8}),
       {
         icon = "__base__/graphics/icons/fluid/sulfuric-acid.png",
         icon_size = 64,
@@ -194,9 +174,24 @@ data:extend({
       {type = "fluid", name = "sulfuric-acid", amount = 35}
     },
     results = {
-      {type = "item", name = "stone",       probability = 1/3, amount_min = 1, amount_max = 1 },
-      {type = "item", name = "iron-ore",    probability = 1/3, amount_min = 1, amount_max = 1 },
-      {type = "item", name = "copper-ore",  probability = 1/3, amount_min = 1, amount_max = 1 },
+      -- {type = "item", name = "stone",       probability = 1, amount_min = 1, amount_max = 1 },
+      -- {type = "item", name = "iron-ore",    probability = 1/3, amount_min = 1, amount_max = 1 },
+      -- {type = "item", name = "copper-ore",  probability = 1/3, amount_min = 1, amount_max = 1 },
     }
   }
 })
+
+local results = {}
+local ores = get_minable_resouces()
+local size = 0
+for _ in pairs(ores) do size = size + 1 end
+for key, _ in pairs(ores) do
+  if key == "stone" then
+    table.insert(results, {type = "item", name = key,  probability = 1, amount_min = 1, amount_max = 1 })
+  else
+    table.insert(results, {type = "item", name = key,  probability = 1/size, amount_min = 1, amount_max = 1 })
+  end
+end
+-- table.insert(data.raw.recipe["slag-pellet-recycling"].ingredients, {type = "item", name = "slag-pellet", amount = 2*size})
+data.raw.recipe["slag-pellet-recycling"].results = results
+

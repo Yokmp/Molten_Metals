@@ -1,53 +1,37 @@
 local yutil = {}
 
--- TODO icon composer for Techs!
 
-function yutil.get_icon(icon_name, type, icon_size, mipmaps, scale)
-  type = type or "icons"
-  return {
-    icon = "__Molten_Metals__/graphics/"..type.."/"..icon_name..".png",
-    icon_size = icon_size or 64,
-    icon_mipmaps = mipmaps or 4,
-    scale = scale or 0.5,
-    shift = util.by_pixel(0, 0), tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
-  }
-end
-
-function yutil.ore_definition(ore_name, definition)
+function yutil.ore_definition(ore_name)
 -- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
 -- temperature = {melting-point, boiling-point}
   local definitions = {
-    ["missing"]       = {temperature = {min=1100,max=2600}, icon = {}},
-    ["iron-ore"]      = {temperature = {min=1500,max=3000}, icon = {}},
-    ["copper-ore"]    = {temperature = {min=1100,max=2600}, icon = {}},
-    ["stone"]         = {temperature = {min=800,max=1200}, icon = {}},
-    ["uranium-ore"]   = {temperature = {min=1100,max=4100}, icon = {}},
-    -- ["titanium-ore"]  = {temperature = {min=1600,max=3200}, icon = {}},
-    ["lead-ore"]      = {temperature = {min=320,max=1700}, icon = {}},
-    -- ["tungsten-ore"]  = {temperature = {min=3400,max=5900}, icon = {}},
-    -- ["platin-ore"]    = {temperature = {min=1800,max=3800}, icon = {}},
-    -- ["lithium-ore"]   = {temperature = {min=180,max=1300}, icon = {}},
-    -- ["tin-ore"]       = {temperature = {min=230,max=2600}, icon = {}},
-    -- ["zinc-ore"]      = {temperature = {min=420,max=900}, icon = {}},
-    ["aluminum-ore"]  = {temperature = {min=660,max=2500}, icon = {}},
-    -- ["aluminium-ore"] = {temperature = {min=660,max=2500}, icon = {}},
-    -- ["silver-ore"]    = {temperature = {min=960,max=2200}, icon = {}},
-    -- ["gold-ore"]      = {temperature = {min=1100,max=3000}, icon = {}},
+    ["missing"]       = {temperature = {min=1100,max=2600}},
+    ["iron-ore"]      = {temperature = {min=1500,max=3000}},
+    ["copper-ore"]    = {temperature = {min=1100,max=2600}},
+    ["stone"]         = {temperature = {min= 800,max=1200}},
+    ["uranium-ore"]   = {temperature = {min=1100,max=4100}},
+    ["titanium-ore"]  = {temperature = {min=1600,max=3200}},
+    ["lead-ore"]      = {temperature = {min= 320,max=1700}},
+    ["aluminum-ore"]  = {temperature = {min=660,max=2500}},
+    -- ["tungsten-ore"]  = {temperature = {min=3400,max=5900}},
+    -- ["platin-ore"]    = {temperature = {min=1800,max=3800}},
+    -- ["lithium-ore"]   = {temperature = {min=180,max=1300}},
+    -- ["tin-ore"]       = {temperature = {min=230,max=2600}},
+    -- ["zinc-ore"]      = {temperature = {min=420,max=900}},
+    -- ["aluminium-ore"] = {temperature = {min=660,max=2500}},
+    -- ["silver-ore"]    = {temperature = {min=960,max=2200}},
+    -- ["gold-ore"]      = {temperature = {min=1100,max=3000}},
   }
 
 if not definitions[ore_name] then ore_name = "missing" end
-definitions[ore_name].icon = yutil.get_icon("molten-"..ore_name)
-
-if definition == "temperature" then return definitions[ore_name].temperature end
-if definition == "icon" then return definitions[ore_name].icon end
-return definitions[ore_name]
+return definitions[ore_name].temperature
 end
 
 
 
 
----adds name and amount keys to table and returns a new table
----@param _table table ``{string, number?}``
+---Adds name and amount keys to table and returns a new table
+---@param _table table ``lua {string, number?}``
 ---@return table ``{ name = "name", amount = n }``
 function yutil.add_pairs(_table)
   local _t = _table

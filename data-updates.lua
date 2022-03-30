@@ -10,6 +10,7 @@ data:extend({
 })
 
 
+require("util.icons")
 require("util.functions")
 blacklist = {
   ores = {"coal"},
@@ -27,7 +28,5 @@ require("prototypes.vanilla.machines")
 require("prototypes.vanilla.slag")
 require("prototypes.vanilla.technology")
 require("prototypes.vanilla.create")
-
-
 
 require("prototypes.mods.bz-mods")

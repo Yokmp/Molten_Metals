@@ -13,7 +13,7 @@ function make_new_smelting_recipe(ore_name, amount_in, amount_out, energy, enabl
   amount_out = amount_out or {40,40}
   energy = energy or {0.5,0.5} --{3.2,3.2}
   enabled = enabled or {false, false}
-  local temperature = yutil.ore_definition(ore_name, "temperature").min
+  local temperature = yutil.ore_definition(ore_name).min
 
   local recipe =  {
     type = "recipe",
@@ -78,7 +78,7 @@ function make_new_casting_recipe(ore_name, result_name, amount_in, amount_out, e
   amount_out = amount_out or {1,1}
   energy = energy or {0.5,0.5} --{1.6,1.6}
   enabled = enabled or {false, false}
-  temperature = yutil.ore_definition(ore_name, "temperature").min
+  temperature = yutil.ore_definition(ore_name).min
 
 data:extend({{
   type = "recipe",

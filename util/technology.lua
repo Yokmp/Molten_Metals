@@ -1,6 +1,6 @@
 local yutil = require("util.util")
 ----------------
--- TECHNOLOGY -- --TODO icon function
+-- TECHNOLOGY --
 ----------------
 
 ---Creates a new technology
@@ -18,8 +18,7 @@ function make_new_technology(tech_name, icon_name, prerequisites, ingredient, lo
       type = "technology",
       name = tech_name,
       localised_name = {"", {"item-name."..localized_name}, " ", {"item-name.casting"}},
-      -- localised_description = {"technology-description.tech_name"},
-      icons = {yutil.get_icon(icon_name, "technology", 128, 1)},
+      icons = technology_icon_compose(icon_name),
       effects = {},
       prerequisites = prerequisites,
       unit =
@@ -137,3 +136,33 @@ function technology_set_parent(tech_name, parent_name, use_prerequisites)
   end
 
 end
+
+
+---Returns icons for technology
+---@param icon_name string must be a valid item name
+---@param size? number
+---@param scale? number multiplier
+---@param shift? table
+---@return table
+function technology_icon_compose(icon_name, size, scale, shift)
+  local icon = get_icon_from_item(icon_name)
+  size = size or 128
+  scale = scale or (icon.icon_size/size)
+  return {
+    {
+      icon = icon.icon,
+      icon_size = icon.icon_size,
+      icon_mipmaps = icon.icon_mipmaps or 0,
+      scale = 1,
+      shift = shift or {0,5}
+    },
+    {
+      icon = "__Molten_Metals__/graphics/technology/molten-drop.png",
+      icon_size = size,
+      scale = 1*scale,
+      shift = {0,0}
+    },
+  }
+end
+
+-- log(serpent.block(technology_icon_compose("aluminum-6061")))

@@ -1,7 +1,7 @@
 data:extend({
-  ----------
-  -- ITEM --
-  ----------
+  ------------
+  -- RECIPE --
+  ------------
   {
     type = "recipe",
     name = "basic-smelter",
@@ -52,14 +52,13 @@ data:extend({
     },
     result = "advanced-caster"
   },
-  --------------
-  -- MACHINES --
-  --------------
+  -----------
+  -- ITEMS --
+  -----------
   {
     type = "item",
     name = "basic-smelter",
-    icon = "__Molten_Metals__/graphics/icons/basic-smelter.png",
-    icon_size = 64, icon_mipmaps = 4,
+    icons = {icons:get("basic-smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
     order = "b[basic-smelter]",
@@ -80,8 +79,7 @@ data:extend({
   {
     type = "item",
     name = "basic-caster",
-    icon = "__Molten_Metals__/graphics/icons/basic-caster.png",
-    icon_size = 32,
+    icons = {icons:get("basic-caster")},
     subgroup = "production-machine",
     order = "c[basic-caster]",
     place_result = "basic-caster",
@@ -90,11 +88,29 @@ data:extend({
   {
     type = "item",
     name = "advanced-caster",
-    icon = "__Molten_Metals__/graphics/icons/advanced-caster.png",
-    icon_size = 32,
+    icons = {icons:get("advanced-caster")},
     subgroup = "production-machine",
     order = "d[advanced-caster]",
     place_result = "advanced-caster",
     stack_size = 50
+  },
+-----------
+-- ICONS --
+-----------
+  {
+    type = "item",
+    name = "basic-caster-old",
+    icons = {{icon = "__Molten_Metals__/graphics/icons/basic-caster-old.png",
+    icon_size = 32, icon_mipmaps = 4,}},
+    stack_size = 1,
+    flags = { "hidden" }
+  },
+  {
+    type = "item",
+    name = "advanced-caster-old",
+    icons = {{icon = "__Molten_Metals__/graphics/icons/advanced-caster-old.png",
+    icon_size = 32, icon_mipmaps = 4,}},
+    stack_size = 1,
+    flags = { "hidden" }
   },
 })

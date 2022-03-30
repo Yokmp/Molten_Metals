@@ -59,6 +59,13 @@ data:extend({
       default_value = true,
       order = "d"
   },
+  {
+      type = "bool-setting",
+      name = "ymm-use-old-icons",
+      setting_type = "startup",
+      default_value = false,
+      order = "e"
+  },
 })
 
 

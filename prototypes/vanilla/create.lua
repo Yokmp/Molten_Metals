@@ -15,6 +15,10 @@ make_molten_fluid("iron-ore")
 make_molten_fluid("copper-ore")
 make_molten_fluid("stone")
 make_molten_fluid("uranium-ore")
+data.raw.fluid["molten-iron-ore"].icons = {icons:get("molten_iron")}
+data.raw.fluid["molten-copper-ore"].icons = {icons:get("molten_copper")}
+data.raw.fluid["molten-stone"].icons = {icons:get("stone")}
+data.raw.fluid["molten-uranium-ore"].icons = {icons:get("molten_uranium")}
 
 -- TECHNOLOGY
 technology_add_effect("uranium-processing", "molten-uranium-ore")
@@ -97,3 +101,8 @@ data.raw.recipe["molten-uranium-238"].expensive.results = {
 -- 201.409869083585
 -- 28571.4285714286
 -- ore to u235 ratio but its to much since there will be no u-238
+
+if settings.startup["ymm-use-old-icons"].value then
+  data.raw.item["basic-caster"].icons = data.raw.item["basic-caster-old"].icons
+  data.raw.item["advanced-caster"].icons = data.raw.item["advanced-caster-old"].icons
+end

@@ -168,8 +168,7 @@ data:extend({
   {
     type = "technology",
     name = "slag-pellet-recycling",
-    icon_size = 128,
-    icon = "__Molten_Metals__/graphics/technology/slag-pellet.png",
+    icons = {icons:get("pellet_tech")},
     effects =
     {
       {
@@ -209,8 +208,7 @@ data:extend({
   {
     type = "technology",
     name = "iron-casting",
-    icon_size = 128,
-    icon = "__Molten_Metals__/graphics/technology/iron-casting.png",
+    icons = {icons:get("casting_tech")},
     effects =
     {
       {
