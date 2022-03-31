@@ -50,6 +50,9 @@ if replace_electric_furnace then technology_remove_effect(tech, "electric-furnac
 technology_add_effect(tech, "advanced-smelter")
 technology_add_effect(tech, "advanced-caster")
 
+tech = "railway"
+technology_add_effect(tech, "molten-rail")
+
 
 -- data:extend({
 --   {

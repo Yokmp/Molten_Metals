@@ -13,6 +13,7 @@ end
 if mods["bztungsten"] then
     table.insert(ores, "tungsten-ore")
 end
+-- SILICA?
 
 
 for i, name in ipairs(ores) do

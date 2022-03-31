@@ -221,16 +221,12 @@ data:extend({
       },
       {
         type = "unlock-recipe",
-        recipe = "molten-rail" -- steel-processing (basic-smelter prerequisite)
-      },
-      {
-        type = "unlock-recipe",
         recipe = "molten-copper-cable"
       },
     },
     prerequisites = {
     "production-science-pack",
-    -- "advanced-material-processing-2"
+    "advanced-material-processing"
   },
     unit =
     {
