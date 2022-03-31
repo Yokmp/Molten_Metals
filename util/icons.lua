@@ -28,31 +28,35 @@ icon_prototype = {
 
 
 icons = {
-  basic_old          = {"basic-caster-old", "icons", 32, 0, 1},
-  advanced_old       = {"advanced-caster-old", "icons", 32, 0, 1},
-  slag               = {"slag-stone", "icons", 32, 0, 1},
-  brick              = {"slag-brick", "icons", 32, 0, 1},
-  concrete           = {"slag-concrete", "icons", 32, 0, 1},
-  pellet             = {"slag-pellet", "icons", 32, 0, 1},
-  powder             = {"slag-powder", "icons", 32, 0, 1},
-  molten_iron        = {"molten-iron-ore", "icons", 64, 4, 0.5},
-  molten_copper      = {"molten-copper-ore", "icons", 64, 4, 0.5},
-  molten_stone       = {"molten-stone", "icons", 64, 4, 0.5},
-  molten_uranium     = {"molten-uranium-ore", "icons", 64, 4, 0.5},
-  filter             = {"filter", "icons", 64, 4, 0.5},
-  molten_bg          = {"molten-base", "icons", 64, 4, 0.5},
-  molten_drop        = {"molten-drop", "icons", 64, 4, 0.5},
-  missing            = {"missing", "icons", 64, 4, 0.5},
-  basic_caster       = {"basic-caster_b", "icons", 64, 4, 0.5},
-  advanced_caster    = {"advanced-caster", "icons", 64, 4, 0.5},
-  basic_smelter      = {"basic-smelter", "icons", 64, 4, 0.5},
-  molten_drop_tech   = {"molten-drop", "technology", 128, 0, 1},
-  basic_smelting     = {"smelting", "technology", 128, 0, 1},
-  advanced_smelting  = {"advanced-smelting", "technology", 128, 0, 1},
-  casting_tech       = {"iron-casting", "technology", 128, 0, 1},
-  slag_tech          = {"slag", "technology", 128, 0, 1},
-  pellet_tech        = {"slag-pellet", "technology", 128, 0, 1},
-  powder_tech        = {"slag-powder", "technology", 128, 0, 1},
+  basic_old         = {"basic-caster-old", "icons", 32, 0, 1},
+  advanced_old      = {"advanced-caster-old", "icons", 32, 0, 1},
+  slag              = {"slag-stone", "icons", 32, 0, 1},
+  brick             = {"slag-brick", "icons", 32, 0, 1},
+  concrete          = {"slag-concrete", "icons", 32, 0, 1},
+  pellet            = {"slag-pellet", "icons", 32, 0, 1},
+  powder            = {"slag-powder", "icons", 32, 0, 1},
+  molten_iron       = {"molten-iron-ore", "icons", 64, 4, 0.5},
+  molten_copper     = {"molten-copper-ore", "icons", 64, 4, 0.5},
+  molten_stone      = {"molten-stone", "icons", 64, 4, 0.5},
+  molten_uranium    = {"molten-uranium-ore", "icons", 64, 4, 0.5},
+  filter            = {"filter", "icons", 64, 4, 0.5},
+  molten_bg         = {"molten-base", "icons", 64, 4, 0.5},
+  molten_drop       = {"molten-drop", "icons", 64, 4, 0.5},
+  missing           = {"missing", "icons", 64, 4, 0.5},
+  basic_caster      = {"basic-caster_b", "icons", 64, 4, 0.5},
+  advanced_caster   = {"advanced-caster", "icons", 64, 4, 0.5},
+  basic_smelter     = {"basic-smelter", "icons", 64, 4, 0.5},
+  molten_drop_tech  = {"molten-drop", "technology", 128, 0, 1},
+  basic_smelting    = {"smelting", "technology", 128, 0, 1},
+  advanced_smelting = {"advanced-smelting", "technology", 128, 0, 1},
+  casting_tech      = {"iron-casting", "technology", 128, 0, 1},
+  slag_tech         = {"slag", "technology", 128, 0, 1},
+  pellet_tech       = {"slag-pellet", "technology", 128, 0, 1},
+  powder_tech       = {"slag-powder", "technology", 128, 0, 1},
+  molten_aluminium  = {"molten-aluminium-ore", "icons", 64, 4, 0.5},
+  molten_lead       = {"molten-lead-ore", "icons", 64, 4, 0.5},
+  molten_titanium   = {"molten-titanium-ore", "icons", 64, 4, 0.5},
+  molten_tungsten   = {"molten-tungsten-ore", "icons", 64, 4, 0.5},
 
   ---Returns an icon object, Use ``icons:get(name, ...)``
   ---@param self table icons table
@@ -74,10 +78,10 @@ icons = {
   end,
 }
 
-icons["iron-ore"]    = icons.molten_iron
-icons["copper-ore"]  = icons.molten_copper
-icons["stone"]       = icons.molten_stone
-icons["uranium-ore"] = icons.molten_iron
+icons["iron-ore"]     = icons.molten_iron
+icons["copper-ore"]   = icons.molten_copper
+icons["stone"]        = icons.molten_stone
+icons["uranium-ore"]  = icons.molten_iron
 
 setmetatable(icons, {__index = function (self) return self.missing end})
 
@@ -110,24 +114,24 @@ end
 ---@param icon_top icon|string use icons:get() if possible, can work on strings
 ---@param icon_bottom? icon defaults to molten_drop (based on icon_top.icon_size)
 ---@param shift? table default ``{{0,0}, {0,5}}``
-function get_composed_icon(icon_top, icon_bottom, scale, shift)
+function get_composed_icon(icon_top, icon_bottom, scale, shift) --//*FIXME drop scaling, should consider making custom icons per metal
   scale = scale or 0.5
-  shift = shift or 3
+  shift = shift or 0
 
   if type(icon_top) == "string" then
     icon_top = get_icon_from_item(icon_top) or icons:get(icon_top)
   end
 
   local function determine_icon_by_type()
-    if icon_top.icon_size <= 96 then return icons:get("molten_drop") --//* needs testing
+    if icon_top.icon_size <= 96 then return icons:get("molten_drop")
     else return icons:get("molten_drop_tech") end
   end
 
-  icon_top.scale = icon_top.scale or 0.5
+  icon_top.scale = icon_top.scale and icon_top.scale-0.2 or 0.6
   icon_top.scale = icon_top.scale*scale
   icon_top.shift = {0,0-shift}
   icon_bottom = icon_bottom or determine_icon_by_type()
-  icon_bottom.scale = (icon_bottom.icon_size/icon_top.icon_size)*scale
+  icon_bottom.scale = (icon_bottom.icon_size/icon_top.icon_size)*(scale-0.2)
   icon_bottom.shift = {0,0+shift}
 
   return {icon_top, icon_bottom}

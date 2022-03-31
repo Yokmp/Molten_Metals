@@ -55,10 +55,11 @@ end
 
 ---returns wether or not a given resource is minable
 ---@param name string ore name
-local function is_ore(name)
-  local _resources = get_minable_resouces()
+---@param resources? table get_minable_resources()
+local function is_ore(name, resources)
+  resources = resources or get_minable_resouces()
 
-  for key, table in pairs(_resources) do
+  for key, table in pairs(resources) do
     for _, result in ipairs(table.results) do -- maybe modded resources have more than 1 result
       if result.name == name then return true end
     end
@@ -163,8 +164,16 @@ end
 -- assert(1==2, "get_recipe_results()")
 
 
--- get every recipe which has the ore as ingredient
--- deepcopy it and replace ore with molten and category with ymm_casting (IF it doen't require a fluid?)
--- if the result (is the only one and) has recipes which only has result as ingredient make a casting recipe and tech
---  so we can cast gear-wheels and sticks
+-- function get_item_ore_value(item_name)
+--   if data.raw.item[item_name] then
+--     local _item = data.raw.item[item_name]
+--     if is_ore(_item) then
+--       return 1
+--     end
+--     local _table = get_recipe_results()
+
+-- if recipe_results == item_name repeat until ore -> count items needed, calc ore amount for item.
+
+--   end
+-- end
 

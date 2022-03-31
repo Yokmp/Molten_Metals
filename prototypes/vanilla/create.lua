@@ -7,6 +7,7 @@ if settings.startup["ymm-replace-steel-furnace"].value then
 end
 if settings.startup["ymm-replace-electric-furnace"].value then
   data.raw.item["electric-furnace"].flags = {"hidden"}
+  data.raw.item["electric-furnace"].minable_result = "advanced-smelter"
   data.raw.item["electric-furnace"].next_upgrade = "advanced-smelter"
 end
 

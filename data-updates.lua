@@ -9,15 +9,16 @@ data:extend({
   { type = "recipe-category", name = categories.casting },
 })
 
+--//TODO migration or "what if advanced-material-processing(-2) is aready researched?"
 
 require("util.icons")
+yutil = require("util.util")
 require("util.functions")
 blacklist = {
   ores = {"coal"},
   recipes = {"concrete"}
 }
 ore = get_minable_resouces()
-yutil = require("util.util")
 
 require("util.fluids")
 require("util.recipe")

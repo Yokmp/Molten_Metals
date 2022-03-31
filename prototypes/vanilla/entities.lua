@@ -2,7 +2,6 @@ local sounds = require("__base__.prototypes.entity.sounds")
 
 data:extend({
   --//TODO balancing
-  --//!BUG smoke doesn't work
   -----------------
   -- FURNACE T2  --
   -----------------
