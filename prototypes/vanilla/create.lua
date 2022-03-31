@@ -102,7 +102,7 @@ data.raw.recipe["molten-uranium-238"].expensive.results = {
 -- 28571.4285714286
 -- ore to u235 ratio but its to much since there will be no u-238
 
-if settings.startup["ymm-use-old-icons"].value then
-  data.raw.item["basic-caster"].icons = data.raw.item["basic-caster-old"].icons
-  data.raw.item["advanced-caster"].icons = data.raw.item["advanced-caster-old"].icons
+if settings.startup["ymm-use-old-icons"].value then --//TODO move into machines.lua
+  data.raw.item["basic-caster"].icons = {icons:get("basic_old")}
+  data.raw.item["advanced-caster"].icons = {icons:get("advanced_old")}
 end

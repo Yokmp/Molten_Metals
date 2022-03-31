@@ -1,3 +1,6 @@
+
+log(serpent.block(icons:get("basic_caster")))
+
 data:extend({
   ------------
   -- RECIPE --
@@ -58,7 +61,7 @@ data:extend({
   {
     type = "item",
     name = "basic-smelter",
-    icons = {icons:get("basic-smelter")},
+    icons = {icons:get("basic_smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
     order = "b[basic-smelter]",
@@ -79,7 +82,7 @@ data:extend({
   {
     type = "item",
     name = "basic-caster",
-    icons = {icons:get("basic-caster")},
+    icons = {icons:get("basic_caster")},
     subgroup = "production-machine",
     order = "c[basic-caster]",
     place_result = "basic-caster",
@@ -88,7 +91,7 @@ data:extend({
   {
     type = "item",
     name = "advanced-caster",
-    icons = {icons:get("advanced-caster")},
+    icons = {icons:get("advanced_caster")},
     subgroup = "production-machine",
     order = "d[advanced-caster]",
     place_result = "advanced-caster",
@@ -100,16 +103,14 @@ data:extend({
   {
     type = "item",
     name = "basic-caster-old",
-    icons = {{icon = "__Molten_Metals__/graphics/icons/basic-caster-old.png",
-    icon_size = 32, icon_mipmaps = 4,}},
+    icons = {icons:get("basic_old")},
     stack_size = 1,
     flags = { "hidden" }
   },
   {
     type = "item",
     name = "advanced-caster-old",
-    icons = {{icon = "__Molten_Metals__/graphics/icons/advanced-caster-old.png",
-    icon_size = 32, icon_mipmaps = 4,}},
+    icons = {icons:get("advanced_old")},
     stack_size = 1,
     flags = { "hidden" }
   },

@@ -1,7 +1,8 @@
 local sounds = require("__base__.prototypes.entity.sounds")
 
 data:extend({
-  --//TODO: balancing, Caster need some smoke
+  --//TODO balancing
+  --//!BUG smoke doesn't work
   -----------------
   -- FURNACE T2  --
   -----------------
@@ -61,16 +62,7 @@ data:extend({
         minimum_intensity = 0.6,
         maximum_intensity = 0.95
       },
-      smoke =
-      {
-        {
-          name = "smoke",
-          frequency = 10,
-          position = {0.7, -1.2},
-          starting_vertical_speed = 0.08,
-          starting_frame_deviation = 60
-        }
-      }
+
     },
     -- module_specification = { module_slots = 2 },
     -- allowed_effects = {"consumption", "speed", "productivity", "pollution"},
@@ -516,15 +508,6 @@ data:extend({
       type = "electric",
       usage_priority = "secondary-input",
       emissions = 0.03 / 3.5,
-      smoke = {
-        {
-          name = "smoke",
-          frequency = 10,
-          position = {0.7, - 1.2},
-          starting_vertical_speed = 0.08,
-          starting_frame_deviation = 60
-        }
-      }
     },
     module_specification = { module_slots = 1 },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
@@ -668,6 +651,70 @@ data:extend({
             scale = 0.5
           }
         }
+      },
+      {
+        apply_recipe_tint = "none",
+        fadeout = true,
+        constant_speed = true,
+        north_position = util.by_pixel_hr(60, -18),
+        east_position = util.by_pixel_hr(-20, 27), --in
+        south_position = util.by_pixel_hr(-60, -67),
+        west_position = util.by_pixel_hr(3, -71),
+        render_layer = "wires",
+        animation =
+        {
+          filename = "__base__/graphics/entity/chemical-plant/chemical-plant-smoke-outer.png",
+          frame_count = 47,
+          line_length = 16,
+          width = 46,
+          height = 94,
+          animation_speed = 0.5,
+          shift = util.by_pixel(-2, -40),
+          scale = 0.66,
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-smoke-outer.png",
+            frame_count = 47,
+            line_length = 16,
+            width = 90,
+            height = 188,
+            animation_speed = 0.5,
+            shift = util.by_pixel(-2, -40),
+            scale = 0.33
+          }
+        }
+      },
+      {
+        apply_recipe_tint = "primary",
+        fadeout = true,
+        constant_speed = true,
+        north_position = util.by_pixel_hr(60, -37),
+        east_position = util.by_pixel_hr(-20, 10), --in
+        south_position = util.by_pixel_hr(-60, -86),
+        west_position = util.by_pixel_hr(3, -90),
+        render_layer = "wires",
+        animation =
+        {
+          filename = "__base__/graphics/entity/chemical-plant/chemical-plant-smoke-inner.png",
+          frame_count = 47,
+          line_length = 16,
+          width = 20,
+          height = 42,
+          animation_speed = 0.5,
+          shift = util.by_pixel(0, -14),
+          sacle = 0.5,
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-smoke-inner.png",
+            frame_count = 47,
+            line_length = 16,
+            width = 40,
+            height = 84,
+            animation_speed = 0.5,
+            shift = util.by_pixel(0, -14),
+            scale = 0.33
+          }
+        }
       }
     },
     working_sound = {
@@ -708,7 +755,7 @@ data:extend({
   				}
   			}
   		},
-  		{ --back bottom WATER
+  		{ --back bottom STEAM
   			production_type = "output",
         maximum_temperature = 166.0,
   			-- filter = "waste-water",
@@ -720,8 +767,36 @@ data:extend({
   					position = { -1, 2}
   				}
   			}
-  		}
-  	}
+  		},
+  		{ --back bottom UNUSED
+  			production_type = "output",
+        maximum_temperature = 166.0,
+  			-- filter = "waste-water",
+  			pipe_covers = pipecoverspictures(),
+  			base_level = 1,
+  			pipe_connections = {
+  				{
+  					type = "output",
+  					position = { 1, 2}
+  				}
+  			}
+  		},
+  	},
+    water_reflection =
+    {
+      pictures =
+      {
+        filename = "__base__/graphics/entity/chemical-plant/chemical-plant-reflection.png", --//? maybe custom reflection?
+        priority = "extra-high",
+        width = 28,
+        height = 36,
+        shift = util.by_pixel(5, 60),
+        variation_count = 4,
+        scale = 5
+      },
+      rotate = false,
+      orientation_to_variation = true
+    },
   },
 ------------------------
 -- CASTING MACHINE T2 --
@@ -745,15 +820,6 @@ data:extend({
       type = "electric",
       usage_priority = "secondary-input",
       emissions = 0.03 / 3.5,
-      smoke = {
-        {
-          name = "smoke",
-          frequency = 10,
-          position = {0.7, - 1.2},
-          starting_vertical_speed = 0.08,
-          starting_frame_deviation = 60
-        }
-      }
     },
     module_specification = { module_slots = 2 },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
@@ -901,6 +967,70 @@ data:extend({
             scale = 0.5
           }
         }
+      },
+      {
+        apply_recipe_tint = "none",
+        fadeout = true,
+        constant_speed = true,
+        north_position = util.by_pixel_hr(60, -18),
+        east_position = util.by_pixel_hr(-20, 27), --in
+        south_position = util.by_pixel_hr(-60, -67),
+        west_position = util.by_pixel_hr(3, -71),
+        render_layer = "wires",
+        animation =
+        {
+          filename = "__base__/graphics/entity/chemical-plant/chemical-plant-smoke-outer.png",
+          frame_count = 47,
+          line_length = 16,
+          width = 46,
+          height = 94,
+          animation_speed = 0.5,
+          shift = util.by_pixel(-2, -40),
+          scale = 0.66,
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-smoke-outer.png",
+            frame_count = 47,
+            line_length = 16,
+            width = 90,
+            height = 188,
+            animation_speed = 0.5,
+            shift = util.by_pixel(-2, -40),
+            scale = 0.33
+          }
+        }
+      },
+      {
+        apply_recipe_tint = "primary",
+        fadeout = true,
+        constant_speed = true,
+        north_position = util.by_pixel_hr(60, -37),
+        east_position = util.by_pixel_hr(-20, 10), --in
+        south_position = util.by_pixel_hr(-60, -86),
+        west_position = util.by_pixel_hr(3, -90),
+        render_layer = "wires",
+        animation =
+        {
+          filename = "__base__/graphics/entity/chemical-plant/chemical-plant-smoke-inner.png",
+          frame_count = 47,
+          line_length = 16,
+          width = 20,
+          height = 42,
+          animation_speed = 0.5,
+          shift = util.by_pixel(0, -14),
+          sacle = 0.5,
+          hr_version =
+          {
+            filename = "__base__/graphics/entity/chemical-plant/hr-chemical-plant-smoke-inner.png",
+            frame_count = 47,
+            line_length = 16,
+            width = 40,
+            height = 84,
+            animation_speed = 0.5,
+            shift = util.by_pixel(0, -14),
+            scale = 0.33
+          }
+        }
       }
     },
     vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
@@ -941,7 +1071,7 @@ data:extend({
   				}
   			}
   		},
-  		{ --back bottom WATER
+  		{ --back bottom STEAM
   			production_type = "output",
   			-- filter = "waste-water",
   			pipe_covers = pipecoverspictures(),
@@ -952,7 +1082,34 @@ data:extend({
   					position = { -1, 2}
   				}
   			}
-  		}
-  	}
-  },
+  		},
+      { --back bottom UNUSED
+      production_type = "output",
+      maximum_temperature = 166.0,
+      -- filter = "waste-water",
+      pipe_covers = pipecoverspictures(),
+      base_level = 1,
+      pipe_connections = {
+        {
+          type = "output",
+          position = { 1, 2}
+        }
+      }
+    },
+  	},
+    water_reflection =
+    {
+      pictures =
+      {
+        filename = "__base__/graphics/entity/chemical-plant/chemical-plant-reflection.png", --//? maybe custom reflection?
+        priority = "extra-high",
+        width = 28,
+        height = 36,
+        shift = util.by_pixel(5, 60),
+        variation_count = 4,
+        scale = 5
+      },
+      rotate = false,
+    },
+  }
 })

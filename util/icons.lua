@@ -28,8 +28,8 @@ icon_prototype = {
 
 
 icons = {
-  basic_caster32     = {"basic-caster-old", "icons", 32, 0, 1},
-  advanced_caster32  = {"advanced-caster-old", "icons", 32, 0, 1},
+  basic_old          = {"basic-caster-old", "icons", 32, 0, 1},
+  advanced_old       = {"advanced-caster-old", "icons", 32, 0, 1},
   slag               = {"slag-stone", "icons", 32, 0, 1},
   brick              = {"slag-brick", "icons", 32, 0, 1},
   concrete           = {"slag-concrete", "icons", 32, 0, 1},
@@ -43,9 +43,9 @@ icons = {
   molten_bg          = {"molten-base", "icons", 64, 4, 0.5},
   molten_drop        = {"molten-drop", "icons", 64, 4, 0.5},
   missing            = {"missing", "icons", 64, 4, 0.5},
-  basic_caster       = {"basic-caster", "icons", 64, 4, 0.5},
-  basic_smelter      = {"basic-smelter", "icons", 64, 4, 0.5},
+  basic_caster       = {"basic-caster_b", "icons", 64, 4, 0.5},
   advanced_caster    = {"advanced-caster", "icons", 64, 4, 0.5},
+  basic_smelter      = {"basic-smelter", "icons", 64, 4, 0.5},
   molten_drop_tech   = {"molten-drop", "technology", 128, 0, 1},
   basic_smelting     = {"smelting", "technology", 128, 0, 1},
   advanced_smelting  = {"advanced-smelting", "technology", 128, 0, 1},
@@ -80,7 +80,6 @@ icons["stone"]       = icons.molten_stone
 icons["uranium-ore"] = icons.molten_iron
 
 setmetatable(icons, {__index = function (self) return self.missing end})
-
 
 
 
