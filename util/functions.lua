@@ -69,7 +69,7 @@ local function is_ore(name, resources)
 end
 -- log(serpent.block(is_ore( "iron-stick" )))
 -- log(serpent.block(is_ore( "iron-ore" )))
--- assert(1==2, "is_ore()")
+-- error("is_ore()")
 
 
 ---Returns a list of all recipes using the given ingredient
@@ -113,7 +113,7 @@ end
 -- log(serpent.block(get_recipes_byingredient("iron-ore")))
 -- log(serpent.block(get_recipes_byingredient("uranium-ore")))
 -- log(serpent.block(get_recipes_byingredient("copper-plate")))
--- assert(1==2, "get_recipes_byingredient()")
+-- error("get_recipes_byingredient()")
 
 
 ---Returns a table containing the results of the given recipe
@@ -161,19 +161,33 @@ function get_recipe_results(recipe_name)
 end
 -- log(serpent.block( get_recipe_results( "tank" ) ))
 -- log(serpent.block( get_recipe_results( "iron-plate" ) ))
--- assert(1==2, "get_recipe_results()")
+-- error("get_recipe_results()")
 
 
--- function get_item_ore_value(item_name)
---   if data.raw.item[item_name] then
---     local _item = data.raw.item[item_name]
---     if is_ore(_item) then
---       return 1
---     end
---     local _table = get_recipe_results()
+---Returns energy_required as a table for normal and expensive
+---@param recipe_name string
+---@return table ``{normal, expensive}``
+function get_energy_required(recipe_name)
+  local time = {0.5, 0.5}
+  if data.raw.recipe[recipe_name] then
+    local data_recipe = data.raw.recipe[recipe_name]
+    if data_recipe.energy_required then
+      time[1] = data_recipe.energy_required
+      time[2] = data_recipe.energy_required
+    end
+    if data_recipe.normal then
+      time[1] = data_recipe.normal.energy_required
+    else
+    end
+    if data_recipe.expensive then
+      time[2] = data_recipe.expensive.energy_required
+    end
+  end
+  return time
+end
+-- log(serpent.block( get_energy_required( "tank" ) ))
+-- log(serpent.block( get_energy_required( "iron-plate" ) ))
+-- error("get_energy_required()")
 
--- if recipe_results == item_name repeat until ore -> count items needed, calc ore amount for item.
 
---   end
--- end
-
+--get amount_in/amount_out

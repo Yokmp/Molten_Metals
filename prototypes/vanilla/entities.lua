@@ -1,4 +1,5 @@
 local sounds = require("__base__.prototypes.entity.sounds")
+local hit_effects = require("__base__.prototypes.entity.hit-effects")
 
 data:extend({
   --//TODO balancing
@@ -8,18 +9,25 @@ data:extend({
   {
     type = "assembling-machine",
     name = "basic-smelter",
-    -- icon = "__Molten_Metals__/graphics/icons/basic-smelter.png",
-    -- icon_size = 32, icon_mipmaps = 4,
     icons = {icons:get("basic_smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "basic-smelter"},
+    crafting_categories = {categories.smelting},
+    fast_replaceable_group = "furnace",
+    collision_box = {{ -0.7, -0.7}, {0.7, 0.7}},
+    selection_box = {{ -0.8, -1  }, {0.8, 1  }},
+    -- drawing_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
+		crafting_speed = 2,
+    ingredient_count = 1,
     max_health = 300,
-    corpse = "steel-furnace-remnants",
-    dying_explosion = "steel-furnace-explosion",
     vehicle_impact_sound = sounds.generic_impact,
-    -- vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
+    damaged_trigger_effect = hit_effects.entity(),
     open_sound = sounds.machine_open,
     close_sound = sounds.machine_close,
+    corpse = "chemical-plant-remnants",
+    dying_explosion = "chemical-plant-explosion",
+    module_specification = { module_slots = 1 },
+    allowed_effects = {"consumption", "speed", "productivity", "pollution"},
     working_sound =
     {
       sound =
@@ -40,14 +48,8 @@ data:extend({
         percent = 100
       }
     },
-    collision_box = {{ -0.7, -0.7}, {0.7, 0.7}},
-    selection_box = {{ -0.8, -1  }, {0.8, 1  }},
-    crafting_categories = {categories.smelting},
-    fast_replaceable_group = "furnace",
-		crafting_speed = 2,
     source_inventory_size = 1,
     result_inventory_size = 1,
-    ingredient_count = 1,
 		energy_usage = "90kW",
     energy_source = {
       type = "burner",
@@ -105,8 +107,7 @@ data:extend({
         },
       },
     },
-    working_visualisations =
-    {
+    working_visualisations = {
       {
         draw_as_light = true,
         fadeout = true,
@@ -214,8 +215,7 @@ data:extend({
         },
       },
     },
-    water_reflection =
-    {
+    water_reflection = {
       pictures =
       {
         filename = "__base__/graphics/entity/steel-furnace/steel-furnace-reflection.png",
@@ -255,30 +255,31 @@ data:extend({
     icon_size = 32,
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 1, result = "advanced-smelter"},
+    crafting_categories = {categories.smelting},
+    fast_replaceable_group = "furnace",
+    collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
+    selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
+    -- drawing_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
+    crafting_speed = 2,
+    ingredient_count = 1,
     max_health = 350,
-    corpse = "electric-furnace-remnants",
-    dying_explosion = "electric-furnace-explosion",
-    -- vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
     vehicle_impact_sound = sounds.generic_impact,
+    damaged_trigger_effect = hit_effects.entity(),
     open_sound = sounds.machine_open,
     close_sound = sounds.machine_close,
+    corpse = "electric-furnace-remnants",
+    dying_explosion = "electric-furnace-explosion",
+    module_specification = { module_slots = 2, module_info_icon_shift = {0, 0.8} },
+    allowed_effects = {"consumption", "speed", "productivity", "pollution"},
     resistances = {
       {
         type = "fire",
         percent = 80
       }
     },
-    collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
-    selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
-    module_specification = { module_slots = 2, module_info_icon_shift = {0, 0.8} },
-    allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-    crafting_categories = {categories.smelting},
-    fast_replaceable_group = "furnace",
-    crafting_speed = 2,
     source_inventory_size = 1,
     result_inventory_size = 1,
-    ingredient_count = 1,
-    energy_usage = "180kW",
+    energy_usage = "100kW",
 		energy_source = {
 			type = "electric",
 			usage_priority = "secondary-input",
@@ -486,30 +487,29 @@ data:extend({
     name = "basic-caster",
     icons = {icons:get("basic_caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
+    minable = {mining_time = 0.5, result = "basic-caster"},
     crafting_categories = {categories.casting},
     fast_replaceable_group = "assembling-machine",
-    minable = {mining_time = 0.5, result = "basic-caster"},
-    max_health = 300,
-    corpse = "chemical-plant-remnants",
-    dying_explosion = "chemical-plant-explosion",
-    -- corpse = "big-remnants",
-    -- dying_explosion = "medium-explosion",
-    crafting_speed = 1,
-    ingredient_count = 1,
-    vehicle_impact_sound = sounds.generic_impact,
-    open_sound = sounds.machine_open,
-    close_sound = sounds.machine_close,
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
     drawing_box = {{ - 1.5, - 1.9}, {1.5, 1.5}},
-    energy_usage = "120kW",
+    crafting_speed = 1,
+    ingredient_count = 1,
+    max_health = 300,
+    vehicle_impact_sound = sounds.generic_impact,
+    damaged_trigger_effect = hit_effects.entity(),
+    open_sound = sounds.machine_open,
+    close_sound = sounds.machine_close,
+    corpse = "chemical-plant-remnants",
+    dying_explosion = "chemical-plant-explosion",
+    module_specification = { module_slots = 1 },
+    allowed_effects = {"consumption", "speed", "productivity", "pollution"},
+    energy_usage = "60kW",
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
       emissions = 0.03 / 3.5,
     },
-    module_specification = { module_slots = 1 },
-    allowed_effects = {"consumption", "speed", "productivity", "pollution"},
     animation = make_4way_animation_from_spritesheet({
       layers = {
       {
@@ -806,24 +806,28 @@ data:extend({
     icons = {icons:get("advanced_caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {hardness = 0.2, mining_time = 0.5, result = "advanced-caster"},
-    crafting_speed = 1.5,
-    ingredient_count = 1,
-    max_health = 300,
-    corpse = "big-remnants",
-    dying_explosion = "medium-explosion",
+    crafting_categories = {categories.casting},
+    fast_replaceable_group = "assembling-machine",
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
     drawing_box = {{ - 1.5, - 1.9}, {1.5, 1.5}},
-    energy_usage = "220kW",
+    crafting_speed = 1.5,
+    ingredient_count = 1,
+    max_health = 350,
+    vehicle_impact_sound = sounds.generic_impact,
+    damaged_trigger_effect = hit_effects.entity(),
+    open_sound = sounds.machine_open,
+    close_sound = sounds.machine_close,
+    corpse = "big-remnants",
+    dying_explosion = "medium-explosion",
+    module_specification = { module_slots = 2 },
+    allowed_effects = {"consumption", "speed", "productivity", "pollution"},
+    energy_usage = "80kW",
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
       emissions = 0.03 / 3.5,
     },
-    module_specification = { module_slots = 2 },
-    allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-    crafting_categories = {categories.casting},
-    fast_replaceable_group = "assembling-machine",
     animation = make_4way_animation_from_spritesheet({
       layers = {
         {
@@ -1032,7 +1036,6 @@ data:extend({
         }
       }
     },
-    vehicle_impact_sound = { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
     working_sound = {
       sound = { {
         filename = "__base__/sound/chemical-plant.ogg",

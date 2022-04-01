@@ -71,12 +71,16 @@ end
 ---@param result_name string also sets the main product
 ---@param amount_in? table {normal, expensive}
 ---@param amount_out? table {normal, expensive}
----@param energy? table {normal, expensive}
+---@param energy? table {normal, expensive} will be divided by 2
 ---@param enabled? table {normal, expensive}
 function make_new_casting_recipe(ore_name, result_name, amount_in, amount_out, energy, enabled)
   amount_in = amount_in or {20,20}
   amount_out = amount_out or {1,1}
-  energy = energy or {0.5,0.5} --{1.6,1.6}
+  -- energy = energy or {0.5,0.5} --{1.6,1.6}
+  if not energy then
+    energy = get_energy_required(result_name) --casting machine speed is 1 and 1.5
+    energy = {energy[1]/2, energy[2]/2}
+  end
   enabled = enabled or {false, false}
   temperature = yutil.ore_definition(ore_name).min
 

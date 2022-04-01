@@ -30,8 +30,7 @@ local replace_steel_furnace = settings.startup["ymm-replace-steel-furnace"].valu
 local replace_electric_furnace = settings.startup["ymm-replace-steel-furnace"].value
 
 tech = "advanced-material-processing"
-data.raw.technology[tech].icon = "__Molten_Metals__/graphics/technology/smelting.png"
-data.raw.technology[tech].icon_size = 128
+data.raw.technology[tech].icons = {icons:get("basic_tech")}
 if replace_steel_furnace then technology_remove_effect(tech, "steel-furnace") end
 technology_add_effect(tech, "basic-smelter")
 technology_add_effect(tech, "basic-caster")
@@ -44,8 +43,7 @@ technology_add_effect(tech, "molten-stone-brick")
 technology_add_effect(tech, "molten-steel-plate")
 
 tech = "advanced-material-processing-2"
-data.raw.technology[tech].icon = "__Molten_Metals__/graphics/technology/advanced-smelting.png"
-data.raw.technology[tech].icon_size = 128
+data.raw.technology[tech].icons = {icons:get("advanced_tech")}
 if replace_electric_furnace then technology_remove_effect(tech, "electric-furnace") end
 technology_add_effect(tech, "advanced-smelter")
 technology_add_effect(tech, "advanced-caster")
@@ -68,25 +66,25 @@ technology_add_effect(tech, "molten-rail")
 --     order = "z"
 --   },
 -- })
-
+--//TODO URANIUM BALANCING :[
 -- SMELTING
-make_new_smelting_recipe( "iron-ore", {2,2}, {40,40}, {3.2,3.2})
-make_new_smelting_recipe( "copper-ore", {2,2}, {40,40}, {3.2,3.2})
-make_new_smelting_recipe( "stone", {2,2}, {40,40}, {3.2,3.2})
-make_new_smelting_recipe( "uranium-ore", {2,2}, {40,40}, {3.2,3.2})
+make_new_smelting_recipe( "iron-ore", {2,2}, {40,40}, get_energy_required("iron-plate"))
+make_new_smelting_recipe( "copper-ore", {2,2}, {40,40}, get_energy_required("copper-plate"))
+make_new_smelting_recipe( "stone", {2,2}, {40,40}, get_energy_required("stone-brick"))
+make_new_smelting_recipe( "uranium-ore", {10,10}, {20,20}, get_energy_required("uranium-processing"))
 
 -- CASTING
-make_new_casting_recipe("copper-ore", "copper-plate", {20,20}, {1,1}, {1.6,1.6})
-make_new_casting_recipe("copper-ore", "copper-cable", {20,20}, {2,2}, {0.5,0.5})
-make_new_casting_recipe("iron-ore", "iron-plate", {20,20}, {1,1}, {1.6,1.6})
-make_new_casting_recipe("iron-ore", "steel-plate", {80,80}, {1,1}, {8,16})
-make_new_casting_recipe("iron-ore", "iron-gear-wheel", {80,80}, {2,2}, {1,1})
-make_new_casting_recipe("iron-ore", "iron-stick", {20,20}, {2,2}, {0.5,0.5})
-make_new_casting_recipe("iron-ore", "rail", {120,120}, {2,2}, {0.5,0.5})
--- table.insert(data.raw.recipe["molten-rail"].ingredients, {type = "item", name = "stone", amount = 1})
-make_new_casting_recipe("stone", "stone-brick", {20,20}, {1,1}, {1.6,1.6})
-make_new_casting_recipe("uranium-ore", "uranium-238", {200,200}, {1,1}, {12,12})
-make_new_casting_recipe("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, {12,12})
+make_new_casting_recipe("copper-ore", "copper-plate", {20,20}, {1,1})
+make_new_casting_recipe("copper-ore", "copper-cable", {20,20}, {2,2})
+make_new_casting_recipe("iron-ore", "iron-plate", {20,20}, {1,1})
+make_new_casting_recipe("iron-ore", "steel-plate", {80,80}, {1,1})
+make_new_casting_recipe("iron-ore", "iron-gear-wheel", {80,80}, {2,2})
+make_new_casting_recipe("iron-ore", "iron-stick", {20,20}, {2,2})
+make_new_casting_recipe("iron-ore", "rail", {120,120}, {2,2})
+-- table.insert(data.raw.recipe["molten-rail"].ingredients, {type = "item", name = "stone", amount = 1}) -- need fluid mixer soon
+make_new_casting_recipe("stone", "stone-brick", {20,20}, {1,1})
+make_new_casting_recipe("uranium-ore", "uranium-238", {200,200}, {1,1}, get_energy_required("uranium-processing"))
+make_new_casting_recipe("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, get_energy_required("uranium-processing"))
 data.raw.recipe["molten-uranium-238"].normal.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},

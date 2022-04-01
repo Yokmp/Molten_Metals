@@ -6,7 +6,7 @@ local yutil = require("util.util")
 ---Creates a new technology
 ---@param tech_name string
 ---@param icon_name string
----@param prerequisites table
+---@param prerequisites table use technology_set_parent()
 ---@param ingredient table or use technology_add_ingedient()
 ---@param localized_name? string item-name
 ---@param count? number

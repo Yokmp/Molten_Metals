@@ -26,7 +26,7 @@ icon_prototype = {
     tint = { r = 1.0, g = 1.0, b = 1.0, a = 1.0 }
   }
 
-
+-- key = {name, folder, size, mipmaps, scale}
 icons = {
   basic_old         = {"basic-caster-old", "icons", 32, 0, 1},
   advanced_old      = {"advanced-caster-old", "icons", 32, 0, 1},
@@ -35,6 +35,7 @@ icons = {
   concrete          = {"slag-concrete", "icons", 32, 0, 1},
   pellet            = {"slag-pellet", "icons", 32, 0, 1},
   powder            = {"slag-powder", "icons", 32, 0, 1},
+
   molten_iron       = {"molten-iron-ore", "icons", 64, 4, 0.5},
   molten_copper     = {"molten-copper-ore", "icons", 64, 4, 0.5},
   molten_stone      = {"molten-stone", "icons", 64, 4, 0.5},
@@ -46,17 +47,21 @@ icons = {
   basic_caster      = {"basic-caster_b", "icons", 64, 4, 0.5},
   advanced_caster   = {"advanced-caster", "icons", 64, 4, 0.5},
   basic_smelter     = {"basic-smelter", "icons", 64, 4, 0.5},
-  molten_drop_tech  = {"molten-drop", "technology", 128, 0, 1},
-  basic_smelting    = {"smelting", "technology", 128, 0, 1},
-  advanced_smelting = {"advanced-smelting", "technology", 128, 0, 1},
-  casting_tech      = {"iron-casting", "technology", 128, 0, 1},
-  slag_tech         = {"slag", "technology", 128, 0, 1},
-  pellet_tech       = {"slag-pellet", "technology", 128, 0, 1},
-  powder_tech       = {"slag-powder", "technology", 128, 0, 1},
   molten_aluminium  = {"molten-aluminium-ore", "icons", 64, 4, 0.5},
   molten_lead       = {"molten-lead-ore", "icons", 64, 4, 0.5},
   molten_titanium   = {"molten-titanium-ore", "icons", 64, 4, 0.5},
   molten_tungsten   = {"molten-tungsten-ore", "icons", 64, 4, 0.5},
+
+  molten_drop_tech  = {"molten-drop", "technology", 128, 0, 1},
+  basic_tech        = {"smelting", "technology", 128, 0, 1},
+  advanced_tech     = {"advanced-smelting", "technology", 128, 0, 1},
+  casting_tech      = {"iron-casting", "technology", 128, 0, 1},
+  slag_tech         = {"slag", "technology", 128, 0, 1},
+  pellet_tech       = {"slag-pellet", "technology", 128, 0, 1},
+  powder_tech       = {"slag-powder", "technology", 128, 0, 1},
+
+  aluminium_tech    = {"aluminium-casting", "technology", 128, 0, 1},
+  lead_tech         = {"lead-casting", "technology", 128, 0, 1},
 
   ---Returns an icon object, Use ``icons:get(name, ...)``
   ---@param self table icons table
