@@ -8,7 +8,7 @@ local use_slag = settings.startup["ymm-enable-slag"].value
 ---@param amount_out? table {normal, expensive}
 ---@param energy? table {normal, expensive}
 ---@param enabled? table {normal, expensive}
-function make_new_smelting_recipe(ore_name, amount_in, amount_out, energy, enabled)
+function new_smelting_recipe_ext(ore_name, amount_in, amount_out, energy, enabled)
   amount_in = amount_in or {2,2}
   amount_out = amount_out or {40,40}
   energy = energy or {0.5,0.5} --{3.2,3.2}
@@ -66,23 +66,36 @@ end
 -- log(serpent.block(data.raw.recipe["molten-iron-ore"]))
 -- error("make_new_smelting_recipe()")
 
+---Wrapper for new_smelting_recipe_ext()
+---@param ingredient string ore-name
+---@param result string item-name, __NOT__ fluid-name
+---@param enabled? boolean
+function new_smelting_recipe(ingredient, result, enabled)
+  new_smelting_recipe_ext(
+    ingredient,
+    get_recipe_amount_in(result, ingredient),
+    get_recipe_amount_out(result),
+    get_energy_required(result),
+    enabled or false
+  )
+end
+
+
 ---Creates a new casting recipe
----@param ore_name string recipe and ingredient name (molten-result-name)
----@param result_name string also sets the main product
----@param amount_in? table {normal, expensive}
----@param amount_out? table {normal, expensive}
----@param energy? table {normal, expensive} will be divided by 2
----@param enabled? table {normal, expensive}
-function make_new_casting_recipe(ore_name, result_name, amount_in, amount_out, energy, enabled)
+---@param fluid_name string recipe and ingredient name (molten-result-name)
+---@param result_name string also sets the main product, must be an item
+---@param amount_in? table {normal, expensive} {1,1}
+---@param amount_out? table ``{normal, expensive} or (get_recipe_amount_out(result_name) or {1,1})``
+---@param energy? table {normal, expensive} get_energy_required(result_name) or number
+---@param enabled? table {normal, expensive} false
+function new_casting_recipe_ext(fluid_name, result_name, amount_in, amount_out, energy, enabled)
   amount_in = amount_in or {20,20}
-  amount_out = amount_out or {1,1}
-  -- energy = energy or {0.5,0.5} --{1.6,1.6}
+  amount_out = amount_out or (get_recipe_amount_out(result_name) or {1,1})
   if not energy then
     energy = get_energy_required(result_name) --casting machine speed is 1 and 1.5
-    energy = {energy[1]/2, energy[2]/2}
   end
   enabled = enabled or {false, false}
-  temperature = yutil.ore_definition(ore_name).min
+  temperature = yutil.ore_definition(fluid_name).min
 
 data:extend({{
   type = "recipe",
@@ -102,7 +115,7 @@ data:extend({{
     enabled = enabled[1],
     energy_required = energy[1], -- 1.6 (3.2 at speed 2)
     ingredients = {
-      {type = "fluid", name = "molten-"..ore_name, amount = amount_in[1], temperature = temperature},
+      {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[1], temperature = temperature},
       {type = "fluid", name = "water", amount = 40}
     },
     results = {
@@ -115,8 +128,8 @@ data:extend({{
     enabled = enabled[2],
     energy_required = energy[2],
     ingredients = {
-      {type = "fluid", name = "molten-"..ore_name, amount = amount_in[2], temperature = temperature},
-      {type = "fluid", name = "water", amount = 80}
+      {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[2], temperature = temperature},
+      {type = "fluid", name = "water", amount = 60}
     },
     results = {
       {type = "item",  name = result_name, amount = amount_out[2]},
@@ -130,6 +143,19 @@ end
 -- make_new_casting_recipe("iron-ore", "iron-plate")
 -- log(serpent.block(data.raw.recipe["molten-iron-plate"]))
 -- error("make_new_smelting_recipe()")
+
+---Wrapper for new_casting_recipe_ext()
+---@param ingredient string ore-name, __NOT__ fluid-name
+---@param result string item-name
+function new_casting_recipe(ingredient, result)
+  new_casting_recipe_ext(
+  ingredient,
+  result,
+  get_recipe_amount_in(result, ingredient),
+  get_recipe_amount_out(result)
+)
+end
+
 
 
     ------------

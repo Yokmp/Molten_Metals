@@ -81,7 +81,7 @@ data:extend({
   {
     type = "item",
     name = "basic-caster",
-    icons = {icons:get("basic_caster")},
+    icons = settings.startup["ymm-use-old-icons"].value and {icons:get("basic_old")} or {icons:get("basic_caster")},
     subgroup = "production-machine",
     order = "c[basic-caster]",
     place_result = "basic-caster",
@@ -90,7 +90,7 @@ data:extend({
   {
     type = "item",
     name = "advanced-caster",
-    icons = {icons:get("advanced_caster")},
+    icons = settings.startup["ymm-use-old-icons"].value and {icons:get("advanced_old")} or {icons:get("advanced_caster")},
     subgroup = "production-machine",
     order = "d[advanced-caster]",
     place_result = "advanced-caster",

@@ -68,23 +68,25 @@ technology_add_effect(tech, "molten-rail")
 -- })
 --//TODO URANIUM BALANCING :[
 -- SMELTING
-make_new_smelting_recipe( "iron-ore", {2,2}, {40,40}, get_energy_required("iron-plate"))
-make_new_smelting_recipe( "copper-ore", {2,2}, {40,40}, get_energy_required("copper-plate"))
-make_new_smelting_recipe( "stone", {2,2}, {40,40}, get_energy_required("stone-brick"))
-make_new_smelting_recipe( "uranium-ore", {10,10}, {20,20}, get_energy_required("uranium-processing"))
+
+
+new_smelting_recipe("iron-ore", "iron-plate")
+new_smelting_recipe("copper-ore", "copper-plate")
+new_smelting_recipe("stone", "stone-brick")
+new_smelting_recipe("uranium-ore", "uranium-processing")
 
 -- CASTING
-make_new_casting_recipe("copper-ore", "copper-plate", {20,20}, {1,1})
-make_new_casting_recipe("copper-ore", "copper-cable", {20,20}, {2,2})
-make_new_casting_recipe("iron-ore", "iron-plate", {20,20}, {1,1})
-make_new_casting_recipe("iron-ore", "steel-plate", {80,80}, {1,1})
-make_new_casting_recipe("iron-ore", "iron-gear-wheel", {80,80}, {2,2})
-make_new_casting_recipe("iron-ore", "iron-stick", {20,20}, {2,2})
-make_new_casting_recipe("iron-ore", "rail", {120,120}, {2,2})
+new_casting_recipe( "copper-ore", "copper-plate")
+new_casting_recipe("copper-ore", "copper-cable")
+new_casting_recipe("iron-ore", "iron-plate")
+new_casting_recipe("iron-ore", "steel-plate")
+new_casting_recipe("iron-ore", "iron-gear-wheel")
+new_casting_recipe("iron-ore", "iron-stick")
+new_casting_recipe("iron-ore", "rail")
 -- table.insert(data.raw.recipe["molten-rail"].ingredients, {type = "item", name = "stone", amount = 1}) -- need fluid mixer soon
-make_new_casting_recipe("stone", "stone-brick", {20,20}, {1,1})
-make_new_casting_recipe("uranium-ore", "uranium-238", {200,200}, {1,1}, get_energy_required("uranium-processing"))
-make_new_casting_recipe("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, get_energy_required("uranium-processing"))
+new_casting_recipe("stone", "stone-brick")
+new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, get_energy_required("uranium-processing"))
+new_casting_recipe_ext("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, get_energy_required("uranium-processing"))
 data.raw.recipe["molten-uranium-238"].normal.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},
@@ -103,8 +105,3 @@ data.raw.recipe["molten-uranium-238"].expensive.results = {
 -- 201.409869083585
 -- 28571.4285714286
 -- ore to u235 ratio but its to much since there will be no u-238
-
-if settings.startup["ymm-use-old-icons"].value then --//TODO move into machines.lua
-  data.raw.item["basic-caster"].icons = {icons:get("basic_old")}
-  data.raw.item["advanced-caster"].icons = {icons:get("advanced_old")}
-end

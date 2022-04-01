@@ -72,6 +72,10 @@ end
 -- error("is_ore()")
 
 
+
+--MOVE TO RECIPE.LUA
+
+
 ---Returns a list of all recipes using the given ingredient
 ---@param item_name string
 ---@return table table List of recipe names
@@ -190,4 +194,88 @@ end
 -- error("get_energy_required()")
 
 
---get amount_in/amount_out
+---Returns the input amount of an item. Returns ``nil`` on error
+---@param recipe_name string
+---@param ingredient_name string
+---@return table|nil {normal, expensive}
+function get_recipe_amount_in(recipe_name, ingredient_name)
+  if data.raw.recipe[recipe_name] then
+    local recipe = data.raw.recipe[recipe_name]
+    local amount = {0,0}
+
+    if recipe.ingredients then --add next() check?
+      for _, value in ipairs(recipe.ingredients) do
+        if value.name and value.name == ingredient_name then
+          amount = {value.amount or 1, value.amount or 1}
+        elseif type(value[1]) == "string" and value[1] == ingredient_name then
+          amount = {value[2] or 1, value[2] or 1}
+        end
+      end
+    end
+    if recipe.normal and recipe.normal.ingredients then
+      for _, value in ipairs(recipe.normal.ingredients) do
+        if value.name and value.name == ingredient_name then
+          amount[1] = value.amount or 1
+        elseif type(value[1]) == "string" and value[1] == ingredient_name then
+          amount[1] = value[2] or 1
+        end
+      end
+    end
+    if recipe.expensive and recipe.expensive.ingredients then
+      for _, value in ipairs(recipe.expensive.ingredients) do
+        if value.name and value.name == ingredient_name then
+          amount[2] = value.amount or 1
+        elseif type(value[1]) == "string" and value[1] == ingredient_name then
+          amount[2] = value[2] or 1
+        end
+      end
+    end
+    -- amount[1] = amount[1] > 0 and amount[1] or (amount[2] > 0 and amount[2] or 1)
+    -- amount[2] = amount[2] > 0 and amount[2] or (amount[1] > 0 and amount[1] or 1)
+    return amount
+  end
+  log("Unknown recipe: "..recipe_name)
+  return nil
+end
+-- log(serpent.block( get_recipe_amount_in( "express-splitter", "advanced-circuit" ) )) --10
+-- log(serpent.block( get_recipe_amount_in( "advanced-circuit", "electronic-circuit" ) )) --2
+-- error("get_recipe_amount_in()")
+
+
+---Returns the output amount of an item. Returns ``nil`` on error
+---@param recipe_name string
+---@param item_name? string can be omitted if recipe and result name are identical
+---@return table|nil {normal, expensive}
+function get_recipe_amount_out(recipe_name, item_name)
+  if data.raw.recipe[recipe_name] then
+    item_name = item_name or recipe_name
+    local results = get_recipe_results(recipe_name)
+    local amount = {0,0}
+
+      if results.results then
+        for _, v in ipairs(results.results) do
+          if v.name == item_name then
+            amount = {v.amount, v.amount}
+          end
+        end
+      end
+      if results.normal then
+        for _, v in ipairs(results.normal) do
+          if v.name == item_name then amount[1] = v.amount end
+        end
+      end
+      if results.expensive then
+        for _, v in ipairs(results.expensive) do
+          if v.name == item_name then amount[2] = v.amount end
+        end
+      end
+    return amount
+  end
+  log("Unknown recipe: "..recipe_name)
+  return nil
+end
+-- log(serpent.block( get_recipe_amount_out( "tank" ) ))
+-- log(serpent.block( get_recipe_amount_out( "iron-plate" ) ))
+-- log(serpent.block( get_recipe_amount_out( "explosives" ) ))
+-- error("get_recipe_amount_out()")
+

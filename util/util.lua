@@ -30,29 +30,30 @@ end
 
 
 
----Adds name and amount keys to table and returns a new table
----@param _table table ``lua {string, number?}``
----@return table ``{ name = "name", amount = n }``
-function yutil.add_pairs(_table)
-  local _t = _table
+---Returns table __t__ with keys for name and amount
+---@param t table|string ``lua {string, number?}``
+---@return table ``{ name = "name": string, amount = n: integer }``
+function yutil.add_pairs(t)
 
-  if type(_t) == "table" and _t[1] then --they can be empty and would be "valid" until ...
-    if _t.name then return _t end       --ignore if it has pairs already
-    if type(_t[1]) ~= "string" then error(" First value must be 'string'") end
-    if type(_t[2]) ~= "number" then _t[2] = 1 end -- this is risky
-    return { name = _t[1], amount = _t[2] or 1}
-  elseif type(_t) == "string" then
-    log(" Warning: add_pairs("..type(_t[1])..", "..type(_t[2])..") - implicitly set value - amount = 1")
-    return { name = _t, amount = 1}
+  if type(t) == "table" and t[1] then --they can be empty and would be "valid" until ...
+---@diagnostic disable-next-line: undefined-field
+    if t.name then return t end       --ignore if it has pairs already
+    if type(t[1]) ~= "string" then error(" First value must be 'string'") end
+    if type(t[2]) ~= "number" then t[2] = 1 end -- this is risky
+    return { name = t[1], amount = t[2] or 1}
+  elseif type(t) == "string" then
+    log(" Warning: add_pairs("..type(t[1])..", "..type(t[2])..") - implicitly set value - amount = 1")
+    return { name = t, amount = 1}
   end
 
-  return _t
+  return t
 end
 
 
 ---@return boolean ... returns _false_ if table doesn't exists or is empty, else returns _true_
 function yutil.check_table(table)
   if not table then return false end
+  if not type(table) == "table" then return false end
   if not next(table) then return false end
   return true
 end

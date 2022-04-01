@@ -1,4 +1,4 @@
-local yutil = require("util.util")
+
 ----------------
 -- TECHNOLOGY --
 ----------------
@@ -11,7 +11,7 @@ local yutil = require("util.util")
 ---@param localized_name? string item-name
 ---@param count? number
 ---@param time? number
-function make_new_technology(tech_name, icon_name, prerequisites, ingredient, localized_name, count, time)
+function new_technology_ext(tech_name, icon_name, prerequisites, ingredient, localized_name, count, time)
 
   data:extend({
     {
@@ -31,6 +31,17 @@ function make_new_technology(tech_name, icon_name, prerequisites, ingredient, lo
     },
   })
 end
+
+---Wrapper for new_technology_ext(), also sets the parent technology
+---@param tech_name string
+---@param icon_name string
+---@param parent_name string
+---@param localized_name? string omittable if icon and locale names match
+function new_technology(tech_name, icon_name, parent_name, localized_name)
+  new_technology_ext(tech_name, icon_name, {}, {}, localized_name or icon_name)
+  technology_set_parent(tech_name, parent_name)
+end
+
 
 ---Adds a recipe as effect to a technology
 ---@param technology_name string
