@@ -8,6 +8,8 @@ There is a setting which disables the furnace replacement.
 At he moment only "vanilla-ores" (iron and copper) are affected (modded ones are added over time).
 If you want to add ores from other mods just take a look at mods/bz-mods.lua.
 
+![screenshot_2](shot_02.png)
+
 ## Updates
 * Initial release
 
@@ -21,9 +23,9 @@ If you want to add ores from other mods just take a look at mods/bz-mods.lua.
 ## ToDo
 * [ ] Balancing
 * [x] better Icons
-* [x] Techtree adjustments (maybe)
+* [x] Techtree adjustments
 * [x] Options/Settings
-* [ ] Interface
+* [ ] Fluid Mixer
 * [ ] Additional recipes (maybe)
 
 ## How to contribute?
