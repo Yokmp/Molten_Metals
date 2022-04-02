@@ -176,21 +176,21 @@ function get_energy_required(recipe_name)
   if data.raw.recipe[recipe_name] then
     local data_recipe = data.raw.recipe[recipe_name]
     if data_recipe.energy_required then
-      time[1] = data_recipe.energy_required
-      time[2] = data_recipe.energy_required
+      time[1] = data_recipe.energy_required or 0.5
+      time[2] = data_recipe.energy_required or 0.5
     end
     if data_recipe.normal then
-      time[1] = data_recipe.normal.energy_required
-    else
+      time[1] = data_recipe.normal.energy_required or 0.5
     end
     if data_recipe.expensive then
-      time[2] = data_recipe.expensive.energy_required
+      time[2] = data_recipe.expensive.energy_required or 0.5
     end
   end
   return time
 end
 -- log(serpent.block( get_energy_required( "tank" ) ))
 -- log(serpent.block( get_energy_required( "iron-plate" ) ))
+-- log(serpent.block( get_energy_required( "iron-gear-wheel" ) ))
 -- error("get_energy_required()")
 
 
@@ -234,11 +234,12 @@ function get_recipe_amount_in(recipe_name, ingredient_name)
     -- amount[2] = amount[2] > 0 and amount[2] or (amount[1] > 0 and amount[1] or 1)
     return amount
   end
-  log("Unknown recipe: "..recipe_name)
+  log("amount_in - Unknown recipe: "..recipe_name)
   return nil
 end
 -- log(serpent.block( get_recipe_amount_in( "express-splitter", "advanced-circuit" ) )) --10
 -- log(serpent.block( get_recipe_amount_in( "advanced-circuit", "electronic-circuit" ) )) --2
+-- log(serpent.block( get_recipe_amount_in( "steel-plate", "iron-plate" ) )) --5, 10
 -- error("get_recipe_amount_in()")
 
 
@@ -271,7 +272,7 @@ function get_recipe_amount_out(recipe_name, item_name)
       end
     return amount
   end
-  log("Unknown recipe: "..recipe_name)
+  log("amount_out - Unknown recipe: "..recipe_name)
   return nil
 end
 -- log(serpent.block( get_recipe_amount_out( "tank" ) ))

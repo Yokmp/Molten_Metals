@@ -68,32 +68,32 @@ end
 
 ---Wrapper for new_smelting_recipe_ext()
 ---@param ingredient string ore-name
----@param result string item-name, __NOT__ fluid-name
+---@param result string|table item-name, __NOT__ fluid-name
 ---@param enabled? boolean
-function new_smelting_recipe(ingredient, result, enabled)
-  new_smelting_recipe_ext(
-    ingredient,
-    get_recipe_amount_in(result, ingredient),
-    get_recipe_amount_out(result),
-    get_energy_required(result),
-    enabled or false
-  )
+---@param multiplier? number 3 - applied to ingredients and results
+function new_smelting_recipe(ingredient, result, enabled, multiplier)
+  multiplier = multiplier or 3
+  local amount_in = get_recipe_amount_in(result, ingredient)
+  local amount_out = get_recipe_amount_out(result)
+  amount_in[1] = amount_in[1]*(2*multiplier) -- ratio is 1:20
+  amount_in[2] = amount_in[2]*(2*multiplier)
+  amount_out[1] = amount_out[1]*(40*multiplier)
+  amount_out[2] = amount_out[2]*(40*multiplier)
+  new_smelting_recipe_ext( ingredient, amount_in, amount_out, get_energy_required(result), enabled or false)
 end
 
 
 ---Creates a new casting recipe
 ---@param fluid_name string recipe and ingredient name (molten-result-name)
 ---@param result_name string also sets the main product, must be an item
----@param amount_in? table {normal, expensive} {1,1}
+---@param amount_in? table ``{normal, expensive} or {20,20}``
 ---@param amount_out? table ``{normal, expensive} or (get_recipe_amount_out(result_name) or {1,1})``
----@param energy? table {normal, expensive} get_energy_required(result_name) or number
----@param enabled? table {normal, expensive} false
+---@param energy? table ``{normal, expensive} or {0.5,0.5}``
+---@param enabled? table ``{normal, expensive} or false``
 function new_casting_recipe_ext(fluid_name, result_name, amount_in, amount_out, energy, enabled)
   amount_in = amount_in or {20,20}
   amount_out = amount_out or (get_recipe_amount_out(result_name) or {1,1})
-  if not energy then
-    energy = get_energy_required(result_name) --casting machine speed is 1 and 1.5
-  end
+  energy = energy or {0.5,0.5} --vanilla default
   enabled = enabled or {false, false}
   temperature = yutil.ore_definition(fluid_name).min
 
@@ -116,11 +116,11 @@ data:extend({{
     energy_required = energy[1], -- 1.6 (3.2 at speed 2)
     ingredients = {
       {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[1], temperature = temperature},
-      {type = "fluid", name = "water", amount = 40}
+      {type = "fluid", name = "water", amount = amount_in[1]*2}
     },
     results = {
       {type = "item",  name = result_name, amount = amount_out[1]},
-      {type = "fluid", name = "steam", amount = 10, temperature = 165}
+      {type = "fluid", name = "steam", amount = amount_in[1]*2.5, temperature = 165}
     }
   },
   expensive = {
@@ -129,11 +129,11 @@ data:extend({{
     energy_required = energy[2],
     ingredients = {
       {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[2], temperature = temperature},
-      {type = "fluid", name = "water", amount = 60}
+      {type = "fluid", name = "water", amount =amount_in[2]*3}
     },
     results = {
       {type = "item",  name = result_name, amount = amount_out[2]},
-      {type = "fluid", name = "steam", amount = 10, temperature = 165}
+      {type = "fluid", name = "steam", amount = amount_in[1]*3.75, temperature = 165}
     }
   }
 }})
@@ -145,17 +145,25 @@ end
 -- error("make_new_smelting_recipe()")
 
 ---Wrapper for new_casting_recipe_ext()
----@param ingredient string ore-name, __NOT__ fluid-name
----@param result string item-name
-function new_casting_recipe(ingredient, result)
-  new_casting_recipe_ext(
-  ingredient,
-  result,
-  get_recipe_amount_in(result, ingredient),
-  get_recipe_amount_out(result)
-)
-end
+---@param ore_name string ore-name, __NOT__ fluid-name
+---@param ingredient string defines input amount
+---@param result string item-name, also defines output amount
+---@param multiplier? table ``{3,3}`` - applied to ingredients[1] and results[2]
+function new_casting_recipe(ore_name, ingredient, result, multiplier)
+  log("making new casting recipe for: "..result)
+  multiplier = multiplier or {3,3}
+  local energy = get_energy_required(result)
+  local amount_in = get_recipe_amount_in(result, ingredient)
+  local amount_out = get_recipe_amount_out(result)
+  energy[1] = energy[1]/2 --casting machine speed is 1 and 1.5
+  energy[2] = energy[2]/2 --vanilla furnace is 2 (vanilla energy min is 0.5)
+  amount_in[1] = amount_in[1] < 20 and (amount_in[1]*20)*multiplier[1]
+  amount_in[2] = amount_in[2] < 20 and (amount_in[2]*20)*multiplier[1]
+  amount_out[1] = amount_out[1] < 20 and amount_out[1]*multiplier[2]
+  amount_out[2] = amount_out[2] < 20 and amount_out[2]*multiplier[2]
 
+  new_casting_recipe_ext(ore_name, result, amount_in, amount_out, energy)
+end
 
 
     ------------
@@ -233,5 +241,10 @@ end
 -- error("recipe_set_result_temperature()")
 
 
+-- function recipe_set_amount_out(recipe_name, amount)
+--   if data.raw.recipe[recipe_name] then
+    
+--   end
 
+-- end
 
