@@ -76,6 +76,43 @@ end
 --MOVE TO RECIPE.LUA
 
 
+---Returns a recipes ingredients by difficulty (if available) or nil
+---@param recipe_name string
+---@return table|nil
+function get_recipe_ingredients(recipe_name)
+  if type(recipe_name) == "string" and data.raw.recipe[recipe_name] then
+    local data_recipe = data.raw.recipe[recipe_name]
+    local ingredients = {}
+
+    if data_recipe.ingredients and data_recipe.ingredients then
+      ingredients.ingredients = {}
+      for i, ingredient in ipairs(data_recipe.ingredients) do
+        ingredients.ingredients[i] = yutil.add_pairs(ingredient)
+      end
+    end
+    if data_recipe.normal and data_recipe.normal.ingredients then
+      ingredients.normal = {}
+      for i, ingredient in ipairs(data_recipe.normal.ingredients) do
+        ingredients.normal[i] = yutil.add_pairs(ingredient)
+      end
+    end
+    if data_recipe.expensive and data_recipe.expensive.ingredients then
+      ingredients.expensive = {}
+      for i, ingredient in ipairs(data_recipe.expensive.ingredients) do
+        ingredients.expensive[i] = yutil.add_pairs(ingredient)
+      end
+    end
+    return ingredients
+  else
+    log(" Recipe not found: "..tostring(recipe_name))
+  end
+  return nil
+end
+-- log(serpent.block(get_recipe_ingredients("tank")))
+-- log(serpent.block(get_recipe_ingredients("steel-furnace")))
+-- error("get_recipe_ingredients()")
+
+
 ---Returns a list of all recipes using the given ingredient
 ---@param item_name string
 ---@return table table List of recipe names
@@ -111,7 +148,6 @@ function get_recipes_byingredient(item_name)
   return recipes
   else
     log(" Item not found: "..tostring(item_name))
-    error(" Item not found: "..tostring(item_name))
   end
 end
 -- log(serpent.block(get_recipes_byingredient("iron-ore")))
@@ -159,7 +195,6 @@ function get_recipe_results(recipe_name)
 
   else
     log(" Recipe not found: "..tostring(recipe_name))
-    error(" Recipe not found: "..tostring(recipe_name))
   end
   return _return
 end

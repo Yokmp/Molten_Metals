@@ -59,6 +59,27 @@ function yutil.check_table(table)
 end
 
 
+---Returns mixed rgb values, big thx to Honktown
+---@param t1 tint|table
+---@param t2 tint|table
+---@return tint|table
+function mix_tints(t1, t2)
+	local tint1 = {t1.r or t1[1] or 0, t1.g or t1[2] or 0, t1.b or t1[3] or 0, t1.a or t1[4]}
+	local tint2 = {t2.r or t2[1] or 0, t2.g or t2[2] or 0, t2.b or t2[3] or 0, t2.a or t2[4]}
+
+	for _, tint in pairs({tint1, tint2}) do
+		if tint[1] > 1 or tint[2] > 1 or tint[3] > 1 or (tint[4] and tint[4] > 1) then
+			for i, c in pairs(tint) do
+				tint[i] = c/255
+			end
+		end
+		tint[4] = tint[4] or 1
+	end
+
+	return {r=(tint1[1] + tint2[1]) / 2, g=(tint1[2] + tint2[2]) / 2, b=(tint1[3] + tint2[3]) / 2, a=(tint1[4] + tint2[4]) / 2}
+end
+
+
 function yutil.assembler1pipepictures(color)
   local tint = {}
   if type(color) == "table" and next(color) then

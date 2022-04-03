@@ -1,11 +1,13 @@
 -- REPLACE FURNACES
 if settings.startup["ymm-replace-steel-furnace"].value then
+  table.insert(data.raw.recipe["basic-smelter"], get_recipe_ingredients("steel-furnace"))
   data.raw.item["steel-furnace"].flags = {"hidden"}
   data.raw["furnace"]["steel-furnace"].next_upgrade = "basic-smelter"
   data.raw["furnace"]["steel-furnace"].minable.result = "basic-smelter"
   data.raw["furnace"]["stone-furnace"].next_upgrade = "basic-smelter"
 end
 if settings.startup["ymm-replace-electric-furnace"].value then
+  table.insert(data.raw.recipe["advanced-smelter"], get_recipe_ingredients("electric-furnace"))
   data.raw.item["electric-furnace"].flags = {"hidden"}
   data.raw.item["electric-furnace"].minable_result = "advanced-smelter"
   data.raw.item["electric-furnace"].next_upgrade = "advanced-smelter"

@@ -32,6 +32,18 @@ data:extend({
   },
   {
     type = "recipe",
+    name = "fluid-mixer",
+    energy_required = 2,
+    enabled = false,
+    ingredients = {
+      {"engine-unit", 1},
+      {"iron-plate", 4},
+      {"pipe", 2}
+    },
+    result = "fluid-mixer"
+  },
+  {
+    type = "recipe",
     name = "basic-caster",
     energy_required = 3,
     enabled = false,
@@ -80,10 +92,19 @@ data:extend({
   },
   {
     type = "item",
+    name = "fluid-mixer",
+    icons = {icons:get("missing")}, --//TODO fluid mixer icon
+    subgroup = "production-machine",
+    order = "d[fluid-mixer]",
+    place_result = "fluid-mixer",
+    stack_size = 50
+  },
+  {
+    type = "item",
     name = "basic-caster",
     icons = settings.startup["ymm-use-old-icons"].value and {icons:get("basic_old")} or {icons:get("basic_caster")},
     subgroup = "production-machine",
-    order = "c[basic-caster]",
+    order = "e[basic-caster]",
     place_result = "basic-caster",
     stack_size = 50
   },
@@ -92,7 +113,7 @@ data:extend({
     name = "advanced-caster",
     icons = settings.startup["ymm-use-old-icons"].value and {icons:get("advanced_old")} or {icons:get("advanced_caster")},
     subgroup = "production-machine",
-    order = "d[advanced-caster]",
+    order = "f[advanced-caster]",
     place_result = "advanced-caster",
     stack_size = 50
   },
