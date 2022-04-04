@@ -32,3 +32,5 @@ require("prototypes.vanilla.create")
 
 require("prototypes.mods.bz-mods")
 
+
+new_mixed_fluids_and_recipes({"molten"})
