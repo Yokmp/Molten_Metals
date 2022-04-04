@@ -41,7 +41,6 @@ icons = {
   molten_stone      = {"molten-stone", "icons", 64, 4, 0.5},
   molten_uranium    = {"molten-uranium-ore", "icons", 64, 4, 0.5},
   filter            = {"filter", "icons", 64, 4, 0.5},
-  fluid_mixing      = {"fluid-mixing", "icons", 64, 0, 0.5},
   molten_bg         = {"molten-base", "icons", 64, 4, 0.5},
   molten_drop       = {"molten-drop", "icons", 64, 4, 0.5},
   missing           = {"missing", "icons", 64, 4, 0.5},

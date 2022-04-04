@@ -1137,9 +1137,3 @@ data:extend({
     },
   },
 })
-  -----------------
-  -- FLUID MIXER --
-  -----------------
--- local fluid_mixer = util.copy(data.raw["assembling-machine"]["chemical-plant"])
--- fluid_mixer.name = "Fluid Mixer"
--- data:extend({{fluid_mixer}})

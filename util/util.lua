@@ -60,9 +60,9 @@ end
 
 
 ---Returns mixed rgb values, big thx to Honktown
----@param t1 tint|table
----@param t2 tint|table
----@return tint|table
+---@param t1 color|table
+---@param t2 color|table
+---@return color|table
 function mix_tints(t1, t2)
 	local tint1 = {t1.r or t1[1] or 0, t1.g or t1[2] or 0, t1.b or t1[3] or 0, t1.a or t1[4]}
 	local tint2 = {t2.r or t2[1] or 0, t2.g or t2[2] or 0, t2.b or t2[3] or 0, t2.a or t2[4]}

@@ -108,16 +108,6 @@ data:extend({
     place_result = "advanced-caster",
     stack_size = 50
   },
-  -- {
-  --   type = "item",
-  --   name = "fluid-mixer",
-  --   icons = {icons:get("missing")}, --//TODO fluid mixer icon
-  --   subgroup = "production-machine",
-  --   order = "d[fluid-mixer]",
-  --   -- place_result = "fluid-mixer",
-  --   place_result = "chemical-plant",
-  --   stack_size = 50
-  -- },
 -----------
 -- ICONS --
 -----------

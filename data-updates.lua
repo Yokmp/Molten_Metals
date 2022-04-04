@@ -9,8 +9,6 @@ data:extend({
   { type = "recipe-category", name = categories.casting },
 })
 
---//TODO migration or "what if advanced-material-processing(-2) is aready researched?"
-
 require("util.icons")
 yutil = require("util.util")
 require("util.functions")
@@ -31,6 +29,3 @@ require("prototypes.vanilla.technology")
 require("prototypes.vanilla.create")
 
 require("prototypes.mods.bz-mods")
-
-
-new_mixed_fluids_and_recipes({"molten"})
