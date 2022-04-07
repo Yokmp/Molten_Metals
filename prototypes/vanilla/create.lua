@@ -87,7 +87,8 @@ new_casting_recipe("iron-ore", "iron-plate", "iron-stick", {1,1})
 new_casting_recipe_ext("iron-ore", "rail", {110,110}, {2,2})
 -- new_casting_recipe("iron-ore", "steel-plate", "rail")
 -- table.insert(data.raw.recipe["molten-rail"].ingredients, {type = "item", name = "stone", amount = 1}) -- need fluid mixer soon
-new_casting_recipe("stone", "strone", "stone-brick")
+new_casting_recipe("stone", "stone", "stone-brick")
+-- new_casting_recipe_ext("stone", "stone-brick", {40}, {2})
 new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, get_energy_required("uranium-processing"))
 new_casting_recipe_ext("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, get_energy_required("uranium-processing"))
 data.raw.recipe["molten-uranium-238"].normal.results = {
