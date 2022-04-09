@@ -25,7 +25,11 @@ for i, name in ipairs(ores) do
             default_value = true,
             order = "d"..i,
             localised_name = {"", "[item="..name.."]", " - ", {"item-name."..name}, " ", {"item-name.smelting"}},
-            -- localised_description = {"", "[item="..name.."]"},
+            -- localised_description = {"", {"item-name.smelts"}, " ",
+            --                              {"item-name."..name}, " ",
+            --                              {"item-name.into"}, " ",
+            --                              {"item-name.molten"}, " ",
+            --                              {"item-name."..name},},
         }
     })
 end
@@ -33,11 +37,19 @@ end
 
 data:extend({
   {
+      type = "string-setting",
+      name = "ymm-logging",
+      setting_type = "startup",
+      default_value = "none",
+      allowed_values = {"warning", "all", "none"},
+      order = "aa"
+  },
+  {
       type = "bool-setting",
       name = "ymm-allow-barreling",
       setting_type = "startup",
       default_value = false,
-      order = "a"
+      order = "ab"
   },
   {
       type = "bool-setting",

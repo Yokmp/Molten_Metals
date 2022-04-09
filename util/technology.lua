@@ -128,7 +128,7 @@ function technology_get_prerequisites(tech_name)
   if data.raw.technology[tech_name] then
     return util.table.deepcopy(data.raw.technology[tech_name].prerequisites)
   end
-  log("Technology "..tech_name.." has no prerequisites!")
+  if logging then log("Technology "..tech_name.." has no prerequisites!") end
   return {}
 end
 

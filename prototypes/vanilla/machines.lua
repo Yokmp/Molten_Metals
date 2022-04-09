@@ -54,18 +54,6 @@ data:extend({
     },
     result = "advanced-caster"
   },
-  -- {
-  --   type = "recipe",
-  --   name = "fluid-mixer",
-  --   energy_required = 2,
-  --   enabled = false,
-  --   ingredients = {
-  --     {"engine-unit", 1},
-  --     {"iron-plate", 4},
-  --     {"pipe", 2}
-  --   },
-  --   result = "fluid-mixer"
-  -- },
   -----------
   -- ITEMS --
   -----------
@@ -108,6 +96,24 @@ data:extend({
     place_result = "advanced-caster",
     stack_size = 50
   },
+  -- {
+  --   type = "item",
+  --   name = "insulated-pipe",
+  --   icons = {icons:get("pipe")},
+  --   subgroup = "energy-pipe-distribution",
+  --   order = "a[pipe]-b[insulated-pipe]",
+  --   place_result = "insulated-pipe",
+  --   stack_size = 100
+  -- },
+  -- {
+  --   type = "item",
+  --   name = "insulated-pipe-to-ground",
+  --   icons = {icons:get("pipe_to_ground")},
+  --   subgroup = "energy-pipe-distribution",
+  --   order = "a[pipe]-c[insulated-pipe-to-ground]",
+  --   place_result = "insulated-pipe-to-ground",
+  --   stack_size = 50
+  -- },
 -----------
 -- ICONS --
 -----------

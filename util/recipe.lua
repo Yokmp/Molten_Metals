@@ -14,6 +14,7 @@ function new_smelting_recipe_ext(ore_name, amount_in, amount_out, energy, enable
   energy = energy or {0.5,0.5} --{3.2,3.2}
   enabled = enabled or {false, false}
   local temperature = yutil.ore_definition(ore_name).min
+  -- info("New molten-"..ore_name.." {"..amount_in[1]..", "..amount_in[2].."},".." {"..amount_out[1]..", "..amount_out[2].."}")
 
   local recipe =  {
     type = "recipe",
@@ -67,24 +68,28 @@ end
 -- error("make_new_smelting_recipe()")
 
 ---Wrapper for new_smelting_recipe_ext()
----@param ingredient string ore-name
----@param result string|table item-name, __NOT__ fluid-name
+---@param ore_name string ingredient
+---@param recipe_name string the recipe used to calculate the input amount
+---@param result? string must be set if recipe and result names differ; used to calc the output amount
 ---@param enabled? boolean
 ---@param multiplier? number 3 - applied to ingredients and results
-function new_smelting_recipe(ingredient, result, enabled, multiplier)
+function new_smelting_recipe(ore_name, recipe_name, result, enabled, multiplier) --BUG needs result to calc amount
   multiplier = multiplier or 3
-  local amount_in = get_recipe_amount_in(result, ingredient)
-  local amount_out = get_recipe_amount_out(result)
+  result = result or recipe_name
+  local amount_in = get_recipe_amount_in(recipe_name, ore_name)
+  local amount_out = get_recipe_amount_out(recipe_name, result)
   amount_in[1] = amount_in[1]*(2*multiplier) -- ratio is 1:20
   amount_in[2] = amount_in[2]*(2*multiplier)
   amount_out[1] = amount_out[1]*(40*multiplier)
   amount_out[2] = amount_out[2]*(40*multiplier)
-  new_smelting_recipe_ext( ingredient, amount_in, amount_out, get_energy_required(result), enabled or false)
+
+  info("new smelting recipe: molten-"..ore_name.." for: "..result)
+  new_smelting_recipe_ext( ore_name, amount_in, amount_out, get_energy_required(recipe_name), enabled or false)
 end
 
 
 ---Creates a new casting recipe
----@param fluid_name string recipe and ingredient name (molten-result-name)
+---@param fluid_name string ``"molten-"..fluid_name`` recipe and ingredient name (molten-result-name)
 ---@param result_name string also sets the main product, must be an item
 ---@param amount_in? table ``{normal, expensive} or {20,20}``
 ---@param amount_out? table ``{normal, expensive} or (get_recipe_amount_out(result_name) or {1,1})``
@@ -96,6 +101,8 @@ function new_casting_recipe_ext(fluid_name, result_name, amount_in, amount_out, 
   energy = energy or {0.5,0.5} --vanilla default
   enabled = enabled or {false, false}
   temperature = yutil.ore_definition(fluid_name).min
+  -- info("New "..fluid_name.." casting".." {"..amount_in[1]..", "..amount_in[2].."}"..
+  -- " into "..result_name.." {"..amount_out[1]..", "..amount_out[2].."}")
 
 data:extend({{
   type = "recipe",
@@ -116,11 +123,12 @@ data:extend({{
     energy_required = energy[1], -- 1.6 (3.2 at speed 2)
     ingredients = {
       {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[1], temperature = temperature},
-      {type = "fluid", name = "water", amount = amount_in[1]*2}
+      {type = "fluid", name = "water", amount = math.floor((amount_in[1]*1.8)/10)*10}
     },
     results = {
       {type = "item",  name = result_name, amount = amount_out[1]},
-      {type = "fluid", name = "steam", amount = amount_in[1]*2.5, temperature = 165}
+      -- {type = "fluid", name = "steam", amount = amount_in[1]*2.5, temperature = 165}
+      {type = "fluid", name = "steam", amount = 12, temperature = 165}
     }
   },
   expensive = {
@@ -129,11 +137,12 @@ data:extend({{
     energy_required = energy[2],
     ingredients = {
       {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[2], temperature = temperature},
-      {type = "fluid", name = "water", amount =amount_in[2]*3}
+      {type = "fluid", name = "water", amount = math.ceil(amount_in[1]*2.2)}
     },
     results = {
       {type = "item",  name = result_name, amount = amount_out[2]},
-      {type = "fluid", name = "steam", amount = amount_in[1]*3.75, temperature = 165}
+      -- {type = "fluid", name = "steam", amount = amount_in[1]*3.75, temperature = 165}
+      {type = "fluid", name = "steam", amount = 6, temperature = 165}
     }
   }
 }})
@@ -150,20 +159,26 @@ end
 ---@param result string item-name, also defines output amount
 ---@param multiplier? table ``{3,3}`` - applied to ingredients[1] and results[2]
 function new_casting_recipe(ore_name, ingredient, result, multiplier)
-  log("making new casting recipe for: "..result)
   multiplier = multiplier or {3,3}
   local energy = get_energy_required(result)
   local amount_in = get_recipe_amount_in(result, ingredient)
   local amount_out = get_recipe_amount_out(result)
   energy[1] = energy[1]/2 --casting machine speed is 1 and 1.5
   energy[2] = energy[2]/2 --vanilla furnace is 2 (vanilla energy min is 0.5)
-  amount_in[1] = amount_in[1] < 20 and (amount_in[1]*20)*multiplier[1]
-  amount_in[2] = amount_in[2] < 20 and (amount_in[2]*20)*multiplier[1]
+
+  amount_in[1] = amount_in[1] < 20 and (amount_in[1]*20)*multiplier[1] -- if returns 0?
+  amount_in[2] = amount_in[2] < 20 and (amount_in[2]*20)*multiplier[1] -- if returns nil?
+
   amount_out[1] = amount_out[1] < 20 and amount_out[1]*multiplier[2]
   amount_out[2] = amount_out[2] < 20 and amount_out[2]*multiplier[2]
 
+  info("new casting recipe for: "..result)
   new_casting_recipe_ext(ore_name, result, amount_in, amount_out, energy)
 end
+-- new_casting_recipe("stone", "stone", "stone-brick")
+-- log(serpent.block(data.raw.recipe["molten-stone-brick"]))
+-- error("new_casting_recipe")
+
 
 
     ------------
@@ -241,10 +256,115 @@ end
 -- error("recipe_set_result_temperature()")
 
 
--- function recipe_set_amount_out(recipe_name, amount)
---   if data.raw.recipe[recipe_name] then
-    
---   end
 
--- end
+---Adds an inredient to a recipe
+---@param recipe_name string
+---@param ingredient string
+---@param amount? table ``{nomral, expensive}``
+function recipe_add_ingredient(recipe_name, ingredient, amount)
+  amount = amount or {1,1}
+  if data.raw.recipe[recipe_name] then
+    if type(ingredient) == "string" then
+      if data.raw.recipe[recipe_name].ingredients then
+        table.insert(data.raw.recipe[recipe_name].ingredients, {name = ingredient, amount = amount[1]})
+      end
+      if data.raw.recipe[recipe_name].normal and data.raw.recipe[recipe_name].normal.ingredients then
+        table.insert(data.raw.recipe[recipe_name].normal.ingredients, {name = ingredient, amount = amount[1]})
+      end
+      if data.raw.recipe[recipe_name].expensive and data.raw.recipe[recipe_name].expensive.ingredients then
+        table.insert(data.raw.recipe[recipe_name].expensive.ingredients, {name = ingredient, amount = amount[2]})
+      end
+    else
+      log("Wrong type: "..type(ingredient))
+    end
+  else
+    log("Recipe "..tostring(recipe_name).." does not exist!")
+  end
+end
+-- recipe_add_ingredient("tank", "TEST", {1,2})
+-- log(serpent.block(data.raw.recipe["tank"]))
+-- recipe_add_ingredient("gun-turret", "TEST")
+-- log(serpent.block(data.raw.recipe["gun-turret"]))
+-- error("recipe_add_ingredient()")
 
+
+---Overwrites the ingredients of the given recipe
+---@param recipe_name string
+---@param ingredients table ``{ {ingredients}, ... }``
+function recipe_set_ingredients(recipe_name, ingredients)
+  if data.raw.recipe[recipe_name] then
+    if type(ingredients) == "table" then
+      if data.raw.recipe[recipe_name].ingredients then
+        data.raw.recipe[recipe_name].ingredients = {ingredients}
+      end
+      if data.raw.recipe[recipe_name].normal and data.raw.recipe[recipe_name].normal then
+        data.raw.recipe[recipe_name].normal.ingredients = ingredients
+      end
+      if data.raw.recipe[recipe_name].expensive then
+        data.raw.recipe[recipe_name].expensive.ingredients = ingredients
+      end
+    else
+      log("Wrong type: "..type(ingredients))
+    end
+  else
+    log("Recipe "..tostring(recipe_name).." does not exist!")
+  end
+end
+
+
+---Removes an ingredient from the recipe
+---@param recipe_name string
+---@param ingredient_name string
+function recipe_remove_ingredient(recipe_name, ingredient_name)
+  if data.raw.recipe[recipe_name] then
+    if type(ingredient_name) == "string" then
+
+      local function remove(_t)
+        for i, value in ipairs(_t) do
+          if (value.name or value[1]) == ingredient_name then
+            table.remove(_t, i)
+          end
+        end
+      end
+
+      if data.raw.recipe[recipe_name].ingredients then
+        remove(data.raw.recipe[recipe_name].ingredients)
+      end
+      if data.raw.recipe[recipe_name].normal and data.raw.recipe[recipe_name].normal.ingredients then
+        remove(data.raw.recipe[recipe_name].normal.ingredients)
+      end
+      if data.raw.recipe[recipe_name].expensive and data.raw.recipe[recipe_name].expensive.ingredients then
+        remove(data.raw.recipe[recipe_name].expensive.ingredients)
+      end
+
+    else
+      log("string expected, got "..type(ingredient_name))
+    end
+  else
+    log("Recipe "..tostring(recipe_name).." does not exist!")
+  end
+end
+-- recipe_remove_ingredient("tank", "engine-unit")
+-- log(serpent.block(data.raw.recipe["tank"]))
+-- recipe_remove_ingredient("gun-turret", "iron-plate")
+-- log(serpent.block(data.raw.recipe["gun-turret"]))
+-- recipe_remove_ingredient("production-science-pack", "rail")
+-- log(serpent.block(data.raw.recipe["production-science-pack"]))
+-- error("recipe_remove_ingredient()")
+
+
+--TODO should only replace the ingredient, NOT the amount
+
+---Replaces an ingredient
+---@param recipe_name string
+---@param ingredient_remove string
+---@param ingredient_add string
+function recipe_replace_ingredient(recipe_name, ingredient_remove, ingredient_add)
+  if data.raw.recipe[recipe_name] then
+    local amount = get_recipe_amount_in(recipe_name, ingredient_remove)
+    recipe_remove_ingredient(recipe_name, ingredient_remove)
+    recipe_add_ingredient(recipe_name, ingredient_add, amount)
+  else
+    log("Recipe "..tostring(recipe_name).." does not exist!")
+  end
+end

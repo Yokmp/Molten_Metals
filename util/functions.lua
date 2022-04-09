@@ -13,6 +13,28 @@
 -- }
 
 
+---Returns the type
+---@param name string
+---@return string
+function get_type(name)
+  local type_name = nil
+  if type(name) == "string" then
+    local type_list = {
+      "ammo", "armor", "capsule", "fluid", "gun", "item", "mining-tool", "repair-tool", "module", "tool",
+      "item-with-entity-data", "rail-planner", "item-with-label", "item-with-inventory", "blueprint-book",
+      "item-with-tags", "selection-tool", "blueprint", "copy-paste-tool", "deconstruction-item", "upgrade-item",
+      "spidertron-remote"
+    }
+    for _, _t in pairs(type_list) do
+      if data.raw[_t][name] then type_name = _t end
+    end
+  else
+    log("Parameter Name is not a string")
+  end
+  return type_name
+end
+
+
 ---returns a table containing all minable recources(*basic-solid only!*); removes the ones specified in the **blacklist**
 ---@param filter? boolean
 ---@return table
@@ -115,9 +137,11 @@ end
 
 ---Returns a list of all recipes using the given ingredient
 ---@param item_name string
+---@param item_type? string
 ---@return table table List of recipe names
-function get_recipes_byingredient(item_name)
-  if data.raw.item[item_name] then
+function get_recipes_byingredient(item_name, item_type)
+  item_type = item_type or get_type(item_name)
+  if data.raw[item_type][item_name] then
     local recipes = {}
 
     for recipe_name, data_recipe in pairs(data.raw.recipe) do
@@ -153,6 +177,7 @@ end
 -- log(serpent.block(get_recipes_byingredient("iron-ore")))
 -- log(serpent.block(get_recipes_byingredient("uranium-ore")))
 -- log(serpent.block(get_recipes_byingredient("copper-plate")))
+-- log(serpent.block(get_recipes_byingredient("electric-furnace")))
 -- error("get_recipes_byingredient()")
 
 
@@ -269,7 +294,7 @@ function get_recipe_amount_in(recipe_name, ingredient_name)
     -- amount[2] = amount[2] > 0 and amount[2] or (amount[1] > 0 and amount[1] or 1)
     return amount
   end
-  log("amount_in - Unknown recipe: "..recipe_name)
+  log("Unknown recipe: "..recipe_name)
   return nil
 end
 -- log(serpent.block( get_recipe_amount_in( "express-splitter", "advanced-circuit" ) )) --10
@@ -280,38 +305,43 @@ end
 
 ---Returns the output amount of an item. Returns ``nil`` on error
 ---@param recipe_name string
----@param item_name? string can be omitted if recipe and result name are identical
+---@param result_name? string can be omitted if recipe and result name are identical
 ---@return table|nil {normal, expensive}
-function get_recipe_amount_out(recipe_name, item_name)
+function get_recipe_amount_out(recipe_name, result_name)
   if data.raw.recipe[recipe_name] then
-    item_name = item_name or recipe_name
+    result_name = result_name or recipe_name
     local results = get_recipe_results(recipe_name)
     local amount = {0,0}
 
       if results.results then
         for _, v in ipairs(results.results) do
-          if v.name == item_name then
+          if v.name == result_name then
             amount = {v.amount, v.amount}
           end
         end
       end
       if results.normal then
         for _, v in ipairs(results.normal) do
-          if v.name == item_name then amount[1] = v.amount end
+          if v.name == result_name then amount[1] = v.amount end
         end
       end
       if results.expensive then
         for _, v in ipairs(results.expensive) do
-          if v.name == item_name then amount[2] = v.amount end
+          if v.name == result_name then amount[2] = v.amount end
         end
       end
     return amount
+  else
+    log("Unknown recipe: "..recipe_name)
   end
-  log("amount_out - Unknown recipe: "..recipe_name)
   return nil
 end
 -- log(serpent.block( get_recipe_amount_out( "tank" ) ))
 -- log(serpent.block( get_recipe_amount_out( "iron-plate" ) ))
 -- log(serpent.block( get_recipe_amount_out( "explosives" ) ))
+-- log(serpent.block( get_recipe_amount_out( "uranium-processing", "uranium-238" ) ))
 -- error("get_recipe_amount_out()")
+
+
+
 

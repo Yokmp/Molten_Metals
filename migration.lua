@@ -19,6 +19,21 @@ for _, force in pairs(game.forces) do
     if technologies["railway"] then
       recipes["molten-rail"].enabled = true
     end
+    if technologies["advanced-material-processing-2"] then
+      recipes["advanced-smelter"].enabled = true
+      recipes["advanced-caster"].enabled = true
+    end
+    if technologies["uranium-processing"] then
+      recipes["molten-uraniom-ore"].enabled = true
+      recipes["molten-uraniom-238"].enabled = true
+    end
+    if technologies["kovarex-enrichment-process"] then
+      recipes["molten-uranium-235"].enabled = true
+    end
+
+
+
+
 -- MODS --
     if mods["bzaluminum"] and settings.startup["ymm-use-aluminum-ore"].value and technologies["aluminium-casting"].researched then
       recipes["molten-aluminum-ore"].enabled = true

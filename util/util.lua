@@ -94,7 +94,7 @@ function yutil.assembler1pipepictures(color)
   end
   return {
     north = {
-      filename = "__Molten_Metals__/graphics/assembling-machine-1/hr-assembling-machine-1-pipe-N.png",
+      filename = "__Molten_Metals__/graphics/entity/assembling-machine-1/hr-assembling-machine-1-pipe-N.png",
       priority = "extra-high",
       width = 71,
       height = 38,
@@ -103,7 +103,7 @@ function yutil.assembler1pipepictures(color)
       tint = tint
     },
     east = {
-      filename = "__Molten_Metals__/graphics/assembling-machine-1/hr-assembling-machine-1-pipe-E.png",
+      filename = "__Molten_Metals__/graphics/entity/assembling-machine-1/hr-assembling-machine-1-pipe-E.png",
       priority = "extra-high",
       width = 42,
       height = 76,
@@ -112,7 +112,7 @@ function yutil.assembler1pipepictures(color)
       tint = tint
     },
     south = {
-      filename = "__Molten_Metals__/graphics/assembling-machine-1/hr-assembling-machine-1-pipe-S.png",
+      filename = "__Molten_Metals__/graphics/entity/assembling-machine-1/hr-assembling-machine-1-pipe-S.png",
       priority = "extra-high",
       width = 88,
       height = 61,
@@ -121,7 +121,7 @@ function yutil.assembler1pipepictures(color)
       tint = tint
     },
     west = {
-      filename = "__Molten_Metals__/graphics/assembling-machine-1/hr-assembling-machine-1-pipe-W.png",
+      filename = "__Molten_Metals__/graphics/entity/assembling-machine-1/hr-assembling-machine-1-pipe-W.png",
       priority = "extra-high",
       width = 39,
       height = 73,

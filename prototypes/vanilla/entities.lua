@@ -50,7 +50,7 @@ data:extend({
     },
     source_inventory_size = 1,
     result_inventory_size = 1,
-		energy_usage = "90kW",
+		energy_usage = "270kW",
     energy_source = {
       type = "burner",
       fuel_category = "chemical",
@@ -70,14 +70,14 @@ data:extend({
     animation = {
       layers = {
         {
-          filename = "__Molten_Metals__/graphics/basic-smelter/smelter.png",
+          filename = "__Molten_Metals__/graphics/entity/basic-smelter/smelter.png",
           priority = "high",
           width = 85,
           height = 87,
           frame_count = 1,
           shift = util.by_pixel(-1.5, 1.5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/basic-smelter/hr-smelter.png",
+            filename = "__Molten_Metals__/graphics/entity/basic-smelter/hr-smelter.png",
             priority = "high",
             width = 171,
             height = 171,
@@ -215,20 +215,6 @@ data:extend({
         },
       },
     },
-    water_reflection = {
-      pictures =
-      {
-        filename = "__base__/graphics/entity/steel-furnace/steel-furnace-reflection.png",
-        priority = "extra-high",
-        width = 20,
-        height = 24,
-        shift = util.by_pixel(0, 45),
-        variation_count = 1,
-        scale = 5
-      },
-      rotate = false,
-      orientation_to_variation = false
-    },
     fluid_boxes = {
       {
         production_type = "output",
@@ -243,7 +229,21 @@ data:extend({
           { position = { -0.5, -1.5} }
         }
       }
-    }
+    },
+    water_reflection = {
+      pictures =
+      {
+        filename = "__base__/graphics/entity/steel-furnace/steel-furnace-reflection.png",
+        priority = "extra-high",
+        width = 20,
+        height = 24,
+        shift = util.by_pixel(0, 45),
+        variation_count = 1,
+        scale = 5
+      },
+      rotate = false,
+      orientation_to_variation = false
+    },
   },
   ----------------
   -- FURNACE T3 --
@@ -287,7 +287,7 @@ data:extend({
       fade_in_ticks = 4,
       fade_out_ticks = 20
     },
-    energy_usage = "100kW",
+    energy_usage = "525kW",
 		energy_source = {
 			type = "electric",
 			usage_priority = "secondary-input",
@@ -305,14 +305,14 @@ data:extend({
     animation = {
       layers = {
         {
-          filename = "__Molten_Metals__/graphics/advanced-smelter/advanced-smelter.png",
+          filename = "__Molten_Metals__/graphics/entity/advanced-smelter/advanced-smelter.png",
           priority = "high",
           width = 129,
           height = 100,
           frame_count = 1,
           shift = {0.421875, 0},
           hr_version = {
-            filename = "__Molten_Metals__/graphics/advanced-smelter/hr-advanced-smelter.png",
+            filename = "__Molten_Metals__/graphics/entity/advanced-smelter/hr-advanced-smelter.png",
             priority = "high",
             width = 239,
             height = 219,
@@ -530,7 +530,7 @@ data:extend({
       idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.6 },
       apparent_volume = 1.5,
     },
-    energy_usage = "60kW",
+    energy_usage = "225kW",
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
@@ -539,13 +539,13 @@ data:extend({
     animation = make_4way_animation_from_spritesheet({
       layers = {
       {
-        filename = "__Molten_Metals__/graphics/caster/basic-caster.png",
+        filename = "__Molten_Metals__/graphics/entity/caster/basic-caster.png",
         width = 122,
         height = 134,
         frame_count = 1,
         shift = util.by_pixel(-5, - 4.5),
         hr_version = {
-          filename = "__Molten_Metals__/graphics/caster/hr-basic-caster.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/hr-basic-caster.png",
           width = 244,
           height = 268,
           frame_count = 1,
@@ -554,14 +554,14 @@ data:extend({
         }
       },
       {
-        filename = "__Molten_Metals__/graphics/caster/caster-shadow.png",
+        filename = "__Molten_Metals__/graphics/entity/caster/caster-shadow.png",
         width = 175,
         height = 110,
         frame_count = 1,
         shift = util.by_pixel(31.5, 11),
         draw_as_shadow = true,
         hr_version = {
-          filename = "__Molten_Metals__/graphics/caster/hr-caster-shadow.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/hr-caster-shadow.png",
           width = 350,
           height = 219,
           frame_count = 1,
@@ -579,13 +579,13 @@ data:extend({
         east_position = util.by_pixel(-11, - 1),
         apply_recipe_tint = "primary",
         animation = {
-          filename = "__Molten_Metals__/graphics/caster/boiling-green-patch.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-green-patch.png",
           frame_count = 32,
           width = 15,
           height = 10,
           animation_speed = 0.5,
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-green-patch.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-green-patch.png",
             frame_count = 32,
             width = 30,
             height = 20,
@@ -602,13 +602,13 @@ data:extend({
         apply_recipe_tint = "secondary",
         animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-green-patch-mask.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-green-patch-mask.png",
           frame_count = 32,
           width = 15,
           height = 10,
           animation_speed = 0.5,
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-green-patch-mask.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-green-patch-mask.png",
             frame_count = 32,
             width = 30,
             height = 20,
@@ -625,13 +625,13 @@ data:extend({
         east_position = {0, 0},
         north_animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-window-green-patch.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-window-green-patch.png",
           frame_count = 1,
           width = 87,
           height = 60,
           shift = util.by_pixel(0, - 5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-window-green-patch.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-window-green-patch.png",
             x = 0,
             frame_count = 1,
             width = 174,
@@ -642,14 +642,14 @@ data:extend({
         },
         east_animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-window-green-patch.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-window-green-patch.png",
           x = 87,
           frame_count = 1,
           width = 87,
           height = 60,
           shift = util.by_pixel(0, - 5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-window-green-patch.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-window-green-patch.png",
             x = 174,
             frame_count = 1,
             width = 174,
@@ -660,14 +660,14 @@ data:extend({
         },
         south_animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-window-green-patch.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-window-green-patch.png",
           x = 174,
           frame_count = 1,
           width = 87,
           height = 60,
           shift = util.by_pixel(0, - 5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-window-green-patch.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-window-green-patch.png",
             x = 348,
             frame_count = 1,
             width = 174,
@@ -810,8 +810,7 @@ data:extend({
         variation_count = 4,
         scale = 5
       },
-      rotate = false,
-      orientation_to_variation = true
+      rotate = true,
     },
   },
 ------------------------
@@ -853,7 +852,7 @@ data:extend({
       idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.6 },
       apparent_volume = 1.5,
     },
-    energy_usage = "80kW",
+    energy_usage = "275kW",
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
@@ -862,13 +861,13 @@ data:extend({
     animation = make_4way_animation_from_spritesheet({
       layers = {
         {
-          filename = "__Molten_Metals__/graphics/caster/advanced-caster.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/advanced-caster.png",
           width = 122,
           height = 134,
           frame_count = 1,
           shift = util.by_pixel(-5, - 4.5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-advanced-caster.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-advanced-caster.png",
             width = 244,
             height = 268,
             frame_count = 1,
@@ -877,14 +876,14 @@ data:extend({
           }
         },
         {
-          filename = "__Molten_Metals__/graphics/caster/caster-shadow.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/caster-shadow.png",
           width = 175,
           height = 110,
           frame_count = 1,
           shift = util.by_pixel(31.5, 11),
           draw_as_shadow = true,
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-caster-shadow.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-caster-shadow.png",
             width = 350,
             height = 219,
             frame_count = 1,
@@ -904,13 +903,13 @@ data:extend({
         apply_recipe_tint = "primary",
         animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-green-patch.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-green-patch.png",
           frame_count = 32,
           width = 15,
           height = 10,
           animation_speed = 0.5,
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-green-patch.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-green-patch.png",
             frame_count = 32,
             width = 30,
             height = 20,
@@ -927,13 +926,13 @@ data:extend({
         apply_recipe_tint = "secondary",
         animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-green-patch-mask.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-green-patch-mask.png",
           frame_count = 32,
           width = 15,
           height = 10,
           animation_speed = 0.5,
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-green-patch-mask.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-green-patch-mask.png",
             frame_count = 32,
             width = 30,
             height = 20,
@@ -950,13 +949,13 @@ data:extend({
         east_position = {0, 0},
         north_animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-window-green-patch.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-window-green-patch.png",
           frame_count = 1,
           width = 87,
           height = 60,
           shift = util.by_pixel(0, - 5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-window-green-patch.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-window-green-patch.png",
             x = 0,
             frame_count = 1,
             width = 174,
@@ -967,14 +966,14 @@ data:extend({
         },
         east_animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-window-green-patch.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-window-green-patch.png",
           x = 87,
           frame_count = 1,
           width = 87,
           height = 60,
           shift = util.by_pixel(0, - 5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-window-green-patch.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-window-green-patch.png",
             x = 174,
             frame_count = 1,
             width = 174,
@@ -985,14 +984,14 @@ data:extend({
         },
         south_animation =
         {
-          filename = "__Molten_Metals__/graphics/caster/boiling-window-green-patch.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/boiling-window-green-patch.png",
           x = 174,
           frame_count = 1,
           width = 87,
           height = 60,
           shift = util.by_pixel(0, - 5),
           hr_version = {
-            filename = "__Molten_Metals__/graphics/caster/hr-boiling-window-green-patch.png",
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-boiling-window-green-patch.png",
             x = 348,
             frame_count = 1,
             width = 174,
@@ -1133,7 +1132,9 @@ data:extend({
         variation_count = 4,
         scale = 5
       },
-      rotate = false,
+      rotate = true,
     },
   },
+
+
 })

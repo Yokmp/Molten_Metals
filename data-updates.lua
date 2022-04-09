@@ -1,6 +1,7 @@
 -- require('__debugadapter__/debugadapter.lua')
 
-logging = true
+logging = settings.startup["ymm-logging"].value
+require("util.logger")
 
 ---create the categories for molten metals
 categories = {smelting="ymm_smelting", casting="ymm_casting"}
@@ -22,6 +23,7 @@ require("util.fluids")
 require("util.recipe")
 require("util.technology")
 
+require("prototypes.vanilla.pipepictures")
 require("prototypes.vanilla.entities")
 require("prototypes.vanilla.machines")
 require("prototypes.vanilla.slag")

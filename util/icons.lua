@@ -51,6 +51,8 @@ icons = {
   molten_lead       = {"molten-lead-ore", "icons", 64, 4, 0.5},
   molten_titanium   = {"molten-titanium-ore", "icons", 64, 4, 0.5},
   molten_tungsten   = {"molten-tungsten-ore", "icons", 64, 4, 0.5},
+  pipe              = {"pipe", "icons", 64, 4, 0.5},
+  pipe_to_ground    = {"pipe-to-ground", "icons", 64, 4, 0.5},
 
   molten_drop_tech  = {"molten-drop", "technology", 128, 0, 1},
   basic_tech        = {"smelting", "technology", 128, 0, 1},
@@ -86,9 +88,9 @@ icons = {
 icons["iron-ore"]     = icons.molten_iron
 icons["copper-ore"]   = icons.molten_copper
 icons["stone"]        = icons.molten_stone
-icons["uranium-ore"]  = icons.molten_iron
+icons["uranium-ore"]  = icons.molten_uranium
 
-setmetatable(icons, {__index = function (self) return self.missing end})
+-- setmetatable(icons, {__index = function (self) return self.missing end})
 
 
 
