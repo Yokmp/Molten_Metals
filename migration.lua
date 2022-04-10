@@ -7,7 +7,6 @@ for _, force in pairs(game.forces) do
   if technologies["advanced-material-processing"].researched then
     recipes["basic-caster"].enabled = true
     recipes["basic-smelter"].enabled = true
-    recipes["basic-caster"].enabled = true
     recipes["molten-iron-ore"].enabled = true
     recipes["molten-copper-ore"].enabled = true
     recipes["molten-stone"].enabled = true
@@ -24,8 +23,8 @@ for _, force in pairs(game.forces) do
       recipes["advanced-caster"].enabled = true
     end
     if technologies["uranium-processing"] then
-      recipes["molten-uraniom-ore"].enabled = true
-      recipes["molten-uraniom-238"].enabled = true
+      recipes["molten-uranium-ore"].enabled = true
+      recipes["molten-uranium-238"].enabled = true
     end
     if technologies["kovarex-enrichment-process"] then
       recipes["molten-uranium-235"].enabled = true
