@@ -47,6 +47,7 @@ icons = {
   basic_caster      = {"basic-caster_b", "icons", 64, 4, 0.5},
   advanced_caster   = {"advanced-caster", "icons", 64, 4, 0.5},
   basic_smelter     = {"basic-smelter", "icons", 64, 4, 0.5},
+  advanced_smelter  = {"advanced-smelter", "icons", 64, 4, 0.5},
   molten_aluminium  = {"molten-aluminium-ore", "icons", 64, 4, 0.5},
   molten_lead       = {"molten-lead-ore", "icons", 64, 4, 0.5},
   molten_titanium   = {"molten-titanium-ore", "icons", 64, 4, 0.5},

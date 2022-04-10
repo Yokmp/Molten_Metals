@@ -1,4 +1,3 @@
---//TODO FLUID MIXER
 
 data:extend({
   ------------
@@ -70,8 +69,7 @@ data:extend({
   {
     type = "item",
     name = "advanced-smelter",
-    icon = "__base__/graphics/icons/electric-furnace.png",
-    icon_size = 64, icon_mipmaps = 4,
+    icons = {icons:get("advanced_smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
     order = "c[advanced-smelter]",

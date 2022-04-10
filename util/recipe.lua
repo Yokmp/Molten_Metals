@@ -76,15 +76,15 @@ end
 function new_smelting_recipe(ore_name, recipe_name, result, enabled, multiplier) --BUG needs result to calc amount
   multiplier = multiplier or 3
   result = result or recipe_name
-  local amount_in = get_recipe_amount_in(recipe_name, ore_name)
-  local amount_out = get_recipe_amount_out(recipe_name, result)
+  local amount_in = recipe_get_amount_in(recipe_name, ore_name)
+  local amount_out = recipe_get_amount_out(recipe_name, result)
   amount_in[1] = amount_in[1]*(2*multiplier) -- ratio is 1:20
   amount_in[2] = amount_in[2]*(2*multiplier)
   amount_out[1] = amount_out[1]*(40*multiplier)
   amount_out[2] = amount_out[2]*(40*multiplier)
 
   info("new smelting recipe: molten-"..ore_name.." for: "..result)
-  new_smelting_recipe_ext( ore_name, amount_in, amount_out, get_energy_required(recipe_name), enabled or false)
+  new_smelting_recipe_ext( ore_name, amount_in, amount_out, recipe_get_energy_required(recipe_name), enabled or false)
 end
 
 
@@ -92,12 +92,12 @@ end
 ---@param fluid_name string ``"molten-"..fluid_name`` recipe and ingredient name (molten-result-name)
 ---@param result_name string also sets the main product, must be an item
 ---@param amount_in? table ``{normal, expensive} or {20,20}``
----@param amount_out? table ``{normal, expensive} or (get_recipe_amount_out(result_name) or {1,1})``
+---@param amount_out? table ``{normal, expensive} or (recipe_get_amount_out(result_name) or {1,1})``
 ---@param energy? table ``{normal, expensive} or {0.5,0.5}``
 ---@param enabled? table ``{normal, expensive} or false``
 function new_casting_recipe_ext(fluid_name, result_name, amount_in, amount_out, energy, enabled)
   amount_in = amount_in or {20,20}
-  amount_out = amount_out or (get_recipe_amount_out(result_name) or {1,1})
+  amount_out = amount_out or (recipe_get_amount_out(result_name) or {1,1})
   energy = energy or {0.5,0.5} --vanilla default
   enabled = enabled or {false, false}
   temperature = yutil.ore_definition(fluid_name).min
@@ -160,9 +160,9 @@ end
 ---@param multiplier? table ``{3,3}`` - applied to ingredients[1] and results[2]
 function new_casting_recipe(ore_name, ingredient, result, multiplier)
   multiplier = multiplier or {3,3}
-  local energy = get_energy_required(result)
-  local amount_in = get_recipe_amount_in(result, ingredient)
-  local amount_out = get_recipe_amount_out(result)
+  local energy = recipe_get_energy_required(result)
+  local amount_in = recipe_get_amount_in(result, ingredient)
+  local amount_out = recipe_get_amount_out(result)
   energy[1] = energy[1]/2 --casting machine speed is 1 and 1.5
   energy[2] = energy[2]/2 --vanilla furnace is 2 (vanilla energy min is 0.5)
 
@@ -361,10 +361,255 @@ end
 ---@param ingredient_add string
 function recipe_replace_ingredient(recipe_name, ingredient_remove, ingredient_add)
   if data.raw.recipe[recipe_name] then
-    local amount = get_recipe_amount_in(recipe_name, ingredient_remove)
+    local amount = recipe_get_amount_in(recipe_name, ingredient_remove)
     recipe_remove_ingredient(recipe_name, ingredient_remove)
     recipe_add_ingredient(recipe_name, ingredient_add, amount)
   else
     log("Recipe "..tostring(recipe_name).." does not exist!")
   end
 end
+
+
+---Returns a recipes ingredients by difficulty (if available) or nil
+---@param recipe_name string
+---@return table|nil
+function recipe_get_ingredients(recipe_name)
+  if type(recipe_name) == "string" and data.raw.recipe[recipe_name] then
+    local data_recipe = data.raw.recipe[recipe_name]
+    local ingredients = {}
+
+    if data_recipe.ingredients and data_recipe.ingredients then
+      ingredients.ingredients = {}
+      for i, ingredient in ipairs(data_recipe.ingredients) do
+        ingredients.ingredients[i] = yutil.add_pairs(ingredient)
+      end
+    end
+    if data_recipe.normal and data_recipe.normal.ingredients then
+      ingredients.normal = {}
+      for i, ingredient in ipairs(data_recipe.normal.ingredients) do
+        ingredients.normal[i] = yutil.add_pairs(ingredient)
+      end
+    end
+    if data_recipe.expensive and data_recipe.expensive.ingredients then
+      ingredients.expensive = {}
+      for i, ingredient in ipairs(data_recipe.expensive.ingredients) do
+        ingredients.expensive[i] = yutil.add_pairs(ingredient)
+      end
+    end
+    return ingredients
+  else
+    log(" Recipe not found: "..tostring(recipe_name))
+  end
+  return nil
+end
+-- log(serpent.block(get_recipe_ingredients("tank")))
+-- log(serpent.block(get_recipe_ingredients("steel-furnace")))
+-- error("get_recipe_ingredients()")
+
+
+---Returns a list of all recipes using the given ingredient
+---@param item_name string
+---@param item_type? string
+---@return table table List of recipe names
+function recipe_get_byingredient(item_name, item_type)
+  item_type = item_type or get_type(item_name)
+  if data.raw[item_type][item_name] then
+    local recipes = {}
+
+    for recipe_name, data_recipe in pairs(data.raw.recipe) do
+      if yutil.check_table(data_recipe.ingredients) then
+        for _, ingredient in ipairs(data_recipe.ingredients) do
+          if ingredient.name and ingredient.name == item_name then table.insert(recipes, recipe_name)
+          elseif ingredient[1] and ingredient[1] == item_name then table.insert(recipes, recipe_name)
+          end
+        end
+      end
+
+      if data_recipe.normal then
+        if yutil.check_table(data_recipe.normal.ingredients) then
+          for _, ingredient in ipairs(data_recipe.normal.ingredients) do
+            if ingredient.name == item_name then table.insert(recipes, recipe_name) end
+          end
+        end
+      end
+
+      if data_recipe.expensive then
+        if yutil.check_table(data_recipe.expensive.ingredients) then
+          for _, ingredient in ipairs(data_recipe.expensive.ingredients) do
+            if ingredient.name == item_name then table.insert(recipes, recipe_name) end
+          end
+        end
+      end
+    end
+  return recipes
+  else
+    log(" Item not found: "..tostring(item_name))
+  end
+end
+-- log(serpent.block(get_recipes_byingredient("iron-ore")))
+-- log(serpent.block(get_recipes_byingredient("uranium-ore")))
+-- log(serpent.block(get_recipes_byingredient("copper-plate")))
+-- log(serpent.block(get_recipes_byingredient("electric-furnace")))
+-- error("get_recipes_byingredient()")
+
+
+---Returns a table containing the results of the given recipe
+---@param recipe_name string
+---@return table
+function recipe_get_results(recipe_name)
+    local _return = {results={}, normal={}, expensive={}}
+
+  if data.raw.recipe[recipe_name] then
+    local data_recipe = data.raw.recipe[recipe_name]
+
+    if yutil.check_table(data_recipe.results) then
+      for i, result in pairs(data_recipe.results) do
+        _return.results[i] = yutil.add_pairs( result )
+      end
+    elseif data_recipe.result then
+      _return.results[1] = yutil.add_pairs( {data_recipe.result, data_recipe.result_count} )
+    end
+
+    if data_recipe.normal then
+      if yutil.check_table(data_recipe.normal.results) then
+        for i, result in pairs(data_recipe.normal.results) do
+          _return.normal[i] = yutil.add_pairs( result )
+        end
+      elseif data_recipe.normal.result then
+        _return.normal[1] = yutil.add_pairs( {data_recipe.normal.result, data_recipe.normal.result_count} )
+      end
+    end
+
+    if data_recipe.expensive then
+      if yutil.check_table(data_recipe.expensive.results) then
+        for i, result in pairs(data_recipe.expensive.results) do
+          _return.expensive[i] = yutil.add_pairs( result )
+        end
+      elseif data_recipe.expensive.result then
+        _return.expensive[1] = yutil.add_pairs( {data_recipe.expensive.result, data_recipe.expensive.result_count} )
+      end
+    end
+
+  else
+    log(" Recipe not found: "..tostring(recipe_name))
+  end
+  return _return
+end
+-- log(serpent.block( get_recipe_results( "tank" ) ))
+-- log(serpent.block( get_recipe_results( "iron-plate" ) ))
+-- error("get_recipe_results()")
+
+
+---Returns energy_required as a table for normal and expensive
+---@param recipe_name string
+---@return table ``{normal, expensive}``
+function recipe_get_energy_required(recipe_name)
+  local time = {0.5, 0.5}
+  if data.raw.recipe[recipe_name] then
+    local data_recipe = data.raw.recipe[recipe_name]
+    if data_recipe.energy_required then
+      time[1] = data_recipe.energy_required or 0.5
+      time[2] = data_recipe.energy_required or 0.5
+    end
+    if data_recipe.normal then
+      time[1] = data_recipe.normal.energy_required or 0.5
+    end
+    if data_recipe.expensive then
+      time[2] = data_recipe.expensive.energy_required or 0.5
+    end
+  end
+  return time
+end
+-- log(serpent.block( get_energy_required( "tank" ) ))
+-- log(serpent.block( get_energy_required( "iron-plate" ) ))
+-- log(serpent.block( get_energy_required( "iron-gear-wheel" ) ))
+-- error("get_energy_required()")
+
+
+---Returns the input amount of an item. Returns ``nil`` on error
+---@param recipe_name string
+---@param ingredient_name string
+---@return table|nil {normal, expensive}
+function recipe_get_amount_in(recipe_name, ingredient_name)
+  if data.raw.recipe[recipe_name] then
+    local recipe = data.raw.recipe[recipe_name]
+    local amount = {0,0}
+
+    if recipe.ingredients then --add next() check?
+      for _, value in ipairs(recipe.ingredients) do
+        if value.name and value.name == ingredient_name then
+          amount = {value.amount or 1, value.amount or 1}
+        elseif type(value[1]) == "string" and value[1] == ingredient_name then
+          amount = {value[2] or 1, value[2] or 1}
+        end
+      end
+    end
+    if recipe.normal and recipe.normal.ingredients then
+      for _, value in ipairs(recipe.normal.ingredients) do
+        if value.name and value.name == ingredient_name then
+          amount[1] = value.amount or 1
+        elseif type(value[1]) == "string" and value[1] == ingredient_name then
+          amount[1] = value[2] or 1
+        end
+      end
+    end
+    if recipe.expensive and recipe.expensive.ingredients then
+      for _, value in ipairs(recipe.expensive.ingredients) do
+        if value.name and value.name == ingredient_name then
+          amount[2] = value.amount or 1
+        elseif type(value[1]) == "string" and value[1] == ingredient_name then
+          amount[2] = value[2] or 1
+        end
+      end
+    end
+    -- amount[1] = amount[1] > 0 and amount[1] or (amount[2] > 0 and amount[2] or 1)
+    -- amount[2] = amount[2] > 0 and amount[2] or (amount[1] > 0 and amount[1] or 1)
+    return amount
+  end
+  log("Unknown recipe: "..recipe_name)
+  return nil
+end
+-- log(serpent.block( get_recipe_amount_in( "express-splitter", "advanced-circuit" ) )) --10
+-- log(serpent.block( get_recipe_amount_in( "advanced-circuit", "electronic-circuit" ) )) --2
+-- log(serpent.block( get_recipe_amount_in( "steel-plate", "iron-plate" ) )) --5, 10
+-- error("get_recipe_amount_in()")
+
+
+---Returns the output amount of an item. Returns ``nil`` on error
+---@param recipe_name string
+---@param result_name? string can be omitted if recipe and result name are identical
+---@return table|nil {normal, expensive}
+function recipe_get_amount_out(recipe_name, result_name)
+  if data.raw.recipe[recipe_name] then
+    result_name = result_name or recipe_name
+    local results = recipe_get_results(recipe_name)
+    local amount = {0,0}
+
+      if results.results then
+        for _, v in ipairs(results.results) do
+          if v.name == result_name then
+            amount = {v.amount, v.amount}
+          end
+        end
+      end
+      if results.normal then
+        for _, v in ipairs(results.normal) do
+          if v.name == result_name then amount[1] = v.amount end
+        end
+      end
+      if results.expensive then
+        for _, v in ipairs(results.expensive) do
+          if v.name == result_name then amount[2] = v.amount end
+        end
+      end
+    return amount
+  else
+    log("Unknown recipe: "..recipe_name)
+  end
+  return nil
+end
+-- log(serpent.block( get_recipe_amount_out( "tank" ) ))
+-- log(serpent.block( get_recipe_amount_out( "iron-plate" ) ))
+-- log(serpent.block( get_recipe_amount_out( "explosives" ) ))
+-- log(serpent.block( get_recipe_amount_out( "uranium-processing", "uranium-238" ) ))
+-- error("get_recipe_amount_out()")

@@ -37,22 +37,6 @@ tech = "railway"
 technology_add_effect(tech, "molten-rail")
 
 
--- data:extend({
---   {
---     type = "fluid",
---     name = "waste-water",
---     icon = "__Molten_Metals__/graphics/icons/waste-water.png",
---     icon_size = 64, icon_mipmaps = 4,
---     default_temperature = 80,
---     max_temperature = 100,
---     heat_capacity = "0.1KJ",
---     base_color = color.wastewater.base,
---     flow_color = color.wastewater.flow,
---     order = "z"
---   },
--- })
-
-
 --//TODO URANIUM BALANCING :[
 -- SMELTING
 new_smelting_recipe("iron-ore", "iron-plate")
@@ -73,8 +57,8 @@ new_casting_recipe_ext("iron-ore", "rail", {110,110}, {2,2}) --//TODO combined i
 -- table.insert(data.raw.recipe["molten-rail"].ingredients, {type = "item", name = "stone", amount = 1}) -- need fluid mixer soon
 new_casting_recipe("stone", "stone", "stone-brick") -- 12:120:3 -> 4:1 vanilla 2:1
 -- new_casting_recipe_ext("stone", "stone-brick", {40}, {2}) -- 20:1
-new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, get_energy_required("uranium-processing"))
-new_casting_recipe_ext("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, get_energy_required("uranium-processing"))
+new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, recipe_get_energy_required("uranium-processing"))
+new_casting_recipe_ext("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, recipe_get_energy_required("uranium-processing"))
 data.raw.recipe["molten-uranium-238"].normal.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},
@@ -96,27 +80,27 @@ data.raw.recipe["molten-uranium-238"].expensive.results = {
 
 
 -- REPLACE FURNACES
-if settings.startup["ymm-replace-steel-furnace"].value then
-  table.insert(data.raw.recipe["basic-smelter"], get_recipe_ingredients("steel-furnace"))
+if replace_steel_furnace then
+  table.insert(data.raw.recipe["basic-smelter"], recipe_get_ingredients("steel-furnace"))
   data.raw.item["steel-furnace"].flags = {"hidden"}
   data.raw["furnace"]["steel-furnace"].next_upgrade = "basic-smelter"
   data.raw["furnace"]["steel-furnace"].minable.result = "basic-smelter"
   data.raw["furnace"]["stone-furnace"].next_upgrade = "basic-smelter"
-  local steel_furnace = get_recipes_byingredient("steel-furnace")
+  local steel_furnace = recipe_get_byingredient("steel-furnace")
   if #steel_furnace > 0 then
     for i, recipe in ipairs(steel_furnace) do
         recipe_replace_ingredient(recipe, "steel-furnace", "basic-smelter")
     end
   end
 end
-if settings.startup["ymm-replace-electric-furnace"].value then
-  table.insert(data.raw.recipe["advanced-smelter"], get_recipe_ingredients("electric-furnace"))
+if replace_electric_furnace then
+  table.insert(data.raw.recipe["advanced-smelter"], recipe_get_ingredients("electric-furnace"))
   data.raw.item["electric-furnace"].flags = {"hidden"}
   data.raw.item["electric-furnace"].minable_result = "advanced-smelter"
   data.raw.item["electric-furnace"].next_upgrade = "advanced-smelter"
-  local electric_furnace = get_recipes_byingredient("electric-furnace")
+  local electric_furnace = recipe_get_byingredient("electric-furnace")
   if #electric_furnace > 0 then
-    for i, recipe in ipairs(electric_furnace) do
+    for _, recipe in ipairs(electric_furnace) do
         recipe_replace_ingredient(recipe, "electric-furnace", "advanced-smelter")
     end
   end

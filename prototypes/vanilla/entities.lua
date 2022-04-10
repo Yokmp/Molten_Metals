@@ -2,7 +2,6 @@ local sounds = require("__base__.prototypes.entity.sounds")
 local hit_effects = require("__base__.prototypes.entity.hit-effects")
 
 data:extend({
-  --//TODO balancing
   -----------------
   -- FURNACE T2  --
   -----------------
@@ -26,7 +25,7 @@ data:extend({
     close_sound = sounds.machine_close,
     corpse = "chemical-plant-remnants",
     dying_explosion = "chemical-plant-explosion",
-    module_specification = { module_slots = 1 },
+    module_specification = { module_slots = 0 },
     allowed_effects = {"consumption", "speed", "productivity", "pollution"},
     resistances = {
       {
@@ -73,7 +72,7 @@ data:extend({
           filename = "__Molten_Metals__/graphics/entity/basic-smelter/smelter.png",
           priority = "high",
           width = 85,
-          height = 87,
+          height = 85,
           frame_count = 1,
           shift = util.by_pixel(-1.5, 1.5),
           hr_version = {
@@ -251,8 +250,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "advanced-smelter",
-    icon = "__base__/graphics/icons/electric-furnace.png",
-    icon_size = 32,
+    icons = {icons:get("advanced_smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "advanced-smelter"},
     crafting_categories = {categories.smelting},
@@ -352,7 +350,7 @@ data:extend({
           layers =
           {
             {
-              filename = "__base__/graphics/entity/electric-furnace/advanced-smelter-heater.png",
+              filename = "__base__/graphics/entity/electric-furnace/electric-furnace-heater.png",
               priority = "high",
               width = 25,
               height = 15,
@@ -555,13 +553,16 @@ data:extend({
       },
       {
         filename = "__Molten_Metals__/graphics/entity/caster/caster-shadow.png",
-        width = 175,
-        height = 110,
+        priority = "high",
+        width = 156,
+        height = 141,
         frame_count = 1,
         shift = util.by_pixel(31.5, 11),
         draw_as_shadow = true,
-        hr_version = {
+        hr_version =
+        {
           filename = "__Molten_Metals__/graphics/entity/caster/hr-caster-shadow.png",
+          priority = "high",
           width = 350,
           height = 219,
           frame_count = 1,
@@ -569,7 +570,8 @@ data:extend({
           draw_as_shadow = true,
           scale = 0.5
         }
-      }}
+      },
+    }
   	}),
   	working_visualisations = {
       {
@@ -877,13 +879,16 @@ data:extend({
         },
         {
           filename = "__Molten_Metals__/graphics/entity/caster/caster-shadow.png",
-          width = 175,
-          height = 110,
+          priority = "high",
+          width = 156,
+          height = 141,
           frame_count = 1,
           shift = util.by_pixel(31.5, 11),
           draw_as_shadow = true,
-          hr_version = {
+          hr_version =
+          {
             filename = "__Molten_Metals__/graphics/entity/caster/hr-caster-shadow.png",
+            priority = "high",
             width = 350,
             height = 219,
             frame_count = 1,
