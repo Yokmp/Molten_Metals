@@ -73,7 +73,7 @@ end
 ---@param result? string must be set if recipe and result names differ; used to calc the output amount
 ---@param enabled? boolean
 ---@param multiplier? number 3 - applied to ingredients and results
-function new_smelting_recipe(ore_name, recipe_name, result, enabled, multiplier) --BUG needs result to calc amount
+function new_smelting_recipe(ore_name, recipe_name, result, enabled, multiplier) --!-//BUG needs result to calc amount
   multiplier = multiplier or 3
   result = result or recipe_name
   local amount_in = recipe_get_amount_in(recipe_name, ore_name)

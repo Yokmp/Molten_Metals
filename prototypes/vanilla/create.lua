@@ -37,12 +37,11 @@ tech = "railway"
 technology_add_effect(tech, "molten-rail")
 
 
---//TODO URANIUM BALANCING :[
 -- SMELTING
 new_smelting_recipe("iron-ore", "iron-plate")
 new_smelting_recipe("copper-ore", "copper-plate")
 new_smelting_recipe("stone", "stone-brick")
-new_smelting_recipe("uranium-ore", "uranium-processing", "uranium-238")
+new_smelting_recipe("uranium-ore", "uranium-processing", "uranium-238", false, 1)
 
 
 -- CASTING
@@ -57,8 +56,9 @@ new_casting_recipe_ext("iron-ore", "rail", {110,110}, {2,2}) --//TODO combined i
 -- table.insert(data.raw.recipe["molten-rail"].ingredients, {type = "item", name = "stone", amount = 1}) -- need fluid mixer soon
 new_casting_recipe("stone", "stone", "stone-brick") -- 12:120:3 -> 4:1 vanilla 2:1
 -- new_casting_recipe_ext("stone", "stone-brick", {40}, {2}) -- 20:1
+
+new_casting_recipe_ext("uranium-ore", "uranium-235", {2000,2000}, {1,1}, recipe_get_energy_required("uranium-processing"))
 new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, recipe_get_energy_required("uranium-processing"))
-new_casting_recipe_ext("uranium-ore", "uranium-235", {28571.4285714286/2,28571.4285714286/2}, {1,1}, recipe_get_energy_required("uranium-processing"))
 data.raw.recipe["molten-uranium-238"].normal.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},
@@ -70,6 +70,7 @@ data.raw.recipe["molten-uranium-238"].expensive.results = {
   {type = "fluid", name = "steam", amount = 200, temperature = 165}
 }
 
+-- https://mods.factorio.com/mod/Molten_Metals/discussion/6256ffdaf68fa4a923a6fe3b
 -- out/probability = multiplier
 -- 1.00704934541793
 -- 142.857142857143
