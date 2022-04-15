@@ -1,20 +1,14 @@
 # A small Factorio mod which adds molten ores.
-
-This Mod is written under Factorio 1.1.33.
-It inserts its data in the data-updates stage.
 The Steel and Electric Furnaces are replaced by this mods smelters which are Assembling Machine types.
-This means that if other Mods add recipes for furnaces they won't be accessible.
+This means that if other Mods add recipes for furnaces they maybe won't be accessible.
 There is a setting which disables the furnace replacement.
-At he moment only "vanilla-ores" (iron and copper) are affected (modded ones are added over time).
+At the moment only "vanilla-ores" (iron and copper) and a few modded ones are affected.
 If you want to add ores from other mods just take a look at mods/bz-mods.lua.
 
 ![screenshot_2](shot_02.png)
 
-## Updates
-* Initial release
-
 ## Known Issues
-* None yet
+* Uranium mechanic is bad
 
 ## Languages
 * english
@@ -22,12 +16,8 @@ If you want to add ores from other mods just take a look at mods/bz-mods.lua.
 
 ## ToDo
 * [ ] Balancing
-* [x] better Icons
-* [x] Techtree adjustments
-* [x] Options/Settings
 * [ ] Fluid Mixer
-* [ ] Additional recipes (maybe)
+* [ ] ylib implementation
 
 ## How to contribute?
-
 Please use the Issues page and share your bugy, suggestions and/or code.
