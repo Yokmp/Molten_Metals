@@ -6,6 +6,6 @@
   "contact": "yokmp.sfgmail.com",
   "factorio_version": "1.1",
   "homepage": "https://github.com/Yokmp/Molten_Metals",
-  "dependencies": ["base >= 1.0.0", "?Fluid_Mixer"],
+  "dependencies": ["base >= 1.0.0", "? Fluid_Mixer", "? ylib"],
   "description": "Ores now need to be molten and casted."
 }
