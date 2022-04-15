@@ -41,7 +41,14 @@ technology_add_effect(tech, "molten-rail")
 new_smelting_recipe("iron-ore", "iron-plate")
 new_smelting_recipe("copper-ore", "copper-plate")
 new_smelting_recipe("stone", "stone-brick")
-new_smelting_recipe("uranium-ore", "uranium-processing", "uranium-238", false, 1)
+new_smelting_recipe("uranium-ore", "uranium-processing", "uranium-238", false, 1) --//TODO BALANCING!!!!
+for _, value in pairs(data.raw.recipe["molten-uranium-ore"].normal.results) do
+  if value.name == "molten-uranium-ore" then value.amount = 400 end
+end
+for _, value in pairs(data.raw.recipe["molten-uranium-ore"].expensive.results) do
+  if value.name == "molten-uranium-ore" then value.amount = 400 end
+end
+-- new_smelting_recipe("uranium-ore", "uranium-processing", "uranium-238")
 
 
 -- CASTING

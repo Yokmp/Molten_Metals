@@ -74,7 +74,7 @@ end
 ---@param enabled? boolean
 ---@param multiplier? number 3 - applied to ingredients and results
 function new_smelting_recipe(ore_name, recipe_name, result, enabled, multiplier) --!-//BUG needs result to calc amount
-  multiplier = multiplier or 3
+  multiplier = multiplier or 3 --!-//BUG ratio isnt preserved correctly (eg uranium)
   result = result or recipe_name
   local amount_in = recipe_get_amount_in(recipe_name, ore_name)
   local amount_out = recipe_get_amount_out(recipe_name, result)
