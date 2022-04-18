@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2022-04-18
+  Changes:
+    - fixed working sound volume of both casters
+    - adjusted pollution of smelters and casters
+    - added new sound pattern to both casters
+---------------------------------------------------------------------------------------------------
 Version: 0.1.5
 Date: 2022-04-15
   Changes:

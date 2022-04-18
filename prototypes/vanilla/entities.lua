@@ -289,7 +289,7 @@ data:extend({
 		energy_source = {
 			type = "electric",
 			usage_priority = "secondary-input",
-			emissions = 0.03 / 3.5,
+      emissions_per_minute = 1,
 			smoke =	{
 				{
 					name = "smoke",
@@ -521,18 +521,26 @@ data:extend({
       }
     },
     working_sound = {
-      sound = { {
-        filename = "__base__/sound/chemical-plant.ogg",
-        volume = 0.8
-      } },
-      idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.6 },
+      sound = { 
+        {
+          filename = "__base__/sound/chemical-plant.ogg",
+          volume = 0.5
+        },
+        {
+          filename = "__base__/sound/centrifuge-1.ogg",
+          volume = 0.5
+        },
+      },
+      idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.35 },
       apparent_volume = 1.5,
+      fade_in_ticks = 2,
+      fade_out_ticks = 20
     },
     energy_usage = "225kW",
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
-      emissions = 0.03 / 3.5,
+      emissions_per_minute = 3,
     },
     animation = make_4way_animation_from_spritesheet({
       layers = {
@@ -847,18 +855,26 @@ data:extend({
       }
     },
     working_sound = {
-      sound = { {
-        filename = "__base__/sound/chemical-plant.ogg",
-        volume = 0.8
-      } },
-      idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.6 },
+      sound = { 
+        {
+          filename = "__base__/sound/chemical-plant.ogg",
+          volume = 0.5
+        },
+        {
+          filename = "__base__/sound/centrifuge-1.ogg",
+          volume = 0.5
+        },
+      },
+      idle_sound = { filename = "__base__/sound/idle1.ogg", volume = 0.35 },
       apparent_volume = 1.5,
+      fade_in_ticks = 4,
+      fade_out_ticks = 20
     },
     energy_usage = "275kW",
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
-      emissions = 0.03 / 3.5,
+      emissions_per_minute = 2,
     },
     animation = make_4way_animation_from_spritesheet({
       layers = {
