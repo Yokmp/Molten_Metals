@@ -1,20 +1,4 @@
----@class icon
----@field icon string
----@field icon_size integer
----@field icon_mipmaps integer
----@field scale number
----@field shift vector
----@field tint color
-
----@class vector
----@field table number
-
----@class color
----@field r number
----@field g number
----@field b number
----@field a number
-
+--//TODO move table into ylib.icon.icons
 
 ---@type icon
 icon_prototype = {
@@ -91,43 +75,20 @@ icons["copper-ore"]   = icons.molten_copper
 icons["stone"]        = icons.molten_stone
 icons["uranium-ore"]  = icons.molten_uranium
 
--- setmetatable(icons, {__index = function (self) return self.missing end})
 
 
-
----Returns the icon as table from an item
----@param item_name string
----@return icon|nil
-function get_icon_from_item(item_name)  --//TODO icons.lua intergation
-  local icon
-  local _item = data.raw.item[item_name]
-  if _item then
-    icon = {}
-    if _item.icon then
-      icon.icon = _item.icon
-      icon.icon_size = _item.icon_size
-      icon.icon_mipmaps = _item.icon_mipmaps or 0
-    -- elseif _item.main_product then --//?search recipes too?
-    --   icon =  get_icon_from_item(_item.main_product)
-    elseif _item.icons then
-      icon = _item.icons[1]
-    end
-      if logging then log("Using icon: "..item_name.." - "..icon.icon) end
-  end
-  return icon
-end
 
 
 ---Returns a table containing icon definitions
 ---@param icon_top icon|string use icons:get() if possible, can work on strings
 ---@param icon_bottom? icon defaults to molten_drop (based on icon_top.icon_size)
 ---@param shift? table default ``{{0,0}, {0,5}}``
-function get_composed_icon(icon_top, icon_bottom, scale, shift) --//*FIXME drop scaling, should consider making custom icons per metal
+function molten_metals.get_composed_icon(icon_top, icon_bottom, scale, shift) --//*FIXME drop scaling, should consider making custom icons per metal
   scale = scale or 0.5
   shift = shift or 0
 
   if type(icon_top) == "string" then
-    icon_top = get_icon_from_item(icon_top) or icons:get(icon_top)
+    icon_top = ylib.icon.get_icon_from_item(icon_top) or icons:get(icon_top)
   end
 
   local function determine_icon_by_type()

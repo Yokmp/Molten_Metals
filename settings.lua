@@ -2,82 +2,80 @@ local ores = {"iron-ore", "copper-ore", "stone", "uranium-ore"}
 
 -- brevven
 if mods["bzaluminum"] then
-    table.insert(ores, "aluminum-ore")
+  table.insert(ores, "aluminum-ore")
 end
 if mods["bztitanium"] then
-    table.insert(ores, "titanium-ore")
+  table.insert(ores, "titanium-ore")
 end
 if mods["bzlead"] then
-    table.insert(ores, "lead-ore")
+  table.insert(ores, "lead-ore")
 end
 if mods["bztungsten"] then
-    table.insert(ores, "tungsten-ore")
+  table.insert(ores, "tungsten-ore")
 end
 -- SILICA?
 
 
 for i, name in ipairs(ores) do
-    data:extend({
-        {
-            type = "bool-setting",
-            name = "ymm-use-"..name,
-            setting_type = "startup",
-            default_value = true,
-            order = "d"..i,
-            localised_name = {"", "[item="..name.."]", " - ", {"item-name."..name}, " ", {"item-name.smelting"}},
-            -- localised_description = {"", {"item-name.smelts"}, " ",
-            --                              {"item-name."..name}, " ",
-            --                              {"item-name.into"}, " ",
-            --                              {"item-name.molten"}, " ",
-            --                              {"item-name."..name},},
-        }
-    })
-end
-
-
 data:extend({
   {
-      type = "string-setting",
-      name = "ymm-logging",
-      setting_type = "startup",
-      default_value = "none",
-      allowed_values = {"warning", "all", "none"},
-      order = "aa"
+    type = "bool-setting",
+    name = "ymm-use-"..name,
+    setting_type = "startup",
+    default_value = true,
+    order = "d"..i,
+    localised_name = {"", "[item="..name.."]", " - ", {"item-name."..name}, " ", {"item-name.smelting"}},
+    -- localised_description = {"", {"item-name.smelts"}, " ",
+    --                              {"item-name."..name}, " ",
+    --                              {"item-name.into"}, " ",
+    --                              {"item-name.molten"}, " ",
+    --                              {"item-name."..name},},
+  }
+})
+end
+
+local autofill = {
+    type = "bool-setting",
+    name = "ymm-allow-barreling",
+    setting_type = "startup",
+    default_value = false,
+    order = "ab",
+    hidden = true
+  }
+
+if mods["Fluid_Mixer"] then
+  autofill.hidden = false
+end
+
+data:extend({
+  autofill,
+  {
+    type = "bool-setting",
+    name = "ymm-enable-slag",
+    setting_type = "startup",
+    default_value = true,
+    order = "b"
   },
   {
-      type = "bool-setting",
-      name = "ymm-allow-barreling",
-      setting_type = "startup",
-      default_value = false,
-      order = "ab"
+    type = "bool-setting",
+    name = "ymm-replace-steel-furnace",
+    setting_type = "startup",
+    default_value = true,
+    order = "c"
   },
   {
-      type = "bool-setting",
-      name = "ymm-enable-slag",
-      setting_type = "startup",
-      default_value = true,
-      order = "b"
+    type = "bool-setting",
+    name = "ymm-replace-electric-furnace",
+    setting_type = "startup",
+    default_value = true,
+    order = "d"
   },
   {
-      type = "bool-setting",
-      name = "ymm-replace-steel-furnace",
-      setting_type = "startup",
-      default_value = true,
-      order = "c"
-  },
-  {
-      type = "bool-setting",
-      name = "ymm-replace-electric-furnace",
-      setting_type = "startup",
-      default_value = true,
-      order = "d"
-  },
-  {
-      type = "bool-setting",
-      name = "ymm-use-old-icons",
-      setting_type = "startup",
-      default_value = false,
-      order = "e"
+    type = "bool-setting",
+    name = "ymm-use-old-icons",
+    setting_type = "startup",
+    default_value = false,
+    order = "e"
   },
 })
 

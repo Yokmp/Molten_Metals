@@ -49,7 +49,7 @@ end
 function technology_add_effect(technology_name, recipe_name)
   if data.raw.technology[technology_name] and data.raw.technology[technology_name].effects then
     table.insert(data.raw.technology[technology_name].effects, { type = "unlock-recipe", recipe = recipe_name })
-    if logging then log("added "..recipe_name.." to ".. technology_name) end
+    info("added "..recipe_name.." to ".. technology_name)
   else
     log("Unknown technology or missing key: "..tostring(technology_name))
   end
@@ -63,7 +63,7 @@ function technology_remove_effect(technology_name, recipe_name)
     for index, value in ipairs(data.raw.technology[technology_name].effects) do
       if value.recipe == recipe_name then
         table.remove(data.raw.technology[technology_name].effects, index)
-        if logging then log("removed "..recipe_name.." from ".. technology_name) end
+        info("removed "..recipe_name.." from ".. technology_name)
       end
     end
   else
@@ -128,7 +128,7 @@ function technology_get_prerequisites(tech_name)
   if data.raw.technology[tech_name] then
     return util.table.deepcopy(data.raw.technology[tech_name].prerequisites)
   end
-  if logging then log("Technology "..tech_name.." has no prerequisites!") end
+  info("Technology "..tech_name.." has no prerequisites!")
   return {}
 end
 

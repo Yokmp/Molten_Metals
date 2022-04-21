@@ -136,7 +136,7 @@ data:extend({
     allow_intermediates = false,
     hidden = false,
     enabled = false,
-    crafting_machine_tint = yutil.color.wastewater.tint,
+    crafting_machine_tint = molten_metals.color.wastewater.tint,
     ingredients = {
       {type = "item", name = "slag-stone", amount = 10}
     },
@@ -168,7 +168,7 @@ data:extend({
     allow_intermediates = false,
     hidden = false,
     enabled = false,
-    crafting_machine_tint = yutil.color.wastewater.tint,
+    crafting_machine_tint = molten_metals.color.wastewater.tint,
     ingredients = {
       {type = "item", name = "slag-pellet", amount = 15},
       {type = "fluid", name = "sulfuric-acid", amount = 35}

@@ -13,14 +13,14 @@ function new_smelting_recipe_ext(ore_name, amount_in, amount_out, energy, enable
   amount_out = amount_out or {40,40}
   energy = energy or {0.5,0.5} --{3.2,3.2}
   enabled = enabled or {false, false}
-  local temperature = yutil.ore_definition(ore_name).min
+  local temperature = molten_metals.ore_definition(ore_name).min
   -- info("New molten-"..ore_name.." {"..amount_in[1]..", "..amount_in[2].."},".." {"..amount_out[1]..", "..amount_out[2].."}")
 
   local recipe =  {
     type = "recipe",
     name = "molten-"..ore_name,
     localised_name = {"", {"item-name."..ore_name}, " ", {"item-name.smelting"}},
-    category = categories.smelting,
+    category = category.smelting,
     allow_as_intermediate = false,
     allow_intermediates = false,
     hidden = false,
@@ -28,7 +28,7 @@ function new_smelting_recipe_ext(ore_name, amount_in, amount_out, energy, enable
     show_amount_in_title = true,
     always_show_products = true,
     order = "m[molten-"..ore_name.."]",
-    crafting_machine_tint = yutil.color.moltenmetal.tint,
+    crafting_machine_tint = molten_metals.color.moltenmetal.tint,
     normal = {
       main_product = "molten-"..ore_name,
       enabled = enabled[1],
@@ -100,7 +100,7 @@ function new_casting_recipe_ext(fluid_name, result_name, amount_in, amount_out, 
   amount_out = amount_out or (recipe_get_amount_out(result_name) or {1,1})
   energy = energy or {0.5,0.5} --vanilla default
   enabled = enabled or {false, false}
-  temperature = yutil.ore_definition(fluid_name).min
+  temperature = molten_metals.ore_definition(fluid_name).min
   -- info("New "..fluid_name.." casting".." {"..amount_in[1]..", "..amount_in[2].."}"..
   -- " into "..result_name.." {"..amount_out[1]..", "..amount_out[2].."}")
 
@@ -108,7 +108,7 @@ data:extend({{
   type = "recipe",
   name = "molten-"..result_name,
   localised_name = {"", {"item-name."..result_name}, " ", {"item-name.casting"}},
-  category = categories.casting,
+  category = category.casting,
   show_amount_in_title = true,
   allow_as_intermediate = false,
   allow_intermediates = false,
@@ -116,7 +116,7 @@ data:extend({{
   hide_from_player_crafting = true,
   always_show_products = true,
   order = "m[molten-"..result_name.."]",
-  crafting_machine_tint = yutil.color.moltenmetal.tint,
+  crafting_machine_tint = molten_metals.color.moltenmetal.tint,
   normal = {
     main_product = result_name,
     enabled = enabled[1],
@@ -193,7 +193,7 @@ function recipe_set_enabled(recipe_name, enabled)
   if data.raw.recipe[recipe_name] then
     data.raw.recipe[recipe_name].normal.enabled = enabled[1]
     data.raw.recipe[recipe_name].expensive.enabled = enabled[2]
-    if logging then log(recipe_name.." enabled: ".. tostring(enabled[1]) ..", ".. tostring(enabled[2])) end
+    info(recipe_name.." enabled: ".. tostring(enabled[1]) ..", ".. tostring(enabled[2]))
   else
     log("Unknown recipe: "..tostring(recipe_name))
   end
@@ -381,19 +381,19 @@ function recipe_get_ingredients(recipe_name)
     if data_recipe.ingredients and data_recipe.ingredients then
       ingredients.ingredients = {}
       for i, ingredient in ipairs(data_recipe.ingredients) do
-        ingredients.ingredients[i] = yutil.add_pairs(ingredient)
+        ingredients.ingredients[i] = ylib.util.add_pairs(ingredient)
       end
     end
     if data_recipe.normal and data_recipe.normal.ingredients then
       ingredients.normal = {}
       for i, ingredient in ipairs(data_recipe.normal.ingredients) do
-        ingredients.normal[i] = yutil.add_pairs(ingredient)
+        ingredients.normal[i] = ylib.util.add_pairs(ingredient)
       end
     end
     if data_recipe.expensive and data_recipe.expensive.ingredients then
       ingredients.expensive = {}
       for i, ingredient in ipairs(data_recipe.expensive.ingredients) do
-        ingredients.expensive[i] = yutil.add_pairs(ingredient)
+        ingredients.expensive[i] = ylib.util.add_pairs(ingredient)
       end
     end
     return ingredients
@@ -412,12 +412,12 @@ end
 ---@param item_type? string
 ---@return table table List of recipe names
 function recipe_get_byingredient(item_name, item_type)
-  item_type = item_type or get_type(item_name)
+  item_type = item_type or ylib.util.get_item_type(item_name)
   if data.raw[item_type][item_name] then
     local recipes = {}
 
     for recipe_name, data_recipe in pairs(data.raw.recipe) do
-      if yutil.check_table(data_recipe.ingredients) then
+      if ylib.util.check_table(data_recipe.ingredients) then
         for _, ingredient in ipairs(data_recipe.ingredients) do
           if ingredient.name and ingredient.name == item_name then table.insert(recipes, recipe_name)
           elseif ingredient[1] and ingredient[1] == item_name then table.insert(recipes, recipe_name)
@@ -426,7 +426,7 @@ function recipe_get_byingredient(item_name, item_type)
       end
 
       if data_recipe.normal then
-        if yutil.check_table(data_recipe.normal.ingredients) then
+        if ylib.util.check_table(data_recipe.normal.ingredients) then
           for _, ingredient in ipairs(data_recipe.normal.ingredients) do
             if ingredient.name == item_name then table.insert(recipes, recipe_name) end
           end
@@ -434,7 +434,7 @@ function recipe_get_byingredient(item_name, item_type)
       end
 
       if data_recipe.expensive then
-        if yutil.check_table(data_recipe.expensive.ingredients) then
+        if ylib.util.check_table(data_recipe.expensive.ingredients) then
           for _, ingredient in ipairs(data_recipe.expensive.ingredients) do
             if ingredient.name == item_name then table.insert(recipes, recipe_name) end
           end
@@ -462,31 +462,31 @@ function recipe_get_results(recipe_name)
   if data.raw.recipe[recipe_name] then
     local data_recipe = data.raw.recipe[recipe_name]
 
-    if yutil.check_table(data_recipe.results) then
+    if ylib.util.check_table(data_recipe.results) then
       for i, result in pairs(data_recipe.results) do
-        _return.results[i] = yutil.add_pairs( result )
+        _return.results[i] = ylib.util.add_pairs( result )
       end
     elseif data_recipe.result then
-      _return.results[1] = yutil.add_pairs( {data_recipe.result, data_recipe.result_count} )
+      _return.results[1] = ylib.util.add_pairs( {data_recipe.result, data_recipe.result_count} )
     end
 
     if data_recipe.normal then
-      if yutil.check_table(data_recipe.normal.results) then
+      if ylib.util.check_table(data_recipe.normal.results) then
         for i, result in pairs(data_recipe.normal.results) do
-          _return.normal[i] = yutil.add_pairs( result )
+          _return.normal[i] = ylib.util.add_pairs( result )
         end
       elseif data_recipe.normal.result then
-        _return.normal[1] = yutil.add_pairs( {data_recipe.normal.result, data_recipe.normal.result_count} )
+        _return.normal[1] = ylib.util.add_pairs( {data_recipe.normal.result, data_recipe.normal.result_count} )
       end
     end
 
     if data_recipe.expensive then
-      if yutil.check_table(data_recipe.expensive.results) then
+      if ylib.util.check_table(data_recipe.expensive.results) then
         for i, result in pairs(data_recipe.expensive.results) do
-          _return.expensive[i] = yutil.add_pairs( result )
+          _return.expensive[i] = ylib.util.add_pairs( result )
         end
       elseif data_recipe.expensive.result then
-        _return.expensive[1] = yutil.add_pairs( {data_recipe.expensive.result, data_recipe.expensive.result_count} )
+        _return.expensive[1] = ylib.util.add_pairs( {data_recipe.expensive.result, data_recipe.expensive.result_count} )
       end
     end
 

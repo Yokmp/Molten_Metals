@@ -1,22 +1,17 @@
 -- require('__debugadapter__/debugadapter.lua')
 
-logging = settings.startup["ymm-logging"].value
-require("util.logger")
-
+molten_metals = {}
 ---create the categories for molten metals
-categories = {smelting="ymm_smelting", casting="ymm_casting"}
+category = {smelting="ymm_smelting", casting="ymm_casting"}
 data:extend({
-  { type = "recipe-category", name = categories.smelting, },
-  { type = "recipe-category", name = categories.casting },
+  { type = "recipe-category", name = category.smelting, },
+  { type = "recipe-category", name = category.casting },
 })
 
 require("util.icons")
-yutil = require("util.util")
+require("util.util")
 require("util.functions")
-blacklist = {
-  ores = {"coal"},
-  recipes = {"concrete"}
-}
+blacklist = { ores = {"coal"}, recipes = {"concrete"} }
 ore = get_minable_resouces()
 
 require("util.fluids")

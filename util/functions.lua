@@ -13,28 +13,6 @@
 -- }
 
 
----Returns the type
----@param name string
----@return string
-function get_type(name)
-  local type_name = nil
-  if type(name) == "string" then
-    local type_list = {
-      "ammo", "armor", "capsule", "fluid", "gun", "item", "mining-tool", "repair-tool", "module", "tool",
-      "item-with-entity-data", "rail-planner", "item-with-label", "item-with-inventory", "blueprint-book",
-      "item-with-tags", "selection-tool", "blueprint", "copy-paste-tool", "deconstruction-item", "upgrade-item",
-      "spidertron-remote"
-    }
-    for _, _t in pairs(type_list) do
-      if data.raw[_t][name] then type_name = _t end
-    end
-  else
-    log("Parameter Name is not a string")
-  end
-  return type_name
-end
-
-
 ---returns a table containing all minable recources(*basic-solid only!*); removes the ones specified in the **blacklist**
 ---@param filter? boolean
 ---@return table

@@ -11,7 +11,7 @@ data:extend({
     icons = {icons:get("basic_smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "basic-smelter"},
-    crafting_categories = {categories.smelting},
+    crafting_categories = {category.smelting},
     fast_replaceable_group = "furnace",
     collision_box = {{ -0.7, -0.7}, {0.7, 0.7}},
     selection_box = {{ -0.8, -1  }, {0.8, 1  }},
@@ -220,7 +220,7 @@ data:extend({
         -- minimum_temperature = 150.0,
   			-- maximum_temperature = 1500.0,
         pipe_covers = pipecoverspictures(),
-        pipe_picture = yutil.assembler1pipepictures(),
+        pipe_picture = ylib.util.assembler1pipepictures(),
         base_area = 2, -- 1 = 100
         base_level = 1,
         pipe_connections =
@@ -253,7 +253,7 @@ data:extend({
     icons = {icons:get("advanced_smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "advanced-smelter"},
-    crafting_categories = {categories.smelting},
+    crafting_categories = {category.smelting},
     fast_replaceable_group = "furnace",
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
@@ -465,7 +465,7 @@ data:extend({
         -- minimum_temperature = 1100.0,
   			-- maximum_temperature = 3000.0,
         pipe_covers = pipecoverspictures(),
-        pipe_picture = yutil.assembler1pipepictures(),
+        pipe_picture = ylib.util.assembler1pipepictures(),
         base_level = 1,
         pipe_connections =
         {
@@ -473,7 +473,7 @@ data:extend({
         }
       }
     },
-     water_reflection = {
+    water_reflection = {
       pictures =
       {
         filename = "__base__/graphics/entity/electric-furnace/electric-furnace-reflection.png",
@@ -498,7 +498,7 @@ data:extend({
     icons = {icons:get("basic_caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "basic-caster"},
-    crafting_categories = {categories.casting},
+    crafting_categories = {category.casting},
     fast_replaceable_group = "assembling-machine",
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
@@ -832,7 +832,7 @@ data:extend({
     icons = {icons:get("advanced_caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "advanced-caster"},
-    crafting_categories = {categories.casting},
+    crafting_categories = {category.casting},
     fast_replaceable_group = "assembling-machine",
     collision_box = {{ - 1.2, - 1.2}, {1.2, 1.2}},
     selection_box = {{ - 1.5, - 1.5}, {1.5, 1.5}},
