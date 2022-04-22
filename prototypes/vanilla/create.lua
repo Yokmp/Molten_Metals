@@ -113,12 +113,3 @@ if replace_electric_furnace then
     end
   end
 end
-
-if mods["Fluid_Mixer"] then
-  ylib.icon.icons:add("Molten_Metals", "graphics/technology", "hot-barrels", 128, 0 , 1)
-  local icons = {ylib.icon.icons:get("Molten_Metals", "hot-barrels")}
-  local prerequisites = {"fluid-handling"}
-  local ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}
-  fluid_mixer.new_mix_technology("hot-barrels", icons, prerequisites, ingredients)
-
-end

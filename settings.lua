@@ -33,10 +33,11 @@ data:extend({
   }
 })
 end
-
+-- hot-barrel-symbol
 local autofill = {
     type = "bool-setting",
     name = "ymm-allow-barreling",
+    localised_name = {"", "[img=hot-barrel-symbol]", " - ", {"mod-setting-name.ymm-allow-barreling"}},
     setting_type = "startup",
     default_value = false,
     order = "ab",

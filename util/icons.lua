@@ -83,12 +83,12 @@ icons["uranium-ore"]  = icons.molten_uranium
 ---@param icon_top icon|string use icons:get() if possible, can work on strings
 ---@param icon_bottom? icon defaults to molten_drop (based on icon_top.icon_size)
 ---@param shift? table default ``{{0,0}, {0,5}}``
-function molten_metals.get_composed_icon(icon_top, icon_bottom, scale, shift) --//*FIXME drop scaling, should consider making custom icons per metal
+function molten_metals.get_composed_icon(icon_top, icon_bottom, scale, shift) --//TODO util.combine_icons()
   scale = scale or 0.5
   shift = shift or 0
 
   if type(icon_top) == "string" then
-    icon_top = ylib.icon.get_icon_from_item(icon_top) or icons:get(icon_top)
+    icon_top = ylib.icon.get_item_icon(icon_top) or icons:get(icon_top) --//*FIXME drop scaling, should consider making custom icons per metal
   end
 
   local function determine_icon_by_type()
@@ -105,3 +105,17 @@ function molten_metals.get_composed_icon(icon_top, icon_bottom, scale, shift) --
 
   return {icon_top, icon_bottom}
 end
+
+
+
+data:extend({
+  {
+    type = "sprite",
+    name = "hot-barrel-symbol",
+    filename = "__Molten_Metals__/graphics/icons/hot-barrel-symbol.png",
+    priority = "extra-high",
+    width = 64,
+    height = 64,
+    shift = {0,0}
+  },
+})

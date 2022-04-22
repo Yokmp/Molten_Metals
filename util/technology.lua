@@ -155,8 +155,8 @@ end
 ---@param scale? number multiplier
 ---@param shift? table
 ---@return table
-function technology_icon_compose(icon_name, size, scale, shift)
-  local icon = get_icon_from_item(icon_name)
+function technology_icon_compose(icon_name, size, scale, shift) --//TODO ylib.icon.icons:get()
+  local icon = ylib.icon.get_item_icon(icon_name)
   size = size or 128
   scale = scale or (icon.icon_size/size)
   return {

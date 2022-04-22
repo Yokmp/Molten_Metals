@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.7
+Date: 2022-04-24
+  Changes:
+    - added ylib dependency
+    - supports barreling through fluid mixer
+    - many adjustments to icon handling and name generation
+    - reduced modsize from 5 MB to ~600 kB
+---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 2022-04-18
   Changes:
