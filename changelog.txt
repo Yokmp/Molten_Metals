@@ -1,6 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.8
+Date: 2022-04-23
+  Changes:
+    - fixed slag-pellet spelling
+---------------------------------------------------------------------------------------------------
 Version: 0.1.7
-Date: 2022-04-24
+Date: 2022-04-23
   Changes:
     - added ylib dependency
     - supports barreling through fluid mixer (option available when fluid mixer is enabled)
