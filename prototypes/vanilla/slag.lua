@@ -22,7 +22,7 @@ data:extend({
   {
     type = "item",
     name = "slag-pellet",
-    icons = {ylib.icon.icons:get("Molten_Metals", "slag-spellet")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "slag-pellet")},
     subgroup = "intermediate-product",
     order = "c[iron-gear-wheel]",
     stack_size = 200
@@ -126,7 +126,7 @@ data:extend({
   {
     type = "recipe",
     name = "slag-pellet",
-    icons = {ylib.icon.icons:get("Molten_Metals", "slag-spellet")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "slag-pellet")},
     category = "crafting",
     subgroup = "intermediate-product",
     energy_required = 1,
