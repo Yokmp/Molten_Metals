@@ -14,7 +14,6 @@ if mods["bzaluminum"] and settings.startup["ymm-use-aluminum-ore"].value then --
 
   tech = "aluminium-casting"
   new_technology(tech, "aluminum-6061", "advanced-material-processing", "alumina") --2219
-  data.raw.technology[tech].icons = {ylib.icon.icons:get(tech)}
   technology_add_effect(tech, "molten-aluminum-ore")  --ingredient
   technology_add_effect(tech, "molten-alumina")       --result
 end
@@ -27,7 +26,6 @@ if mods["bzlead"] and settings.startup["ymm-use-lead-ore"].value then
 
   tech = "lead-casting"
   new_technology(tech, "lead-plate", "advanced-material-processing")
-  data.raw.technology[tech].icons = {ylib.icon.icons:get(tech)}
   technology_add_effect(tech, "molten-lead-ore")
   technology_add_effect(tech, "molten-lead-plate")
 end
@@ -39,6 +37,7 @@ if mods["bztitanium"] and settings.startup["ymm-use-titanium-ore"].value then --
   new_casting_recipe(ore, ore, "titanium-plate")
 
   tech = "titanium-processing"
+  data.raw.technology[tech].icons = technology_molten_icon(tech, "titanium-plate")
   technology_add_effect(tech, "molten-titanium-ore")
   technology_add_effect(tech, "molten-titanium-plate")
 end
@@ -53,6 +52,7 @@ if mods["bztungsten"] and settings.startup["ymm-use-tungsten-ore"].value then
   -- new_casting_recipe(ore, "tungsten-plate", "rocket-engine-nozzle")--{5,5})
 
   tech = "tungsten-processing"
+  data.raw.technology[tech].icons = technology_molten_icon(tech, "tungsten-plate")
   technology_add_effect(tech, "molten-tungsten-ore")
   technology_add_effect(tech, "molten-tungsten-plate")
   technology_add_effect(tech, "molten-tungsten-carbide")

@@ -1,7 +1,7 @@
 --icon table
 
 ylib.icon.icons:add("Molten_Metals", "graphics/technology", "hot-barrel-tech", 128, 0 , 1)
-ylib.icon.icons:add("Molten_Metals", "graphics/technology", "molten-drop", 128, 0, 1)
+ylib.icon.icons:add("Molten_Metals", "graphics/technology", "molten-drop-tech", 128, 0, 1)
 ylib.icon.icons:add("Molten_Metals", "graphics/technology", "smelting", 128, 0, 1)
 ylib.icon.icons:add("Molten_Metals", "graphics/technology", "advanced-smelting", 128, 0, 1)
 ylib.icon.icons:add("Molten_Metals", "graphics/technology", "iron-casting", 128, 0, 1)

@@ -18,7 +18,7 @@ function new_technology_ext(tech_name, icon_name, prerequisites, ingredient, loc
       type = "technology",
       name = tech_name,
       localised_name = {"", {"item-name."..localized_name}, " ", {"item-name.casting"}},
-      icons = technology_molten_icon(icon_name),
+      icons = technology_molten_icon(tech_name, icon_name),
       effects = {},
       prerequisites = prerequisites,
       unit =
@@ -150,27 +150,21 @@ end
 
 
 ---Returns icons for technology
----@param icon_name string returns ``icons.missing`` if item not found
+---@param tech_name string icon name for technology
+---@param item_name string used when tech has no icon
 ---@param shift? table
 ---@return table
-function technology_molten_icon(icon_name, shift)
+function technology_molten_icon(tech_name, item_name, shift)
 
-  local icon = ylib.icon.get_item_icon(icon_name)
-  local drop = ylib.icon.icons:get("Molten_Metals", "molten-drop")
-  log(icon.icon)
+  if ylib.icon.icons["Molten_Metals"][tech_name] then
+    return {ylib.icon.icons:get("Molten_Metals", tech_name)}
+  end
+  local icon = ylib.icon.get_item_icon(item_name)
+  local drop = ylib.icon.icons:get("Molten_Metals", "molten-drop-tech")
+  log(serpent.block(icon))
 
   icon.scale = 1
   icon.shift = shift or {0,5}
   drop.scale = icon.icon_size/drop.icon_size
-  return {
-    icon
-    -- {
-    --   icon = "__Molten_Metals__/graphics/technology/molten-drop.png",
-    --   icon_size = size,
-    --   scale = 1*scale,
-    --   shift = {0,0}
-    -- },
-  }
+  return { icon, drop }
 end
-
--- log(serpent.block(technology_icon_compose("aluminum-6061")))
