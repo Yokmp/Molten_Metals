@@ -64,8 +64,8 @@ new_casting_recipe_ext("iron-ore", "rail", {110,110}, {2,2}) --//TODO combined i
 new_casting_recipe("stone", "stone", "stone-brick") -- 12:120:3 -> 4:1 vanilla 2:1
 -- new_casting_recipe_ext("stone", "stone-brick", {40}, {2}) -- 20:1
 
-new_casting_recipe_ext("uranium-ore", "uranium-235", {2000,2000}, {1,1}, recipe_get_energy_required("uranium-processing"))
-new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, recipe_get_energy_required("uranium-processing"))
+new_casting_recipe_ext("uranium-ore", "uranium-235", {2000,2000}, {1,1}, ylib.recipe.get_energy_required("uranium-processing"))
+new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, ylib.recipe.get_energy_required("uranium-processing"))
 data.raw.recipe["molten-uranium-238"].normal.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},
@@ -89,27 +89,27 @@ data.raw.recipe["molten-uranium-238"].expensive.results = {
 
 -- REPLACE FURNACES
 if replace_steel_furnace then
-  table.insert(data.raw.recipe["basic-smelter"], recipe_get_ingredients("steel-furnace"))
+  table.insert(data.raw.recipe["basic-smelter"], ylib.recipe.get_ingredients("steel-furnace"))
   data.raw.item["steel-furnace"].flags = {"hidden"}
   data.raw["furnace"]["steel-furnace"].next_upgrade = "basic-smelter"
   data.raw["furnace"]["steel-furnace"].minable.result = "basic-smelter"
   data.raw["furnace"]["stone-furnace"].next_upgrade = "basic-smelter"
-  local steel_furnace = recipe_get_byingredient("steel-furnace")
+  local steel_furnace = ylib.recipe.get_byingredient("steel-furnace")
   if #steel_furnace > 0 then
     for i, recipe in ipairs(steel_furnace) do
-        recipe_replace_ingredient(recipe, "steel-furnace", "basic-smelter")
+      ylib.recipe.replace_ingredient(recipe, "steel-furnace", "basic-smelter")
     end
   end
 end
 if replace_electric_furnace then
-  table.insert(data.raw.recipe["advanced-smelter"], recipe_get_ingredients("electric-furnace"))
+  table.insert(data.raw.recipe["advanced-smelter"], ylib.recipe.get_ingredients("electric-furnace"))
   data.raw.item["electric-furnace"].flags = {"hidden"}
   data.raw.item["electric-furnace"].minable_result = "advanced-smelter"
   data.raw.item["electric-furnace"].next_upgrade = "advanced-smelter"
-  local electric_furnace = recipe_get_byingredient("electric-furnace")
+  local electric_furnace = ylib.recipe.get_byingredient("electric-furnace")
   if #electric_furnace > 0 then
     for _, recipe in ipairs(electric_furnace) do
-        recipe_replace_ingredient(recipe, "electric-furnace", "advanced-smelter")
+      ylib.recipe.replace_ingredient(recipe, "electric-furnace", "advanced-smelter")
     end
   end
 end
