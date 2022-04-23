@@ -1,9 +1,9 @@
 
 -- FLUIDS
-make_molten_fluid("iron-ore")
-make_molten_fluid("copper-ore")
-make_molten_fluid("stone")
-make_molten_fluid("uranium-ore")
+molten_metals.make_molten_fluid("iron-ore")
+molten_metals.make_molten_fluid("copper-ore")
+molten_metals.make_molten_fluid("stone")
+molten_metals.make_molten_fluid("uranium-ore")
 
 
 -- TECHNOLOGY

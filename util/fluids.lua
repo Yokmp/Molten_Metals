@@ -3,7 +3,7 @@ local autofill = settings.startup["ymm-allow-barreling"].value
 
 ---Creates a molten fluid from an ore.
 ---@param ore_name any
-function make_molten_fluid(ore_name)
+function molten_metals.make_molten_fluid(ore_name)
   local icon = ylib.icon.icons["Molten_Metals"][ore_name] and {ylib.icon.icons:get("Molten_Metals", ore_name)} or molten_metals.get_composed_icon(ore_name)
   local molten_fluid = {
     type = "fluid",
