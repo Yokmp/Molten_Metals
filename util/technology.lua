@@ -18,7 +18,7 @@ function new_technology_ext(tech_name, icon_name, prerequisites, ingredient, loc
       type = "technology",
       name = tech_name,
       localised_name = {"", {"item-name."..localized_name}, " ", {"item-name.casting"}},
-      icons = technology_icon_compose(icon_name),
+      icons = technology_molten_icon(icon_name),
       effects = {},
       prerequisites = prerequisites,
       unit =
@@ -150,29 +150,26 @@ end
 
 
 ---Returns icons for technology
----@param icon_name string must be a valid item name
----@param size? number
----@param scale? number multiplier
+---@param icon_name string returns ``icons.missing`` if item not found
 ---@param shift? table
 ---@return table
-function technology_icon_compose(icon_name, size, scale, shift) --//TODO ylib.icon.icons:get()
+function technology_molten_icon(icon_name, shift)
+
   local icon = ylib.icon.get_item_icon(icon_name)
-  size = size or 128
-  scale = scale or (icon.icon_size/size)
+  local drop = ylib.icon.icons:get("Molten_Metals", "molten-drop")
+  log(icon.icon)
+
+  icon.scale = 1
+  icon.shift = shift or {0,5}
+  drop.scale = icon.icon_size/drop.icon_size
   return {
-    {
-      icon = icon.icon,
-      icon_size = icon.icon_size,
-      icon_mipmaps = icon.icon_mipmaps or 0,
-      scale = 1,
-      shift = shift or {0,5}
-    },
-    {
-      icon = "__Molten_Metals__/graphics/technology/molten-drop.png",
-      icon_size = size,
-      scale = 1*scale,
-      shift = {0,0}
-    },
+    icon
+    -- {
+    --   icon = "__Molten_Metals__/graphics/technology/molten-drop.png",
+    --   icon_size = size,
+    --   scale = 1*scale,
+    --   shift = {0,0}
+    -- },
   }
 end
 

@@ -8,8 +8,6 @@ ylib.icon.icons:add("Molten_Metals", "graphics/technology", "iron-casting", 128,
 ylib.icon.icons:add("Molten_Metals", "graphics/technology", "slag-tech", 128, 0, 1)
 ylib.icon.icons:add("Molten_Metals", "graphics/technology", "slag-pellet-tech", 128, 0, 1)
 ylib.icon.icons:add("Molten_Metals", "graphics/technology", "slag-powder-tech", 128, 0, 1)
-ylib.icon.icons:add("Molten_Metals", "graphics/technology", "aluminium-casting", 128, 0, 1)
-ylib.icon.icons:add("Molten_Metals", "graphics/technology", "lead-casting", 128, 0, 1)
 
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "basic-caster-old", 32, 0, 1)
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "advanced-caster-old", 32, 0, 1)
@@ -29,15 +27,25 @@ ylib.icon.icons:add("Molten_Metals", "graphics/icons", "basic-caster_b", 64, 4, 
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "advanced-caster", 64, 4, 0.5)
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "basic-smelter", 64, 4, 0.5)
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "advanced-smelter", 64, 4, 0.5)
-ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-aluminium-ore", 64, 4, 0.5)
-ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-lead-ore", 64, 4, 0.5)
-ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-titanium-ore", 64, 4, 0.5)
-ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-tungsten-ore", 64, 4, 0.5)
 
 ylib.icon.icons:alias("Molten_Metals", "iron-ore", "Molten_Metals", "molten-iron-ore")
 ylib.icon.icons:alias("Molten_Metals", "copper-ore", "Molten_Metals", "molten-copper-ore")
 ylib.icon.icons:alias("Molten_Metals", "stone", "Molten_Metals", "molten-stone")
 ylib.icon.icons:alias("Molten_Metals", "uranium-ore", "Molten_Metals", "molten-uranium-ore")
+
+
+ylib.icon.icons:add("Molten_Metals", "graphics/technology", "aluminium-casting", 128, 0, 1)
+ylib.icon.icons:add("Molten_Metals", "graphics/technology", "lead-casting", 128, 0, 1)
+
+ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-aluminium-ore", 64, 4, 0.5)
+ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-lead-ore", 64, 4, 0.5)
+ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-titanium-ore", 64, 4, 0.5)
+ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-tungsten-ore", 64, 4, 0.5)
+
+ylib.icon.icons:alias("Molten_Metals", "aluminum-ore", "Molten_Metals", "molten-aluminium-ore")
+ylib.icon.icons:alias("Molten_Metals", "lead-ore", "Molten_Metals", "molten-lead-ore")
+ylib.icon.icons:alias("Molten_Metals", "titanium-ore", "Molten_Metals", "molten-titanium-ore")
+ylib.icon.icons:alias("Molten_Metals", "tungsten-ore", "Molten_Metals", "molten-tungsten-ore")
 
 
 -- for key, value in pairs(ylib.icon.icons) do
