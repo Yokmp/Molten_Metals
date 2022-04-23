@@ -1,3 +1,4 @@
+
 data:extend({
   ----------
   -- ITEM --
@@ -5,7 +6,7 @@ data:extend({
   {
     type = "item",
     name = "slag-stone",
-    icons = {icons:get("slag")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "slag-stone")},
     subgroup = "terrain",
     order = "f[copper-ore]",
     stack_size = 100
@@ -13,7 +14,7 @@ data:extend({
   -- {
   --   type = "item",
   --   name = "slag-powder",
-    -- icons = icons:get("powder"),
+    -- icons = ylib.icon.icons:get("Molten_Metals", "slag-powder"),
   --   subgroup = "intermediate-product",
   --   order = "c[iron-gear-wheel]",
   --   stack_size = 200
@@ -21,7 +22,7 @@ data:extend({
   {
     type = "item",
     name = "slag-pellet",
-    icons = {icons:get("pellet")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "slag-spellet")},
     subgroup = "intermediate-product",
     order = "c[iron-gear-wheel]",
     stack_size = 200
@@ -63,7 +64,7 @@ data:extend({
   --   crafting_machine_tint = { primary = {r = 0.9, g = 0.5, b = 0.5, a = 0},   -- boiling
   --                             secondary = {r = 0.9, g = 0.5, b = 0.5, a = 0}, -- mask
   --                             tertiary = {r = 0.9, g = 0.5, b = 0.5, a = 0} },-- window
-  --   icons = icons:get("brick"),
+  --   icons = ylib.icon.icons:get("Molten_Metals", "slag-sbrick"),
   --   enabled = false,
   --   energy_required = 3.5,
   --   ingredients = {
@@ -83,7 +84,7 @@ data:extend({
   --   category = "crafting",
   --   subgroup = "intermediate-product",
   --   hide_from_player_crafting = true,
-  --   icons = icons:get("powder"),
+  --   icons = ylib.icon.icons:get("Molten_Metals", "slag-spowder"),
   --   enabled = false,
   --   energy_required = 2,
   --   ingredients = {
@@ -99,7 +100,7 @@ data:extend({
   -- {
   --   type = "recipe",
   --   name = "slag-stone-concrete",
-    -- icons = icons:get("concrete"),
+    -- icons = ylib.icon.icons:get("Molten_Metals", "slag-sconcrete"),
   --   category = "crafting-with-fluid",
   --   energy_required = 1,
   --   show_amount_in_title = true,
@@ -125,7 +126,7 @@ data:extend({
   {
     type = "recipe",
     name = "slag-pellet",
-    icons = {icons:get("pellet")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "slag-spellet")},
     category = "crafting",
     subgroup = "intermediate-product",
     energy_required = 1,
@@ -148,8 +149,8 @@ data:extend({
     type = "recipe",
     name = "slag-pellet-recycling",
     icons = {
-      icons:get("pellet", 1, {0, -3}),
-      icons:get("filter", 0.5, {7,  8}),
+      ylib.icon.icons:get("Molten_Metals", "slag-pellet", 1, {0, -3}),
+      ylib.icon.icons:get("ylib", "filter", 0.5, {7,  8}),
       {
         icon = "__base__/graphics/icons/fluid/sulfuric-acid.png",
         icon_size = 64,
@@ -180,6 +181,8 @@ data:extend({
     }
   }
 })
+
+--add results and set probability based on amount of possible results
 
 local results = {}
 local ores = get_minable_resouces()

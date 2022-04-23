@@ -8,7 +8,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "basic-smelter",
-    icons = {icons:get("basic_smelter")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "basic_smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "basic-smelter"},
     crafting_categories = {category.smelting},
@@ -250,7 +250,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "advanced-smelter",
-    icons = {icons:get("advanced_smelter")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "advanced_smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "advanced-smelter"},
     crafting_categories = {category.smelting},
@@ -495,7 +495,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "basic-caster",
-    icons = {icons:get("basic_caster")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "basic_caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "basic-caster"},
     crafting_categories = {category.casting},
@@ -544,44 +544,43 @@ data:extend({
     },
     animation = make_4way_animation_from_spritesheet({
       layers = {
-      {
-        filename = "__Molten_Metals__/graphics/entity/caster/basic-caster.png",
-        width = 122,
-        height = 134,
-        frame_count = 1,
-        shift = util.by_pixel(-5, - 4.5),
-        hr_version = {
-          filename = "__Molten_Metals__/graphics/entity/caster/hr-basic-caster.png",
-          width = 244,
-          height = 268,
+        {
+          filename = "__Molten_Metals__/graphics/entity/caster/basic-caster.png",
+          width = 122,
+          height = 134,
           frame_count = 1,
           shift = util.by_pixel(-5, - 4.5),
-          scale = 0.5
-        }
-      },
-      {
-        filename = "__Molten_Metals__/graphics/entity/caster/caster-shadow.png",
-        priority = "high",
-        width = 156,
-        height = 141,
-        frame_count = 1,
-        shift = util.by_pixel(31.5, 11),
-        draw_as_shadow = true,
-        hr_version =
+          hr_version = {
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-basic-caster.png",
+            width = 244,
+            height = 268,
+            frame_count = 1,
+            shift = util.by_pixel(-5, - 4.5),
+            scale = 0.5
+          }
+        },
         {
-          filename = "__Molten_Metals__/graphics/entity/caster/hr-caster-shadow.png",
+          filename = "__Molten_Metals__/graphics/entity/caster/caster-shadow.png",
           priority = "high",
-          width = 350,
-          height = 219,
+          width = 156,
+          height = 141,
           frame_count = 1,
-          shift = util.by_pixel(31.5, 10.75),
+          shift = util.by_pixel(31.5, 11),
           draw_as_shadow = true,
-          scale = 0.5
-        }
-      },
-    }
-  	}),
-  	working_visualisations = {
+          hr_version =
+          {
+            filename = "__Molten_Metals__/graphics/entity/caster/hr-caster-shadow.png",
+            priority = "high",
+            width = 350,
+            height = 219,
+            frame_count = 1,
+            shift = util.by_pixel(31.5, 10.75),
+            draw_as_shadow = true,
+            scale = 0.5
+          }
+        },
+      }}),
+    working_visualisations = {
       {
         north_position = util.by_pixel(30, - 24),
         west_position = util.by_pixel(1, - 49.5),
@@ -753,7 +752,7 @@ data:extend({
       }
     },
     -- target_temperature = 500,
-  	fluid_boxes = {
+    fluid_boxes = {
   		{ -- back top METAL
   			production_type = "input",
   			-- minimum_temperature = 150.0, -- min iron
@@ -808,7 +807,7 @@ data:extend({
   				}
   			}
   		},
-  	},
+    },
     water_reflection = {
       pictures =
       {
@@ -829,7 +828,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "advanced-caster",
-    icons = {icons:get("advanced_caster")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "advanced_caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "advanced-caster"},
     crafting_categories = {category.casting},

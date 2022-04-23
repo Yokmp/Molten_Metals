@@ -59,7 +59,7 @@ data:extend({
   {
     type = "item",
     name = "basic-smelter",
-    icons = {icons:get("basic_smelter")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "basic_smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
     order = "b[basic-smelter]",
@@ -69,7 +69,7 @@ data:extend({
   {
     type = "item",
     name = "advanced-smelter",
-    icons = {icons:get("advanced_smelter")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "advanced_smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
     order = "c[advanced-smelter]",
@@ -79,7 +79,7 @@ data:extend({
   {
     type = "item",
     name = "basic-caster",
-    icons = settings.startup["ymm-use-old-icons"].value and {icons:get("basic_old")} or {icons:get("basic_caster")},
+    icons = settings.startup["ymm-use-old-icons"].value and {ylib.icon.icons:get("Molten_Metals", "basic_old")} or {ylib.icon.icons:get("Molten_Metals", "basic_caster")},
     subgroup = "production-machine",
     order = "e[basic-caster]",
     place_result = "basic-caster",
@@ -88,7 +88,7 @@ data:extend({
   {
     type = "item",
     name = "advanced-caster",
-    icons = settings.startup["ymm-use-old-icons"].value and {icons:get("advanced_old")} or {icons:get("advanced_caster")},
+    icons = settings.startup["ymm-use-old-icons"].value and {ylib.icon.icons:get("Molten_Metals", "advanced_old")} or {ylib.icon.icons:get("Molten_Metals", "advanced_caster")},
     subgroup = "production-machine",
     order = "f[advanced-caster]",
     place_result = "advanced-caster",
@@ -97,7 +97,7 @@ data:extend({
   -- {
   --   type = "item",
   --   name = "insulated-pipe",
-  --   icons = {icons:get("pipe")},
+  --   icons = {ylib.icon.icons:get("Molten_Metals", "pipe")},
   --   subgroup = "energy-pipe-distribution",
   --   order = "a[pipe]-b[insulated-pipe]",
   --   place_result = "insulated-pipe",
@@ -106,7 +106,7 @@ data:extend({
   -- {
   --   type = "item",
   --   name = "insulated-pipe-to-ground",
-  --   icons = {icons:get("pipe_to_ground")},
+  --   icons = {ylib.icon.icons:get("Molten_Metals", "pipe_to_ground")},
   --   subgroup = "energy-pipe-distribution",
   --   order = "a[pipe]-c[insulated-pipe-to-ground]",
   --   place_result = "insulated-pipe-to-ground",
@@ -118,14 +118,14 @@ data:extend({
   {
     type = "item",
     name = "basic-caster-old",
-    icons = {icons:get("basic_old")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "basic_old")},
     stack_size = 1,
     flags = { "hidden" }
   },
   {
     type = "item",
     name = "advanced-caster-old",
-    icons = {icons:get("advanced_old")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "advanced_old")},
     stack_size = 1,
     flags = { "hidden" }
   },

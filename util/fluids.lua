@@ -4,7 +4,7 @@ local autofill = settings.startup["ymm-allow-barreling"].value
 ---Creates a molten fluid from an ore.
 ---@param ore_name any
 function make_molten_fluid(ore_name)
-  local icon = icons[ore_name] and {icons:get(ore_name)} or molten_metals.get_composed_icon(ore_name)
+  local icon = ylib.icon.icons["Molten_Metals"][ore_name] and {ylib.icon.icons:get("Molten_Metals", ore_name)} or molten_metals.get_composed_icon(ore_name)
   local molten_fluid = {
     type = "fluid",
     name = "molten-"..ore_name,
@@ -20,7 +20,6 @@ function make_molten_fluid(ore_name)
   }
   data:extend({molten_fluid})
 
-
   if mods["Fluid_Mixer"] and settings.startup["ymm-allow-barreling"].value then
     local empty_barrel_item = {
       type = "item",
@@ -32,7 +31,6 @@ function make_molten_fluid(ore_name)
       stack_size = 10
     }
 
-    ylib.icon.icons:add("Molten_Metals", "graphics/technology", "hot-barrel-tech", 128, 0 , 1)
     local icons = {ylib.icon.icons:get("Molten_Metals", "hot-barrel-tech")}
     local prerequisites = {"fluid-handling", "advanced-material-processing"}
     local ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}

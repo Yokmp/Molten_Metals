@@ -15,7 +15,7 @@ local replace_steel_furnace = settings.startup["ymm-replace-steel-furnace"].valu
 local replace_electric_furnace = settings.startup["ymm-replace-steel-furnace"].value
 
 tech = "advanced-material-processing"
-data.raw.technology[tech].icons = {icons:get("basic_tech")}
+data.raw.technology[tech].icons = {ylib.icon.icons:get("Molten_Metals", "smelting")}
 if replace_steel_furnace then technology_remove_effect(tech, "steel-furnace") end
 technology_add_effect(tech, "basic-smelter")
 technology_add_effect(tech, "basic-caster")
@@ -28,7 +28,7 @@ technology_add_effect(tech, "molten-stone-brick")
 technology_add_effect(tech, "molten-steel-plate")
 
 tech = "advanced-material-processing-2"
-data.raw.technology[tech].icons = {icons:get("advanced_tech")}
+data.raw.technology[tech].icons = {ylib.icon.icons:get("Molten_Metals", "advanced-smelting")}
 if replace_electric_furnace then technology_remove_effect(tech, "electric-furnace") end
 technology_add_effect(tech, "advanced-smelter")
 technology_add_effect(tech, "advanced-caster")

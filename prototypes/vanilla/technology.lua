@@ -168,7 +168,7 @@ data:extend({
   {
     type = "technology",
     name = "slag-pellet-recycling",
-    icons = {icons:get("pellet_tech")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "slag-pellet-tech")},
     effects =
     {
       {
@@ -208,7 +208,7 @@ data:extend({
   {
     type = "technology",
     name = "iron-casting",
-    icons = {icons:get("casting_tech")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "iron-casting")},
     effects =
     {
       {

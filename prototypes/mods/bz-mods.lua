@@ -8,14 +8,14 @@ local ore
 if mods["bzaluminum"] and settings.startup["ymm-use-aluminum-ore"].value then --//TODO need more stuff
   ore = "aluminum-ore"
   make_molten_fluid(ore)
-  data.raw.fluid["molten-"..ore].icons = {icons:get("molten_aluminium")}
+  data.raw.fluid["molten-"..ore].icons = {ylib.icon.icons:get("molten-aluminium-ore")}
   new_smelting_recipe(ore, "alumina")
   new_casting_recipe(ore, ore, "alumina")
 -- aluminum-plate
 
   tech = "aluminium-casting"
   new_technology(tech, "aluminum-6061", "advanced-material-processing", "alumina") --2219
-  data.raw.technology[tech].icons = {icons:get("aluminium_tech")}
+  data.raw.technology[tech].icons = {ylib.icon.icons:get(tech)}
   technology_add_effect(tech, "molten-aluminum-ore")
   technology_add_effect(tech, "molten-alumina")
 end
@@ -23,13 +23,13 @@ end
 if mods["bzlead"] and settings.startup["ymm-use-lead-ore"].value then
   ore = "lead-ore"
   make_molten_fluid(ore)
-  data.raw.fluid["molten-lead-ore"].icons = {icons:get("molten_lead")}
+  data.raw.fluid["molten-lead-ore"].icons = {ylib.icon.icons:get("molten-lead-ore")}
   new_smelting_recipe(ore, "lead-plate")
   new_casting_recipe(ore, ore, "lead-plate")
 
   tech = "lead-casting"
   new_technology(tech, "lead-plate", "advanced-material-processing")
-  data.raw.technology[tech].icons = {icons:get("lead_tech")}
+  data.raw.technology[tech].icons = {ylib.icon.icons:get(tech)}
   technology_add_effect(tech, "molten-lead-ore")
   technology_add_effect(tech, "molten-lead-plate")
 end
@@ -37,7 +37,7 @@ end
 if mods["bztitanium"] and settings.startup["ymm-use-titanium-ore"].value then --//? should it depend on adv-mat-proc-2 ?
   ore = "titanium-ore"
   make_molten_fluid(ore)
-  data.raw.fluid["molten-titanium-ore"].icons = {icons:get("molten_titanium")}
+  data.raw.fluid["molten-titanium-ore"].icons = {ylib.icon.icons:get("molten-titanium-ore")}
   new_smelting_recipe(ore, "titanium-plate")
   new_casting_recipe(ore, ore, "titanium-plate")
 
