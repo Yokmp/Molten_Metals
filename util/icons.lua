@@ -32,6 +32,7 @@ ylib.icon.icons:alias("Molten_Metals", "iron-ore", "Molten_Metals", "molten-iron
 ylib.icon.icons:alias("Molten_Metals", "copper-ore", "Molten_Metals", "molten-copper-ore")
 ylib.icon.icons:alias("Molten_Metals", "stone", "Molten_Metals", "molten-stone")
 ylib.icon.icons:alias("Molten_Metals", "uranium-ore", "Molten_Metals", "molten-uranium-ore")
+ylib.icon.icons:alias("Molten_Metals", "basic-caster", "Molten_Metals", "basic-caster_b")
 
 
 ylib.icon.icons:add("Molten_Metals", "graphics/technology", "aluminium-casting", 128, 0, 1)

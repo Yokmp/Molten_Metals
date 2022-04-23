@@ -7,34 +7,34 @@ molten_metals.make_molten_fluid("uranium-ore")
 
 
 -- TECHNOLOGY
-technology_add_effect("uranium-processing", "molten-uranium-ore")
-technology_add_effect("uranium-processing", "molten-uranium-238")
-technology_add_effect("kovarex-enrichment-process", "molten-uranium-235")
+ylib.technology.add_effect("uranium-processing", "molten-uranium-ore")
+ylib.technology.add_effect("uranium-processing", "molten-uranium-238")
+ylib.technology.add_effect("kovarex-enrichment-process", "molten-uranium-235")
 
 local replace_steel_furnace = settings.startup["ymm-replace-steel-furnace"].value
 local replace_electric_furnace = settings.startup["ymm-replace-steel-furnace"].value
 
 tech = "advanced-material-processing"
 data.raw.technology[tech].icons = {ylib.icon.icons:get("Molten_Metals", "smelting")}
-if replace_steel_furnace then technology_remove_effect(tech, "steel-furnace") end
-technology_add_effect(tech, "basic-smelter")
-technology_add_effect(tech, "basic-caster")
-technology_add_effect(tech, "molten-iron-ore")
-technology_add_effect(tech, "molten-copper-ore")
-technology_add_effect(tech, "molten-stone")
-technology_add_effect(tech, "molten-iron-plate")
-technology_add_effect(tech, "molten-copper-plate")
-technology_add_effect(tech, "molten-stone-brick")
-technology_add_effect(tech, "molten-steel-plate")
+if replace_steel_furnace then ylib.technology.remove_effect(tech, "steel-furnace") end
+ylib.technology.add_effect(tech, "basic-smelter")
+ylib.technology.add_effect(tech, "basic-caster")
+ylib.technology.add_effect(tech, "molten-iron-ore")
+ylib.technology.add_effect(tech, "molten-copper-ore")
+ylib.technology.add_effect(tech, "molten-stone")
+ylib.technology.add_effect(tech, "molten-iron-plate")
+ylib.technology.add_effect(tech, "molten-copper-plate")
+ylib.technology.add_effect(tech, "molten-stone-brick")
+ylib.technology.add_effect(tech, "molten-steel-plate")
 
 tech = "advanced-material-processing-2"
 data.raw.technology[tech].icons = {ylib.icon.icons:get("Molten_Metals", "advanced-smelting")}
-if replace_electric_furnace then technology_remove_effect(tech, "electric-furnace") end
-technology_add_effect(tech, "advanced-smelter")
-technology_add_effect(tech, "advanced-caster")
+if replace_electric_furnace then ylib.technology.remove_effect(tech, "electric-furnace") end
+ylib.technology.add_effect(tech, "advanced-smelter")
+ylib.technology.add_effect(tech, "advanced-caster")
 
 tech = "railway"
-technology_add_effect(tech, "molten-rail")
+ylib.technology.add_effect(tech, "molten-rail")
 
 
 -- SMELTING

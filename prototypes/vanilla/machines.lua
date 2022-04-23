@@ -59,7 +59,7 @@ data:extend({
   {
     type = "item",
     name = "basic-smelter",
-    icons = {ylib.icon.icons:get("Molten_Metals", "basic_smelter")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "basic-smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
     order = "b[basic-smelter]",
@@ -69,7 +69,7 @@ data:extend({
   {
     type = "item",
     name = "advanced-smelter",
-    icons = {ylib.icon.icons:get("Molten_Metals", "advanced_smelter")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "advanced-smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
     order = "c[advanced-smelter]",
@@ -79,7 +79,7 @@ data:extend({
   {
     type = "item",
     name = "basic-caster",
-    icons = settings.startup["ymm-use-old-icons"].value and {ylib.icon.icons:get("Molten_Metals", "basic_old")} or {ylib.icon.icons:get("Molten_Metals", "basic_caster")},
+    icons = settings.startup["ymm-use-old-icons"].value and {ylib.icon.icons:get("Molten_Metals", "basic-caster-old")} or {ylib.icon.icons:get("Molten_Metals", "basic-caster")},
     subgroup = "production-machine",
     order = "e[basic-caster]",
     place_result = "basic-caster",
@@ -88,7 +88,7 @@ data:extend({
   {
     type = "item",
     name = "advanced-caster",
-    icons = settings.startup["ymm-use-old-icons"].value and {ylib.icon.icons:get("Molten_Metals", "advanced_old")} or {ylib.icon.icons:get("Molten_Metals", "advanced_caster")},
+    icons = settings.startup["ymm-use-old-icons"].value and {ylib.icon.icons:get("Molten_Metals", "advanced-caster-old")} or {ylib.icon.icons:get("Molten_Metals", "advanced-caster")},
     subgroup = "production-machine",
     order = "f[advanced-caster]",
     place_result = "advanced-caster",
@@ -115,17 +115,19 @@ data:extend({
 -----------
 -- ICONS --
 -----------
+
+--//TODO use sprites
   {
     type = "item",
     name = "basic-caster-old",
-    icons = {ylib.icon.icons:get("Molten_Metals", "basic_old")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "basic-caster-old")},
     stack_size = 1,
     flags = { "hidden" }
   },
   {
     type = "item",
     name = "advanced-caster-old",
-    icons = {ylib.icon.icons:get("Molten_Metals", "advanced_old")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "advanced-caster-old")},
     stack_size = 1,
     flags = { "hidden" }
   },
