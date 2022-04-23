@@ -97,7 +97,6 @@ function molten_metals.technology_molten_icon(tech_name, item_name, shift)
   end
   local icon = ylib.icon.get_item_icon(item_name)
   local drop = ylib.icon.icons:get("Molten_Metals", "molten-drop-tech")
-  log(serpent.block(icon))
 
   icon.scale = 1
   icon.shift = shift or {0,5}
