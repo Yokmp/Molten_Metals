@@ -21,7 +21,6 @@ ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-iron-ore", 64, 2,
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-copper-ore", 64, 2, 0.5)
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-stone", 64, 2, 0.5)
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-uranium-ore", 64, 2, 0.5)
-ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-base", 64, 2, 0.5)
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-drop", 64, 2, 0.5)
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "molten-drop-result", 64, 2, 0.5)
 ylib.icon.icons:add("Molten_Metals", "graphics/icons", "basic-caster_b", 64, 2, 0.5)
