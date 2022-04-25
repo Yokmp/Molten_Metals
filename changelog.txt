@@ -10,6 +10,7 @@ Date: 2022-04-25
     - increased pollution
     - increased energy consumption to balance out new ratio
     - heat_capacity and emissions_multiplier added to fluids
+    - barrel items now have an ore icon
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.8
 Date: 2022-04-24
