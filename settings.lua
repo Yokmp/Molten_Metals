@@ -85,7 +85,7 @@ data:extend({
   {
     type = "bool-setting",
     name = "ymm-use-old-icons",
-    localised_name = {"", "[item=basic-caster-old]", " - ", {"mod-setting-name.ymm-use-old-icons"}},
+    localised_name = {"", "[img=basic-caster-old]", " - ", {"mod-setting-name.ymm-use-old-icons"}},
     setting_type = "startup",
     default_value = false,
     order = "e"

@@ -26,4 +26,12 @@ require("prototypes.vanilla.create")
 
 require("prototypes.mods.bz-mods")
 
-log(serpent.block(data.raw["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids))
+-- log(serpent.block(data.raw["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids))
+
+-- for key, value in pairs(data.raw.item) do
+--   if string.find(value.name, "barrel") then
+--     log(serpent.block(value))
+--   end
+-- end
+-- error("TEST")
+-- log(serpent.block())

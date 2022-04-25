@@ -47,6 +47,10 @@ function molten_metals.make_molten_fluid(ore_name)
     if fluid_mixer.auto_barrel.can_process_fluids(molten_fluid, technology, empty_barrel_item) then -- no need to check
       fluid_mixer.auto_barrel.process_fluid(molten_fluid, technology, empty_barrel_item)
 
+      data.raw.item["molten-"..ore_name.."-barrel"].icons[4]=ylib.icon.get_item_icon(ore_name)
+      data.raw.item["molten-"..ore_name.."-barrel"].icons[4].scale = 0.25
+      data.raw.item["molten-"..ore_name.."-barrel"].icons[4].shift = {-6,6}
+
       local ore_data = data.raw.resource[ore_name]
       if ore_data.icon then
         local ore_icon = {

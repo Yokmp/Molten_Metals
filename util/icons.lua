@@ -97,4 +97,40 @@ data:extend({
     height = 64,
     shift = {0,0}
   },
+  {
+    type = "sprite",
+    name = "basic-caster-old",
+    filename = "__Molten_Metals__/graphics/icons/basic-caster.png",
+    priority = "extra-high",
+    width = 64,
+    height = 64,
+    shift = {0,0}
+  },
+  {
+    type = "sprite",
+    name = "advanced-caster-old",
+    filename = "__Molten_Metals__/graphics/icons/advanced-caster.png",
+    priority = "extra-high",
+    width = 64,
+    height = 64,
+    shift = {0,0}
+  },
+  {
+    type = "sprite",
+    name = "basic-caster-old",
+    filename = "__Molten_Metals__/graphics/icons/basic-caster-old.png",
+    priority = "extra-high",
+    width = 32,
+    height = 32,
+    shift = {0,0}
+  },
+  {
+    type = "sprite",
+    name = "advanced-caster-old",
+    filename = "__Molten_Metals__/graphics/icons/advanced-caster-old.png",
+    priority = "extra-high",
+    width = 32,
+    height = 32,
+    shift = {0,0}
+  },
 })
