@@ -5,6 +5,7 @@ Date: 2022-04-26
     - fixed missing icon on smelters and casters for mods which use the entity icon
     - casting recipes now have a tiny drop so they are easier to spot
     - fixed that in some rare cases the berreling technology contained 0 recipes to unlock
+    - fixed molten uranium steam has 165°C instead of 500°C
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.9
 Date: 2022-04-25

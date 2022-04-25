@@ -59,32 +59,32 @@ ylib.icon.icons:alias("Molten_Metals", "tungsten-ore", "Molten_Metals", "molten-
 -- end
 
 
----Returns a table containing icon definitions
----@param icon_top icon|string use ylib.icon.icons:get() if possible, can work on strings
----@param icon_bottom? icon defaults to molten_drop (based on icon_top.icon_size)
----@param shift? table default ``{{0,0}, {0,5}}``
-function molten_metals.get_composed_icon(icon_top, icon_bottom, scale, shift) --//TODO util.combine_icons()
-  scale = scale or 0.5
-  shift = shift or 0
+-- ---Returns a table containing icon definitions
+-- ---@param icon_top icon|string use ylib.icon.icons:get() if possible, can work on strings
+-- ---@param icon_bottom? icon defaults to molten_drop (based on icon_top.icon_size)
+-- ---@param shift? table default ``{{0,0}, {0,5}}``
+-- function molten_metals.get_composed_icon(icon_top, icon_bottom, scale, shift) --//TODO util.combine_icons()
+--   scale = scale or 0.5
+--   shift = shift or 0
 
-  if type(icon_top) == "string" then
-    icon_top = ylib.icon.get_item_icon(icon_top) or ylib.icon.icons:get(icon_top) --//*FIXME drop scaling, should consider making custom icons per metal
-  end
+--   if type(icon_top) == "string" then
+--     icon_top = ylib.icon.get_item_icon(icon_top) or ylib.icon.icons:get("Molten_Metals", icon_top) --//*FIXME drop scaling, should consider making custom icons per metal
+--   end
 
-  local function determine_icon_by_type()
-    if icon_top.icon_size <= 96 then return ylib.icon.icons:get("molten_drop")
-    else return ylib.icon.icons:get("molten_drop_tech") end
-  end
+--   local function determine_icon_by_type()
+--     if icon_top.icon_size <= 96 then return ylib.icon.icons:get("Molten_Metals", "molten_drop")
+--     else return ylib.icon.icons:get("Molten_Metals", "molten_drop_tech") end
+--   end
 
-  icon_top.scale = icon_top.scale and icon_top.scale-0.2 or 0.6
-  icon_top.scale = icon_top.scale*scale
-  icon_top.shift = {0,0-shift}
-  icon_bottom = icon_bottom or determine_icon_by_type()
-  icon_bottom.scale = (icon_bottom.icon_size/icon_top.icon_size)*(scale-0.2)
-  icon_bottom.shift = {0,0+shift}
+--   icon_top.scale = icon_top.scale and icon_top.scale-0.2 or 0.6
+--   icon_top.scale = icon_top.scale*scale
+--   icon_top.shift = {0,0-shift}
+--   icon_bottom = icon_bottom or determine_icon_by_type()
+--   icon_bottom.scale = (icon_bottom.icon_size/icon_top.icon_size)*(scale-0.2)
+--   icon_bottom.shift = {0,0+shift}
 
-  return {icon_top, icon_bottom}
-end
+--   return {icon_top, icon_bottom}
+-- end
 
 
 

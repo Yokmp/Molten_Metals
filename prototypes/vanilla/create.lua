@@ -69,12 +69,12 @@ molten_metals.new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1
 data.raw.recipe["molten-uranium-238"].normal.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},
-  {type = "fluid", name = "steam", amount = 200, temperature = 165}
+  {type = "fluid", name = "steam", amount = 200, temperature = molten_metals.ore_definition("uranium-ore").steam_temp}
 }
 data.raw.recipe["molten-uranium-238"].expensive.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},
-  {type = "fluid", name = "steam", amount = 200, temperature = 165}
+  {type = "fluid", name = "steam", amount = 200, temperature = molten_metals.ore_definition("uranium-ore").steam_temp}
 }
 
 -- https://mods.factorio.com/mod/Molten_Metals/discussion/6256ffdaf68fa4a923a6fe3b
