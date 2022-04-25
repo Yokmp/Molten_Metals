@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.9
-Date: 2022-04-23
+Date: 2022-04-25
   Minor Features:
     - new setting lets you set a variable steam temperature which is calculated from the ores melting points
   Changes:
@@ -11,10 +11,10 @@ Date: 2022-04-23
     - heat_capacity and emissions_multiplier added to fluids
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.8
-Date: 2022-04-23
+Date: 2022-04-24
   Changes:
     - fixed slag-pellet spelling
-    - technologies whitch unlock casting recipes now have a molten-ore drop on top to make them easier to find
+    - technologies which unlock casting recipes now have a molten-ore drop on top to make them easier to find
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.7
 Date: 2022-04-23
