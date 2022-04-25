@@ -1,3 +1,4 @@
+---@diagnostic disable: need-check-nil
 
 local use_slag = settings.startup["ymm-enable-slag"].value
 
