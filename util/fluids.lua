@@ -23,6 +23,10 @@ function molten_metals.make_molten_fluid(ore_name)
   }
   data:extend({molten_fluid})
 
+  -- Flamethrower Ammo
+  local turret = data.raw["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids
+  table.insert(turret, {damage_modifier = molten_metals.ore_definition(ore_name).melting/1000, type = "molten-"..ore_name})
+
   if mods["Fluid_Mixer"] and settings.startup["ymm-allow-barreling"].value then
     local empty_barrel_item = {
       type = "item",

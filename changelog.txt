@@ -2,9 +2,10 @@
 Version: 0.1.9
 Date: 2022-04-25
   Minor Features:
-    - new setting lets you set a variable steam temperature which is calculated from the ores melting points
+    - new setting lets you choose between 500°C and new calculation for steam temperature
+    - molten metals can be used in flamethrowers, damagebonus depends on their melting point
   Changes:
-    - steam temperature is now 500°C, making it usable in lategame
+    - steam temperature is now calculated from melting points
     - iron/copper-ore to plate ratio is now 2:3 from 1:1
     - increased pollution
     - increased energy consumption to balance out new ratio
