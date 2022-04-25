@@ -1,6 +1,6 @@
 
 local use_slag = settings.startup["ymm-enable-slag"].value
-local steam_temp_byore = settings.startup["ymm-steam-ore-temp"].value
+
 
 
 ---Creates a smelting recipe, _ore-name_ to _molten-ore-name_
@@ -103,16 +103,12 @@ function molten_metals.new_casting_recipe_ext(fluid_name, result_name, amount_in
   enabled = enabled or {false, false}
   temperature = molten_metals.ore_definition(fluid_name)
   local f_result = "steam"
-  local f_temp = 500
-  if steam_temp_byore then
-    f_temp = math.min(temperature.melting/4, 1000)
-    f_temp = f_temp < 500 and math.min(temperature.melting/2, 1000) or math.min(temperature.melting/4, 1000)
-    f_temp = math.max(f_temp, 100)
-  end
+  local f_temp = temperature.steam_temp
 
   data:extend({{
     type = "recipe",
     name = "molten-"..result_name,
+    icons = {ylib.icon.get_icon(result_name), ylib.icon.icons:get("Molten_Metals", "molten-drop-result", 0.5, {0,-6})},
     localised_name = {"", {"item-name."..result_name}, " ", {"item-name.casting"}},
     category = category.casting,
     show_amount_in_title = true,

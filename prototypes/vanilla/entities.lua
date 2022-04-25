@@ -8,7 +8,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "basic-smelter",
-    icons = {ylib.icon.icons:get("Molten_Metals", "basic_smelter")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "basic-smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "basic-smelter"},
     crafting_categories = {category.smelting},
@@ -252,7 +252,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "advanced-smelter",
-    icons = {ylib.icon.icons:get("Molten_Metals", "advanced_smelter")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "advanced-smelter")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "advanced-smelter"},
     crafting_categories = {category.smelting},
@@ -499,7 +499,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "basic-caster",
-    icons = {ylib.icon.icons:get("Molten_Metals", "basic_caster")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "basic-caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "basic-caster"},
     crafting_categories = {category.casting},
@@ -833,7 +833,7 @@ data:extend({
   {
     type = "assembling-machine",
     name = "advanced-caster",
-    icons = {ylib.icon.icons:get("Molten_Metals", "advanced_caster")},
+    icons = {ylib.icon.icons:get("Molten_Metals", "advanced-caster")},
     flags = {"placeable-neutral", "placeable-player", "player-creation"},
     minable = {mining_time = 0.2, result = "advanced-caster"},
     crafting_categories = {category.casting},

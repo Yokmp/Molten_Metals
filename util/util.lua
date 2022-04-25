@@ -1,31 +1,44 @@
+local steam_temp_byore = settings.startup["ymm-steam-ore-temp"].value
 
 ---Will contain more information per ore at some point; Temperature only atm
 ---@param ore_name string
----@return table ``{melting=integer, boiling=integer, heat_capacity = "1KJ", emissions_multiplier = number}``
+---@return table ``{melting=integer, boiling=integer, heat_capacity="1KJ", emissions_multiplier=number, steam_temp=number}``
 function molten_metals.ore_definition(ore_name)
 -- if a fluids temp is lower/higher than the fluid_box settings it can not be used in this machine
 -- temperature = {melting-point, boiling-point}
   local definitions = {
-    ["missing"]       = {melting=1100, boiling=2400, heat_capacity =    "1KJ", emissions_multiplier = 1  },
-    ["iron-ore"]      = {melting=1500, boiling=3000, heat_capacity =  "449KJ", emissions_multiplier = 1.4},
-    ["copper-ore"]    = {melting=1100, boiling=2600, heat_capacity =  "385KJ", emissions_multiplier = 2  },
-    ["stone"]         = {melting= 800, boiling=1200, heat_capacity =  "225KJ", emissions_multiplier = 0.8},
-    ["uranium-ore"]   = {melting=1100, boiling=4100, heat_capacity =  "116KJ", emissions_multiplier = 3.4},
-    ["titanium-ore"]  = {melting=1600, boiling=3200, heat_capacity =  "523KJ", emissions_multiplier = 1.1},
-    ["lead-ore"]      = {melting= 320, boiling=1700, heat_capacity =  "131KJ", emissions_multiplier = 2  },
-    ["aluminum-ore"]  = {melting= 660, boiling=2500, heat_capacity =  "897KJ", emissions_multiplier = 1  },
-    ["tungsten-ore"]  = {melting=3400, boiling=5900, heat_capacity =  "138KJ", emissions_multiplier = 1.2},
-    ["platin-ore"]    = {melting=1800, boiling=3800, heat_capacity =  "130KJ", emissions_multiplier = 1.5},
-    ["lithium-ore"]   = {melting= 180, boiling=1300, heat_capacity = "3482KJ", emissions_multiplier = 2.2},
-    ["tin-ore"]       = {melting= 230, boiling=2600, heat_capacity =    "1KJ", emissions_multiplier = 1  },
-    ["zinc-ore"]      = {melting= 420, boiling= 900, heat_capacity =  "388KJ", emissions_multiplier = 1  },
-    ["aluminium-ore"] = {melting= 660, boiling=2500, heat_capacity =  "897KJ", emissions_multiplier = 1  },
-    ["silver-ore"]    = {melting= 960, boiling=2200, heat_capacity =  "235KJ", emissions_multiplier = 1.1},
-    ["gold-ore"]      = {melting=1100, boiling=3000, heat_capacity =  "128KJ", emissions_multiplier = 0.6},
+    ["missing"]       = {melting=1100, boiling=2400, heat_capacity =    1},
+    ["iron-ore"]      = {melting=1500, boiling=3000, heat_capacity =  449},
+    ["copper-ore"]    = {melting=1100, boiling=2600, heat_capacity =  385},
+    ["stone"]         = {melting= 800, boiling=1200, heat_capacity =  225},
+    ["uranium-ore"]   = {melting=1100, boiling=4100, heat_capacity =  116},
+    ["titanium-ore"]  = {melting=1600, boiling=3200, heat_capacity =  523},
+    ["lead-ore"]      = {melting= 320, boiling=1700, heat_capacity =  131},
+    ["aluminum-ore"]  = {melting= 660, boiling=2500, heat_capacity =  897},
+    ["tungsten-ore"]  = {melting=3400, boiling=5900, heat_capacity =  138},
+    ["platin-ore"]    = {melting=1800, boiling=3800, heat_capacity =  130},
+    ["lithium-ore"]   = {melting= 180, boiling=1300, heat_capacity = 3482},
+    ["tin-ore"]       = {melting= 230, boiling=2600, heat_capacity =    1},
+    ["zinc-ore"]      = {melting= 420, boiling= 900, heat_capacity =  388},
+    ["aluminium-ore"] = {melting= 660, boiling=2500, heat_capacity =  897},
+    ["silver-ore"]    = {melting= 960, boiling=2200, heat_capacity =  235},
+    ["gold-ore"]      = {melting=1100, boiling=3000, heat_capacity =  128},
   }
 
   if not definitions[ore_name] then ore_name = "missing" end
-  return definitions[ore_name]
+  local ore_data = definitions[ore_name]
+  local f_temp = 500
+  if steam_temp_byore then
+    f_temp = math.min(ore_data.melting/4, 1000)
+    f_temp = f_temp < 500 and math.min(ore_data.melting/2, 1000) or math.min(ore_data.melting/4, 1000)
+    f_temp = math.max(f_temp, 100)
+  end
+
+  ore_data.emissions_multiplier = ore_data.heat_capacity/1000+1
+  ore_data.heat_capacity = tostring(ore_data.heat_capacity).."KJ"
+  ore_data.steam_temp = f_temp
+
+  return ore_data
 end
 
 

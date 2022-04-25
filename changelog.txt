@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.10
+Date: 2022-04-26
+  Changes:
+    - fixed missing icon on smelters and casters for mods which use the entity icon
+    - casting recipes now have a tiny drop so they are easier to spot
+    - fixed that in some rare cases the berreling technology contained 0 recipes to unlock
+---------------------------------------------------------------------------------------------------
 Version: 0.1.9
 Date: 2022-04-25
   Minor Features:

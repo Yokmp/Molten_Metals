@@ -11,10 +11,9 @@ function molten_metals.make_molten_fluid(ore_name)
     localised_name = {"", {"item-name.molten"}, " ", {"item-name."..ore_name}},
     icons = icon,
     default_temperature = molten_metals.ore_definition(ore_name).melting,
-    max_temperature = molten_metals.ore_definition(ore_name).boiling,
+    max_temperature = molten_metals.ore_definition(ore_name).boiling+1,
     gas_temperature = molten_metals.ore_definition(ore_name).boiling,
-    -- heat_capacity = "0.425KJ",
-    heat_capacity = molten_metals.ore_definition(ore_name).heat_capacity,
+    heat_capacity = molten_metals.ore_definition(ore_name).heat_capacity,    -- heat_capacity = "0.425KJ",
     emissions_multiplier = molten_metals.ore_definition(ore_name).emissions_multiplier,
     base_color = molten_metals.color.moltenmetal.base,
     flow_color = molten_metals.color.moltenmetal.flow,
@@ -23,10 +22,19 @@ function molten_metals.make_molten_fluid(ore_name)
   }
   data:extend({molten_fluid})
 
+  molten_metals.new_barreling(ore_name, molten_fluid)
+
   -- Flamethrower Ammo
   local turret = data.raw["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids
   table.insert(turret, {damage_modifier = molten_metals.ore_definition(ore_name).melting/1000, type = "molten-"..ore_name})
 
+end
+
+
+---creates new fill/empty barrel and technology
+---@param ore_name string
+---@param molten_fluid table
+function molten_metals.new_barreling(ore_name, molten_fluid)
   if mods["Fluid_Mixer"] and settings.startup["ymm-allow-barreling"].value then
     local empty_barrel_item = {
       type = "item",
@@ -41,9 +49,11 @@ function molten_metals.make_molten_fluid(ore_name)
     local icons = {ylib.icon.icons:get("Molten_Metals", "hot-barrel-tech")}
     local prerequisites = {"fluid-handling", "advanced-material-processing"}
     local ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}}
-    fluid_mixer.new_mix_technology("hot-barreling", icons, prerequisites, ingredients)
+    local tech_name = "hot-barreling"
 
-    local technology = data.raw.technology["hot-barreling"]
+    fluid_mixer.new_mix_technology(tech_name, icons, prerequisites, ingredients)
+    local technology = data.raw.technology[tech_name]
+
     if fluid_mixer.auto_barrel.can_process_fluids(molten_fluid, technology, empty_barrel_item) then -- no need to check
       fluid_mixer.auto_barrel.process_fluid(molten_fluid, technology, empty_barrel_item)
 
@@ -66,6 +76,8 @@ function molten_metals.make_molten_fluid(ore_name)
         data.raw.recipe["fill-"..molten_fluid.name.."-barrel"].icons[4] = ore_data.icons
         data.raw.recipe["empty-"..molten_fluid.name.."-barrel"].icons[4] = ore_data.icons
       end
+    elseif not ylib.util.check_table(data.raw.technology[tech_name].effects) then --remove tech so we don't end up with an empty tech
+      data.raw.technology[tech_name] = nil
     end
   end
 end
