@@ -82,7 +82,7 @@ function molten_metals.new_smelting_recipe(ore_name, recipe_name, result, enable
   amount_in[1] = amount_in[1]*(2*multiplier) -- ratio is 1:20
   amount_in[2] = amount_in[2]*(2*multiplier)
   amount_out[1] = amount_out[1]*(40*multiplier)
-  amount_out[2] = amount_out[2]*(40*multiplier)
+  amount_out[2] = amount_out[2]*(40*multiplier) -- no need to nil check here. let is burn
 
   info("new smelting recipe: molten-"..ore_name.." for: "..result)
   molten_metals.new_smelting_recipe_ext( ore_name, amount_in, amount_out, ylib.recipe.get_energy_required(recipe_name), enabled or false)
