@@ -1,7 +1,7 @@
 
 local autofill = settings.startup["ymm-allow-barreling"].value
 
----Creates a molten fluid from an ore.
+---Creates molten-fluid from ore.
 ---@param ore_name any
 function molten_metals.make_molten_fluid(ore_name)
   local icon = ylib.icon.icons["Molten_Metals"][ore_name] and {ylib.icon.icons:get("Molten_Metals", ore_name)} or molten_metals.get_composed_icon(ore_name)
@@ -10,9 +10,12 @@ function molten_metals.make_molten_fluid(ore_name)
     name = "molten-"..ore_name,
     localised_name = {"", {"item-name.molten"}, " ", {"item-name."..ore_name}},
     icons = icon,
-    default_temperature = molten_metals.ore_definition(ore_name).min,
-    max_temperature = molten_metals.ore_definition(ore_name).max,
-    heat_capacity = "0.425KJ",
+    default_temperature = molten_metals.ore_definition(ore_name).melting,
+    max_temperature = molten_metals.ore_definition(ore_name).boiling,
+    gas_temperature = molten_metals.ore_definition(ore_name).boiling,
+    -- heat_capacity = "0.425KJ",
+    heat_capacity = molten_metals.ore_definition(ore_name).heat_capacity,
+    emissions_multiplier = molten_metals.ore_definition(ore_name).emissions_multiplier,
     base_color = molten_metals.color.moltenmetal.base,
     flow_color = molten_metals.color.moltenmetal.flow,
     order = "m[molten-"..ore_name.."]",

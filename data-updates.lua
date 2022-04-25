@@ -18,7 +18,6 @@ require("util.fluids")
 require("util.recipe")
 require("util.technology")
 
-require("prototypes.vanilla.pipepictures")
 require("prototypes.vanilla.entities")
 require("prototypes.vanilla.machines")
 require("prototypes.vanilla.slag")

@@ -38,10 +38,10 @@ ylib.technology.add_effect(tech, "molten-rail")
 
 
 -- SMELTING
-new_smelting_recipe("iron-ore", "iron-plate")
-new_smelting_recipe("copper-ore", "copper-plate")
-new_smelting_recipe("stone", "stone-brick")
-new_smelting_recipe("uranium-ore", "uranium-processing", "uranium-238", false, 1) --//TODO BALANCING!!!!
+molten_metals.new_smelting_recipe("iron-ore", "iron-plate")
+molten_metals.new_smelting_recipe("copper-ore", "copper-plate")
+molten_metals.new_smelting_recipe("stone", "stone-brick")
+molten_metals.new_smelting_recipe("uranium-ore", "uranium-processing", "uranium-238", false, 1)
 for _, value in pairs(data.raw.recipe["molten-uranium-ore"].normal.results) do
   if value.name == "molten-uranium-ore" then value.amount = 400 end
 end
@@ -52,20 +52,20 @@ end
 
 
 -- CASTING
-new_casting_recipe("copper-ore", "copper-ore", "copper-plate")
-new_casting_recipe("copper-ore", "copper-plate", "copper-cable")
-new_casting_recipe("iron-ore", "iron-ore", "iron-plate")
-new_casting_recipe("iron-ore", "iron-plate", "steel-plate", {1.6,2})
-new_casting_recipe("iron-ore", "iron-plate", "iron-gear-wheel", {1,1})
-new_casting_recipe("iron-ore", "iron-plate", "iron-stick", {1,1})
-new_casting_recipe_ext("iron-ore", "rail", {110,110}, {2,2}) --//TODO combined ingredients (iron+steel)
--- new_casting_recipe("iron-ore", "steel-plate", "rail")
+molten_metals.new_casting_recipe("copper-ore", "copper-ore", "copper-plate", {2,3})
+molten_metals.new_casting_recipe("copper-ore", "copper-plate", "copper-cable")
+molten_metals.new_casting_recipe("iron-ore", "iron-ore", "iron-plate", {2,3})
+molten_metals.new_casting_recipe("iron-ore", "iron-plate", "steel-plate", {1.6,2})
+molten_metals.new_casting_recipe("iron-ore", "iron-plate", "iron-gear-wheel", {1,1})
+molten_metals.new_casting_recipe("iron-ore", "iron-plate", "iron-stick", {1,1})
+molten_metals.new_casting_recipe_ext("iron-ore", "rail", {110,110}, {2,2}) --//TODO combined ingredients (iron+steel)
+-- molten_metals.new_casting_recipe("iron-ore", "steel-plate", "rail")
 -- table.insert(data.raw.recipe["molten-rail"].ingredients, {type = "item", name = "stone", amount = 1}) -- need fluid mixer soon
-new_casting_recipe("stone", "stone", "stone-brick") -- 12:120:3 -> 4:1 vanilla 2:1
--- new_casting_recipe_ext("stone", "stone-brick", {40}, {2}) -- 20:1
+molten_metals.new_casting_recipe("stone", "stone", "stone-brick") -- 12:120:3 -> 4:1 vanilla 2:1
+-- molten_metals.new_casting_recipe_ext("stone", "stone-brick", {40}, {2}) -- 20:1
 
-new_casting_recipe_ext("uranium-ore", "uranium-235", {2000,2000}, {1,1}, ylib.recipe.get_energy_required("uranium-processing"))
-new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, ylib.recipe.get_energy_required("uranium-processing"))
+molten_metals.new_casting_recipe_ext("uranium-ore", "uranium-235", {2000,2000}, {1,1}, ylib.recipe.get_energy_required("uranium-processing"))
+molten_metals.new_casting_recipe_ext("uranium-ore", "uranium-238", {200,200}, {1,1}, ylib.recipe.get_energy_required("uranium-processing"))
 data.raw.recipe["molten-uranium-238"].normal.results = {
   {type = "item", name = "uranium-238", amount = 1, probability = 0.993},
   {type = "item", name = "uranium-235", amount = 1, probability = 0.007},

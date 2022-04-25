@@ -1,8 +1,20 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.9
+Date: 2022-04-23
+  Minor Features:
+    - new setting lets you set a variable steam temperature which is calculated from the ores melting points
+  Changes:
+    - steam temperature is now 500°C, making it usable in lategame
+    - iron/copper-ore to plate ratio is now 2:3 from 1:1
+    - increased pollution
+    - increased energy consumption to balance out new ratio
+    - heat_capacity and emissions_multiplier added to fluids
+---------------------------------------------------------------------------------------------------
 Version: 0.1.8
 Date: 2022-04-23
   Changes:
     - fixed slag-pellet spelling
+    - technologies whitch unlock casting recipes now have a molten-ore drop on top to make them easier to find
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.7
 Date: 2022-04-23

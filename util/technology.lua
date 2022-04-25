@@ -39,50 +39,50 @@ end
 ---@param localized_name? string omittable if icon and locale names match
 function molten_metals.new_technology(tech_name, icon_name, parent_name, localized_name)
   molten_metals.new_technology_ext(tech_name, icon_name, {}, {}, localized_name or icon_name)
-  molten_metals.technology_set_parent(tech_name, parent_name)
+  ylib.technology.set_parent(tech_name, parent_name)
 end
 
 
----Adds a recipe as effect to a technology
----@param technology_name string
----@param recipe_name string
-function molten_metals.technology_add_effect(technology_name, recipe_name)
-  if data.raw.technology[technology_name] and data.raw.technology[technology_name].effects then
-    table.insert(data.raw.technology[technology_name].effects, { type = "unlock-recipe", recipe = recipe_name })
-    info("added "..recipe_name.." to ".. technology_name)
-  else
-    log("Unknown technology or missing key: "..tostring(technology_name))
-  end
-end
+-- ---Adds a recipe as effect to a technology
+-- ---@param technology_name string
+-- ---@param recipe_name string
+-- function molten_metals.technology_add_effect(technology_name, recipe_name)
+--   if data.raw.technology[technology_name] and data.raw.technology[technology_name].effects then
+--     table.insert(data.raw.technology[technology_name].effects, { type = "unlock-recipe", recipe = recipe_name })
+--     info("added "..recipe_name.." to ".. technology_name)
+--   else
+--     log("Unknown technology or missing key: "..tostring(technology_name))
+--   end
+-- end
 
 
----Returns the prerequisites of a technology
----@param tech_name string
----@return table
-function molten_metals.technology_get_prerequisites(tech_name)
-  if data.raw.technology[tech_name] then
-    return util.table.deepcopy(data.raw.technology[tech_name].prerequisites)
-  end
-  info("Technology "..tech_name.." has no prerequisites!")
-  return {}
-end
+-- ---Returns the prerequisites of a technology
+-- ---@param tech_name string
+-- ---@return table
+-- function molten_metals.technology_get_prerequisites(tech_name)
+--   if data.raw.technology[tech_name] then
+--     return util.table.deepcopy(data.raw.technology[tech_name].prerequisites)
+--   end
+--   info("Technology "..tech_name.." has no prerequisites!")
+--   return {}
+-- end
 
 
----Sets the parent of a technology which inherits all prerequisites and ingredients of the parent
----@param tech_name string
----@param parent_name string
----@param use_prerequisites boolean
-function molten_metals.technology_set_parent(tech_name, parent_name, use_prerequisites)
-  use_prerequisites = use_prerequisites or true
-  local prereq = molten_metals.technology_get_prerequisites(parent_name)
+-- ---Sets the parent of a technology which inherits all prerequisites and ingredients of the parent
+-- ---@param tech_name string
+-- ---@param parent_name string
+-- ---@param use_prerequisites boolean
+-- function molten_metals.technology_set_parent(tech_name, parent_name, use_prerequisites)
+--   use_prerequisites = use_prerequisites or true
+--   local prereq = molten_metals.technology_get_prerequisites(parent_name)
 
-  if data.raw.technology[tech_name] and data.raw.technology[parent_name] then
-    if use_prerequisites then table.insert(prereq, parent_name) end
-    data.raw.technology[tech_name].prerequisites = prereq
-    data.raw.technology[tech_name].unit.ingredients = util.table.deepcopy(data.raw.technology[parent_name].unit.ingredients)
-  end
+--   if data.raw.technology[tech_name] and data.raw.technology[parent_name] then
+--     if use_prerequisites then table.insert(prereq, parent_name) end
+--     data.raw.technology[tech_name].prerequisites = prereq
+--     data.raw.technology[tech_name].unit.ingredients = util.table.deepcopy(data.raw.technology[parent_name].unit.ingredients)
+--   end
 
-end
+-- end
 
 
 ---Returns icons for technology

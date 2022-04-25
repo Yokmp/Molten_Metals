@@ -40,7 +40,7 @@ local autofill = {
     localised_name = {"", "[img=hot-barrel-symbol]", " - ", {"mod-setting-name.ymm-allow-barreling"}},
     setting_type = "startup",
     default_value = false,
-    order = "ab",
+    order = "aa",
     hidden = true
   }
 
@@ -52,7 +52,16 @@ data:extend({
   autofill,
   {
     type = "bool-setting",
+    name = "ymm-steam-ore-temp",
+    localised_name = {"", "[fluid=steam]", " - ", {"mod-setting-name.ymm-steam-ore-temp"}},
+    setting_type = "startup",
+    default_value = false,
+    order = "ab"
+  },
+  {
+    type = "bool-setting",
     name = "ymm-enable-slag",
+    localised_name = {"", "[item=slag-stone]", " - ", {"mod-setting-name.ymm-enable-slag"}},
     setting_type = "startup",
     default_value = true,
     order = "b"
@@ -60,6 +69,7 @@ data:extend({
   {
     type = "bool-setting",
     name = "ymm-replace-steel-furnace",
+    localised_name = {"", "[item=steel-furnace]", " - ", {"mod-setting-name.ymm-replace-steel-furnace"}},
     setting_type = "startup",
     default_value = true,
     order = "c"
@@ -67,6 +77,7 @@ data:extend({
   {
     type = "bool-setting",
     name = "ymm-replace-electric-furnace",
+    localised_name = {"", "[item=electric-furnace]", " - ", {"mod-setting-name.ymm-replace-electric-furnace"}},
     setting_type = "startup",
     default_value = true,
     order = "d"
@@ -74,6 +85,7 @@ data:extend({
   {
     type = "bool-setting",
     name = "ymm-use-old-icons",
+    localised_name = {"", "[item=basic-caster-old]", " - ", {"mod-setting-name.ymm-use-old-icons"}},
     setting_type = "startup",
     default_value = false,
     order = "e"

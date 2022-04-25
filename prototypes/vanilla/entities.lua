@@ -49,12 +49,14 @@ data:extend({
     },
     source_inventory_size = 1,
     result_inventory_size = 1,
-		energy_usage = "270kW",
+		-- energy_usage = "270kW",
+    energy_usage = "1800kW",
     energy_source = {
       type = "burner",
       fuel_category = "chemical",
       effectivity = 1,
-      emissions_per_minute = 4,
+      -- emissions_per_minute = 4,
+      emissions_per_minute = 40,
       fuel_inventory_size = 1,
       light_flicker =
       {
@@ -218,7 +220,7 @@ data:extend({
       {
         production_type = "output",
         -- minimum_temperature = 150.0,
-  			-- maximum_temperature = 1500.0,
+        -- maximum_temperature = 1500.0,
         pipe_covers = pipecoverspictures(),
         pipe_picture = ylib.util.assembler1pipepictures(),
         base_area = 2, -- 1 = 100
@@ -285,11 +287,13 @@ data:extend({
       fade_in_ticks = 4,
       fade_out_ticks = 20
     },
-    energy_usage = "525kW",
+    -- energy_usage = "525kW",
+    energy_usage = "3600kW",
 		energy_source = {
 			type = "electric",
 			usage_priority = "secondary-input",
-      emissions_per_minute = 1,
+      -- emissions_per_minute = 1,
+      emissions_per_minute = 20,
 			smoke =	{
 				{
 					name = "smoke",
@@ -463,7 +467,7 @@ data:extend({
       {
         production_type = "output",
         -- minimum_temperature = 1100.0,
-  			-- maximum_temperature = 3000.0,
+        -- maximum_temperature = 3000.0,
         pipe_covers = pipecoverspictures(),
         pipe_picture = ylib.util.assembler1pipepictures(),
         base_level = 1,
@@ -540,7 +544,8 @@ data:extend({
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
-      emissions_per_minute = 3,
+      -- emissions_per_minute = 3,
+      emissions_per_minute = 8,
     },
     animation = make_4way_animation_from_spritesheet({
       layers = {
@@ -753,60 +758,60 @@ data:extend({
     },
     -- target_temperature = 500,
     fluid_boxes = {
-  		{ -- back top METAL
-  			production_type = "input",
-  			-- minimum_temperature = 150.0, -- min iron
-  			-- maximum_temperature = 1500.0, -- max copper
-  			pipe_covers = pipecoverspictures(),
-  			base_area = 2,
-  			base_level = -1,
-  			pipe_connections = {
-  				{
-  					type = "input",
-  					position = { -1, -2}
-  				}
-  			}
-  		},
-  		{ --back bottom WATER
-  			production_type = "input",
-  			-- filter = "water",
+      { -- back top METAL
+        production_type = "input",
+        -- minimum_temperature = 150.0, -- min iron
+        -- maximum_temperature = 1500.0, -- max copper
+        pipe_covers = pipecoverspictures(),
+        base_area = 2,
+        base_level = -1,
+        pipe_connections = {
+          {
+            type = "input",
+            position = { -1, -2}
+          }
+        }
+      },
+      { --back bottom WATER
+        production_type = "input",
+        -- filter = "water",
         maximum_temperature = 100.0,
-  			pipe_covers = pipecoverspictures(),
-  			base_area = 2,
-  			base_level = -1,
-  			pipe_connections = {
-  				{
-  					type = "input",
-  					position = { 1, -2}
-  				}
-  			}
-  		},
-  		{ --back bottom STEAM
-  			production_type = "output",
-        maximum_temperature = 166.0,
-  			-- filter = "waste-water",
-  			pipe_covers = pipecoverspictures(),
-  			base_level = 1,
-  			pipe_connections = {
-  				{
-  					type = "output",
-  					position = { -1, 2}
-  				}
-  			}
-  		},
-  		{ --back bottom UNUSED
-  			production_type = "output",
-        maximum_temperature = 166.0,
-  			-- filter = "waste-water",
-  			pipe_covers = pipecoverspictures(),
-  			base_level = 1,
-  			pipe_connections = {
-  				{
-  					type = "output",
-  					position = { 1, 2}
-  				}
-  			}
-  		},
+        pipe_covers = pipecoverspictures(),
+        base_area = 2,
+        base_level = -1,
+        pipe_connections = {
+          {
+            type = "input",
+            position = { 1, -2}
+          }
+        }
+      },
+      { --back bottom STEAM
+        production_type = "output",
+        -- maximum_temperature = 166.0,
+        -- filter = "waste-water",
+        pipe_covers = pipecoverspictures(),
+        base_level = 1,
+        pipe_connections = {
+          {
+            type = "output",
+            position = { -1, 2}
+          }
+        }
+      },
+      { --back bottom UNUSED
+        production_type = "output",
+        -- maximum_temperature = 166.0,
+        -- filter = "waste-water",
+        pipe_covers = pipecoverspictures(),
+        base_level = 1,
+        pipe_connections = {
+          {
+            type = "output",
+            position = { 1, 2}
+          }
+        }
+      },
     },
     water_reflection = {
       pictures =
@@ -873,7 +878,8 @@ data:extend({
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
-      emissions_per_minute = 2,
+      -- emissions_per_minute = 2,
+      emissions_per_minute = 10,
     },
     animation = make_4way_animation_from_spritesheet({
       layers = {
@@ -1087,46 +1093,46 @@ data:extend({
       }
     },
     -- target_temperature = 500,
-  	fluid_boxes = {
-  		{ -- back top METAL
-  			production_type = "input",
-  			-- minimum_temperature = 1600.0, -- min iron
-  			-- maximum_temperature = 3000.0, -- max copper
-  			pipe_covers = pipecoverspictures(),
-  			base_area = 1,
-  			base_level = -1,
-  			pipe_connections = {
-  				{
-  					type = "input",
-  					position = { -1, -2}
-  				}
-  			}
-  		},
-  		{ --back bottom WATER
-  			production_type = "input",
-  			-- filter = "water",
-  			pipe_covers = pipecoverspictures(),
-  			base_area = 1,
-  			base_level = -1,
-  			pipe_connections = {
-  				{
-  					type = "input",
-  					position = { 1, -2}
-  				}
-  			}
-  		},
-  		{ --back bottom STEAM
-  			production_type = "output",
-  			-- filter = "waste-water",
-  			pipe_covers = pipecoverspictures(),
-  			base_level = 1,
-  			pipe_connections = {
-  				{
-  					type = "output",
-  					position = { -1, 2}
-  				}
-  			}
-  		},
+    fluid_boxes = {
+      { -- back top METAL
+        production_type = "input",
+        -- minimum_temperature = 1600.0, -- min iron
+        -- maximum_temperature = 3000.0, -- max copper
+        pipe_covers = pipecoverspictures(),
+        base_area = 1,
+        base_level = -1,
+        pipe_connections = {
+          {
+            type = "input",
+            position = { -1, -2}
+          }
+        }
+      },
+      { --back bottom WATER
+        production_type = "input",
+        -- filter = "water",
+        pipe_covers = pipecoverspictures(),
+        base_area = 1,
+        base_level = -1,
+        pipe_connections = {
+          {
+            type = "input",
+            position = { 1, -2}
+          }
+        }
+      },
+      { --back bottom STEAM
+        production_type = "output",
+        -- filter = "waste-water",
+        pipe_covers = pipecoverspictures(),
+        base_level = 1,
+        pipe_connections = {
+          {
+            type = "output",
+            position = { -1, 2}
+          }
+        }
+      },
       { --back bottom UNUSED
       production_type = "output",
       maximum_temperature = 166.0,
@@ -1140,7 +1146,7 @@ data:extend({
         }
       }
     },
-  	},
+    },
     water_reflection = {
       pictures =
       {
