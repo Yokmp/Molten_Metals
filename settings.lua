@@ -52,6 +52,14 @@ data:extend({
   autofill,
   {
     type = "bool-setting",
+    name = "ymm-fp-workaround",
+    localised_name = {"", "[img=info]", " - Workaround: ", {"mod-setting-name.ymm-fp-workaround"}},
+    setting_type = "startup",
+    default_value = false,
+    order = "aaa-temporary"
+  },
+  {
+    type = "bool-setting",
     name = "ymm-steam-ore-temp",
     localised_name = {"", "[fluid=steam]", " - ", {"mod-setting-name.ymm-steam-ore-temp"}},
     setting_type = "startup",

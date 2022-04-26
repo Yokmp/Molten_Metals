@@ -1,6 +1,7 @@
 ---@diagnostic disable: need-check-nil
 
 local use_slag = settings.startup["ymm-enable-slag"].value
+local disable_temperatures = settings.startup["ymm-fp-workaround"].value
 
 
 
@@ -16,7 +17,12 @@ function molten_metals.new_smelting_recipe_ext(ore_name, amount_in, amount_out, 
   energy = energy or {0.5,0.5} --{3.2,3.2}
   enabled = enabled or {false, false}
   local temperature = molten_metals.ore_definition(ore_name).melting
-  -- info("New molten-"..ore_name.." {"..amount_in[1]..", "..amount_in[2].."},".." {"..amount_out[1]..", "..amount_out[2].."}")
+
+--!- Factory Planner Workaround
+if disable_temperatures then
+  temperature = nil
+end
+
 
   local recipe =  {
     type = "recipe",
@@ -54,6 +60,7 @@ function molten_metals.new_smelting_recipe_ext(ore_name, amount_in, amount_out, 
       }
     }
   }
+
   if use_slag then
     local slag_normal = {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.floor(amount_out[1]/10), probability = 0.24}
     local slag_expensive = {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.floor(amount_out[2]/10), probability = 0.24}
@@ -106,7 +113,12 @@ function molten_metals.new_casting_recipe_ext(fluid_name, result_name, amount_in
   local f_result = "steam"
   local f_temp = temperature.steam_temp
 
-  data:extend({{
+--!- Factory Planner Workaround
+if disable_temperatures then
+  temperature.melting = nil
+end
+
+  local recipe = {
     type = "recipe",
     name = "molten-"..result_name,
     icons = {ylib.icon.get_icon(result_name), ylib.icon.icons:get("Molten_Metals", "molten-drop-result", 0.5, {0,-6})},
@@ -125,12 +137,11 @@ function molten_metals.new_casting_recipe_ext(fluid_name, result_name, amount_in
       enabled = enabled[1],
       energy_required = energy[1], -- 1.6 (3.2 at speed 2)
       ingredients = {
-        {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[1], temperature = temperature.min},
+        {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[1], temperature = temperature.melting},
         {type = "fluid", name = "water", amount = math.floor((amount_in[1]*1.8)/10)*10}
       },
       results = {
         {type = "item",  name = result_name, amount = amount_out[1]},
-        -- {type = "fluid", name = "steam", amount = amount_in[1]*2.5, temperature = 165}
         {type = "fluid", name = f_result, amount = 12, temperature = f_temp}
       }
     },
@@ -139,16 +150,17 @@ function molten_metals.new_casting_recipe_ext(fluid_name, result_name, amount_in
       enabled = enabled[2],
       energy_required = energy[2],
       ingredients = {
-        {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[2], temperature = temperature.min},
+        {type = "fluid", name = "molten-"..fluid_name, amount = amount_in[2], temperature = temperature.melting},
         {type = "fluid", name = "water", amount = math.ceil(amount_in[1]*2.2)}
       },
       results = {
         {type = "item",  name = result_name, amount = amount_out[2]},
-        -- {type = "fluid", name = "steam", amount = amount_in[1]*3.75, temperature = 165}
         {type = "fluid", name = f_result, amount = 6, temperature = f_temp}
       }
     }
-  }})
+  }
+
+data:extend({recipe})
 end
 -- make_new_casting_recipe("iron-ore", "iron-plate", {20,20}, {1,1}, {1.6,1.6})
 -- log(serpent.block(data.raw.recipe["molten-iron-plate"]))

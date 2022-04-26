@@ -6,6 +6,7 @@ Date: 2022-04-26
     - casting recipes now have a tiny drop so they are easier to spot
     - fixed that in some rare cases the berreling technology contained 0 recipes to unlock
     - fixed molten uranium steam has 165°C instead of 500°C
+    - added a workaround if you have problems with tools like Factory Planner to disable temperatures of molten products
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.9
 Date: 2022-04-25
