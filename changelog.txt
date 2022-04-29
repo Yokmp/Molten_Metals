@@ -1,12 +1,22 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.11
+Date: 2022-04-29
+  Minor Features:
+    - new option to reset technology effects; untick after use!
+  Changes:
+    - fixed that recipes with steel/electric-furnace as ingredients aren't replaced when set to do so
+    - fixed an issue preventing technology effects containing these furnaces to unlock associated recipes
+    - fixed order of casters, they're now grouped together behind the chemical-plant
+---------------------------------------------------------------------------------------------------
 Version: 0.1.10
 Date: 2022-04-26
+  Minor Features:
+    - added a workaround if you have problems with tools like Factory Planner to disable temperatures of molten products
   Changes:
     - fixed missing icon on smelters and casters for mods which use the entity icon
     - casting recipes now have a tiny drop so they are easier to spot
-    - fixed that in some rare cases the berreling technology contained 0 recipes to unlock
+    - fixed that in some rare cases the barreling technology contained 0 recipes to unlock
     - fixed molten uranium steam has 165°C instead of 500°C
-    - added a workaround if you have problems with tools like Factory Planner to disable temperatures of molten products
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.9
 Date: 2022-04-25

@@ -5,6 +5,7 @@ for _, force in pairs(game.forces) do
   -- recipes[""].enabled = technologies[""].researched
 
   if technologies["advanced-material-processing"].researched then
+    recipes["steel-furnace"].enabled = true
     recipes["basic-caster"].enabled = true
     recipes["basic-smelter"].enabled = true
     recipes["molten-iron-ore"].enabled = true
@@ -19,6 +20,7 @@ for _, force in pairs(game.forces) do
       recipes["molten-rail"].enabled = true
     end
     if technologies["advanced-material-processing-2"] then
+      recipes["electric-furnace"].enabled = true
       recipes["advanced-smelter"].enabled = true
       recipes["advanced-caster"].enabled = true
     end

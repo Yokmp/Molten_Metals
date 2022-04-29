@@ -54,9 +54,19 @@ data:extend({
     type = "bool-setting",
     name = "ymm-fp-workaround",
     localised_name = {"", "[img=info]", " - Workaround: ", {"mod-setting-name.ymm-fp-workaround"}},
+    localised_description = {"", "This is a workaround for some mods like [font=default-boldFactory Planner[/font] which don't work well with temperatures on fluids."},
     setting_type = "startup",
     default_value = false,
-    order = "aaa-temporary"
+    order = "ab"
+  },
+  {
+    type = "bool-setting",
+    name = "ymm-reset-effects",
+    localised_name = {"", "[img=info]", " - Reset technology effects"},
+    localised_description = {"", "Unlock all recipes from already researched technologies again.\nUse this [font=default-bold]ONLY[/font] if you add this mod to an already existing save or if you run into some kind of deadlock.\n\n[color=red]Disable this option after loading and saving your game.[/color]"},
+    setting_type = "startup",
+    default_value = false,
+    order = "ac"
   },
   {
     type = "bool-setting",
@@ -64,7 +74,7 @@ data:extend({
     localised_name = {"", "[fluid=steam]", " - ", {"mod-setting-name.ymm-steam-ore-temp"}},
     setting_type = "startup",
     default_value = false,
-    order = "ab"
+    order = "ba"
   },
   {
     type = "bool-setting",
@@ -72,7 +82,7 @@ data:extend({
     localised_name = {"", "[item=slag-stone]", " - ", {"mod-setting-name.ymm-enable-slag"}},
     setting_type = "startup",
     default_value = true,
-    order = "b"
+    order = "bb"
   },
   {
     type = "bool-setting",

@@ -62,7 +62,7 @@ data:extend({
     icons = {ylib.icon.icons:get("Molten_Metals", "basic-smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
-    order = "b[basic-smelter]",
+    order = data.raw.item["steel-furnace"].order or "b[basic-smelter]",
     place_result = "basic-smelter",
     stack_size = 50
   },
@@ -72,7 +72,7 @@ data:extend({
     icons = {ylib.icon.icons:get("Molten_Metals", "advanced-smelter")},
     group = "furnace",
     subgroup = "smelting-machine",
-    order = "c[advanced-smelter]",
+    order = data.raw.item["electric-furnace"].order or "c[advanced-smelter]",
     place_result = "advanced-smelter",
     stack_size = 50
   },
@@ -81,7 +81,7 @@ data:extend({
     name = "basic-caster",
     icons = settings.startup["ymm-use-old-icons"].value and {ylib.icon.icons:get("Molten_Metals", "basic-caster-old")} or {ylib.icon.icons:get("Molten_Metals", "basic-caster")},
     subgroup = "production-machine",
-    order = "e[basic-caster]",
+    order = "f[basic-caster]",
     place_result = "basic-caster",
     stack_size = 50
   },
@@ -90,7 +90,7 @@ data:extend({
     name = "advanced-caster",
     icons = settings.startup["ymm-use-old-icons"].value and {ylib.icon.icons:get("Molten_Metals", "advanced-caster-old")} or {ylib.icon.icons:get("Molten_Metals", "advanced-caster")},
     subgroup = "production-machine",
-    order = "f[advanced-caster]",
+    order = "g[advanced-caster]",
     place_result = "advanced-caster",
     stack_size = 50
   },

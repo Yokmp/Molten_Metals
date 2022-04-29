@@ -94,22 +94,23 @@ if replace_steel_furnace then
   data.raw["furnace"]["steel-furnace"].next_upgrade = "basic-smelter"
   data.raw["furnace"]["steel-furnace"].minable.result = "basic-smelter"
   data.raw["furnace"]["stone-furnace"].next_upgrade = "basic-smelter"
-  local steel_furnace = ylib.recipe.get_byingredient("steel-furnace")
-  if #steel_furnace > 0 then
-    for i, recipe in ipairs(steel_furnace) do
-      ylib.recipe.replace_ingredient(recipe, "steel-furnace", "basic-smelter")
+
+  for _, recipe in pairs(data.raw.recipe) do
+    if ylib.recipe.has_ingredient(recipe.name, "steel-furnace") then
+      ylib.recipe.replace_ingredient(recipe.name, "steel-furnace", "basic-smelter")
     end
   end
 end
 if replace_electric_furnace then
+  log("REPLACING ELECTRIC-FURNACE")
   table.insert(data.raw.recipe["advanced-smelter"], ylib.recipe.get_ingredients("electric-furnace"))
   data.raw.item["electric-furnace"].flags = {"hidden"}
   data.raw.item["electric-furnace"].minable_result = "advanced-smelter"
   data.raw.item["electric-furnace"].next_upgrade = "advanced-smelter"
-  local electric_furnace = ylib.recipe.get_byingredient("electric-furnace")
-  if #electric_furnace > 0 then
-    for _, recipe in ipairs(electric_furnace) do
-      ylib.recipe.replace_ingredient(recipe, "electric-furnace", "advanced-smelter")
+
+  for _, recipe in pairs(data.raw.recipe) do
+    if ylib.recipe.has_ingredient(recipe.name, "electric-furnace") then
+      ylib.recipe.replace_ingredient(recipe.name, "electric-furnace", "advanced-smelter")
     end
   end
 end
