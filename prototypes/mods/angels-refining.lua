@@ -5,6 +5,8 @@ if mods["angelsrefining"] then
     molten_metals.new_smelting_recipe(item, item.."-smelting", result)
     ylib.recipe.replace_result_name("molten-"..item, "molten-"..item, "molten-"..fluid)
     ylib.recipe.set_main_product("molten-"..item, "molten-"..fluid)
+    local temp = molten_metals.ore_definition(fluid).melting
+    ylib.recipe.set_result_temperature("molten-"..item, {temp,temp}, "molten-")
 --//TODO Molten icon composer
     local icon = ylib.icon.get_item_icon(item)
     icon.scale = 32/icon.icon_size
@@ -12,8 +14,6 @@ if mods["angelsrefining"] then
     local drop = ylib.icon.icons:get("Molten_Metals", "molten-drop")
     data.raw.recipe["molten-"..item].icons = {icon, drop}
   end
-
-log(serpent.block(data.raw.item["angels-iron-pebbles"]))
 
 
   smelting("angels-iron-pebbles", "iron-ore", "iron-plate")
