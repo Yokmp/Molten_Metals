@@ -24,7 +24,7 @@ require("prototypes.vanilla.slag")
 require("prototypes.vanilla.technology")
 require("prototypes.vanilla.create")
 
-require("prototypes.mods.bz-mods")
+
 
 -- log(serpent.block(data.raw["fluid-turret"]["flamethrower-turret"].attack_parameters.fluids))
 

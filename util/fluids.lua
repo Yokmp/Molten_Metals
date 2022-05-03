@@ -36,6 +36,7 @@ end
 ---@param molten_fluid table
 function molten_metals.new_barreling(ore_name, molten_fluid)
   if mods["Fluid_Mixer"] and settings.startup["ymm-allow-barreling"].value then
+    -- if not data.raw.resource[ore_name] then return end
     local empty_barrel_item = {
       type = "item",
       name = "empty-barrel",
@@ -57,11 +58,15 @@ function molten_metals.new_barreling(ore_name, molten_fluid)
     if fluid_mixer.auto_barrel.can_process_fluids(molten_fluid, technology, empty_barrel_item) then -- no need to check
       fluid_mixer.auto_barrel.process_fluid(molten_fluid, technology, empty_barrel_item)
 
+
+      --//TODO rewrite with ylib.icon.get_icon()
+
       data.raw.item["molten-"..ore_name.."-barrel"].icons[4]=ylib.icon.get_item_icon(ore_name)
       data.raw.item["molten-"..ore_name.."-barrel"].icons[4].scale = 0.25
       data.raw.item["molten-"..ore_name.."-barrel"].icons[4].shift = {-6,6}
 
-      local ore_data = data.raw.resource[ore_name]
+      -- local ore_data = data.raw.resource[ore_name]
+      local ore_data = data.raw.item[ore_name]
       if ore_data.icon then
         local ore_icon = {
         icon = ore_data.icon,
@@ -76,6 +81,8 @@ function molten_metals.new_barreling(ore_name, molten_fluid)
         data.raw.recipe["fill-"..molten_fluid.name.."-barrel"].icons[4] = ore_data.icons
         data.raw.recipe["empty-"..molten_fluid.name.."-barrel"].icons[4] = ore_data.icons
       end
+
+
     elseif not ylib.util.check_table(data.raw.technology[tech_name].effects) then --remove tech so we don't end up with an empty tech
       data.raw.technology[tech_name] = nil
     end

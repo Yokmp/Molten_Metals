@@ -26,6 +26,7 @@ ylib.technology.add_effect(tech, "molten-iron-plate")
 ylib.technology.add_effect(tech, "molten-copper-plate")
 ylib.technology.add_effect(tech, "molten-stone-brick")
 ylib.technology.add_effect(tech, "molten-steel-plate")
+ylib.technology.add_effect(tech, "slag-to-stone")
 
 tech = "advanced-material-processing-2"
 data.raw.technology[tech].icons = {ylib.icon.icons:get("Molten_Metals", "advanced-smelting")}
@@ -102,7 +103,7 @@ if replace_steel_furnace then
   end
 end
 if replace_electric_furnace then
-  log("REPLACING ELECTRIC-FURNACE")
+  log("Replacing electric-furnace")
   table.insert(data.raw.recipe["advanced-smelter"], ylib.recipe.get_ingredients("electric-furnace"))
   data.raw.item["electric-furnace"].flags = {"hidden"}
   data.raw.item["electric-furnace"].minable_result = "advanced-smelter"

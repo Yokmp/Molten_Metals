@@ -62,8 +62,8 @@ end
   }
 
   if use_slag then
-    local slag_normal = {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.floor(amount_out[1]/10), probability = 0.24}
-    local slag_expensive = {type = "item", name = "slag-stone", amount_min = 1, amount_max = math.floor(amount_out[2]/10), probability = 0.24}
+    local slag_normal = {type = "item", name = "slag", amount_min = 1, amount_max = math.floor(amount_out[1]/10), probability = 0.24}
+    local slag_expensive = {type = "item", name = "slag", amount_min = 1, amount_max = math.floor(amount_out[2]/10), probability = 0.24}
     table.insert(recipe.normal.results, slag_normal)
     table.insert(recipe.expensive.results, slag_expensive)
   end

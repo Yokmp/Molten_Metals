@@ -1,11 +1,14 @@
 {
   "name": "Molten_Metals",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "title": "Molten Metals",
   "author": "yokmp",
   "contact": "yokmp.sfgmail.com",
   "factorio_version": "1.1",
   "homepage": "https://github.com/Yokmp/Molten_Metals",
-  "dependencies": ["base >= 1.0.0", "ylib >= 0.0.3", "? Fluid_Mixer"],
+  "dependencies": ["base >= 1.0.0",
+                  "ylib >= 0.0.4",
+                  "? Fluid_Mixer",
+                  "? angelsrefining >= 0.12.1"],
   "description": "Ores now need to be molten and casted."
 }

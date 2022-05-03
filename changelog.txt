@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.12
+Date: 2022-05-02
+  Minor Features:
+    - basic integration into angels refining
+  Changes:
+    - slagstone can now be processed into regular stone to prevent stockpiling until slag recycling is researched
+---------------------------------------------------------------------------------------------------
 Version: 0.1.11
 Date: 2022-04-29
   Minor Features:

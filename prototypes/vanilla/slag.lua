@@ -1,20 +1,31 @@
 
+local slag = data.raw.item.slag
+local slag_icon_small = ylib.icon.icons:get("Molten_Metals", "slag-stone", 0.25, {-8,-8})
+if not slag then
+  slag = {
+    type = "item",
+    name = "slag",
+    icons = {ylib.icon.icons:get("Molten_Metals", "slag-stone")},
+    -- subgroup = "terrain",
+    order = "f[copper-ore]",
+    stack_size = 100
+  }
+else
+  slag_icon_small = ylib.icon.get_item_icon("slag")
+  slag_icon_small.scale = 0.25
+  slag_icon_small.shift = {-8,-8}
+  slag_icon_small.tint = nil
+end
+
 data:extend({
   ----------
   -- ITEM --
   ----------
-  {
-    type = "item",
-    name = "slag-stone",
-    icons = {ylib.icon.icons:get("Molten_Metals", "slag-stone")},
-    subgroup = "terrain",
-    order = "f[copper-ore]",
-    stack_size = 100
-  },
+  slag,
   -- {
   --   type = "item",
   --   name = "slag-powder",
-    -- icons = ylib.icon.icons:get("Molten_Metals", "slag-powder"),
+  --   icons = ylib.icon.icons:get("Molten_Metals", "slag-powder"),
   --   subgroup = "intermediate-product",
   --   order = "c[iron-gear-wheel]",
   --   stack_size = 200
@@ -46,7 +57,7 @@ data:extend({
   --   enabled = false,
   --   energy_required = 0.5,
   --   ingredients = {
-  --     {type = "item", name = "slag-stone", amount = 40}
+  --     {type = "item", name = "slag", amount = 40}
   --   },
   --   results = {
   --     {type = "item", name = "landfill", amount = 1}
@@ -68,7 +79,7 @@ data:extend({
   --   enabled = false,
   --   energy_required = 3.5,
   --   ingredients = {
-  --     {type = "item", name = "slag-stone", amount = 10}
+  --     {type = "item", name = "slag", amount = 10}
   --   },
   --   results = {
   --     {type = "item", name = "stone-brick", amount = 1}
@@ -88,7 +99,7 @@ data:extend({
   --   enabled = false,
   --   energy_required = 2,
   --   ingredients = {
-  --     {type = "item", name = "slag-stone", amount = 10}
+  --     {type = "item", name = "slag", amount = 10}
   --   },
   --   results = {
   --     {type = "item", name = "slag-powder", amount = 1}
@@ -99,7 +110,7 @@ data:extend({
   ----------------------
   -- {
   --   type = "recipe",
-  --   name = "slag-stone-concrete",
+  --   name = "slag-concrete",
     -- icons = ylib.icon.icons:get("Molten_Metals", "slag-sconcrete"),
   --   category = "crafting-with-fluid",
   --   energy_required = 1,
@@ -111,7 +122,7 @@ data:extend({
   --   hidden = false,
   --   enabled = false,
   --   ingredients = {
-  --     {type = "item",  name = "slag-stone", amount = 10},
+  --     {type = "item",  name = "slag", amount = 10},
   --     {type = "item",  name = "iron-stick", amount = 2},
   --     {type = "fluid", name = "acidic-water", amount = 60}
   --   },
@@ -139,10 +150,32 @@ data:extend({
     enabled = false,
     crafting_machine_tint = molten_metals.color.wastewater.tint,
     ingredients = {
-      {type = "item", name = "slag-stone", amount = 10}
+      {type = "item", name = "slag", amount = 10}
     },
     results = {
       {type = "item", name = "slag-pellet", amount = 5}
+    }
+  },
+  {
+    type = "recipe",
+    name = "slag-to-stone",
+    icons = {ylib.icon.get_icon("stone"), slag_icon_small},
+    category = "crafting",
+    subgroup = "intermediate-product",
+    energy_required = 1,
+    show_amount_in_title = true,
+    always_show_products = false,
+    hide_from_player_crafting = true,
+    allow_as_intermediate = false,
+    allow_intermediates = false,
+    hidden = false,
+    enabled = false,
+    crafting_machine_tint = molten_metals.color.wastewater.tint,
+    ingredients = {
+      {type = "item", name = "slag", amount = 5}
+    },
+    results = {
+      {type = "item", name = "stone", amount = 2}
     }
   },
   {
