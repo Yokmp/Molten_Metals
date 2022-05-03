@@ -5,8 +5,10 @@ if mods["angelsrefining"] then
     molten_metals.new_smelting_recipe(item, item.."-smelting", result)
     ylib.recipe.replace_result_name("molten-"..item, "molten-"..item, "molten-"..fluid)
     ylib.recipe.set_main_product("molten-"..item, "molten-"..fluid)
-    local temp = molten_metals.ore_definition(fluid).melting
-    ylib.recipe.set_result_temperature("molten-"..item, {temp,temp}, "molten-")
+    if not settings.startup["ymm-fp-workaround"].value then
+      local temp = molten_metals.ore_definition(fluid).melting
+      ylib.recipe.set_result_temperature("molten-"..item, {temp,temp}, "molten-")
+    end
 --//TODO Molten icon composer
     local icon = ylib.icon.get_item_icon(item)
     icon.scale = 32/icon.icon_size
