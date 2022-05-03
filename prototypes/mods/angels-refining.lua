@@ -9,12 +9,11 @@ if mods["angelsrefining"] then
     local icon = ylib.icon.get_item_icon(item)
     icon.scale = 32/icon.icon_size
     icon.shift = {0,-6}
-    icon.tint = nil
     local drop = ylib.icon.icons:get("Molten_Metals", "molten-drop")
     data.raw.recipe["molten-"..item].icons = {icon, drop}
   end
 
-
+log(serpent.block(data.raw.item["angels-iron-pebbles"]))
 
 
   smelting("angels-iron-pebbles", "iron-ore", "iron-plate")

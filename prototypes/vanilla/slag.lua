@@ -14,7 +14,6 @@ else
   slag_icon_small = ylib.icon.get_item_icon("slag")
   slag_icon_small.scale = 0.25
   slag_icon_small.shift = {-8,-8}
-  slag_icon_small.tint = nil
 end
 
 data:extend({
