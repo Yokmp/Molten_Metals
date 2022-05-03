@@ -54,7 +54,7 @@ data:extend({
     type = "bool-setting",
     name = "ymm-fp-workaround",
     localised_name = {"", "[img=info]", " - Workaround: ", {"mod-setting-name.ymm-fp-workaround"}},
-    localised_description = {"", "This is a workaround for some mods like [font=default-boldFactory Planner[/font] which don't work well with temperatures on fluids."},
+    -- localised_description = {"", "This is a workaround for some mods like [font=default-bold]Factory Planner[/font] which don't work well with temperatures on fluids."},
     setting_type = "startup",
     default_value = false,
     order = "ab"
@@ -79,7 +79,7 @@ data:extend({
   {
     type = "bool-setting",
     name = "ymm-enable-slag",
-    localised_name = {"", "[item=slag-stone]", " - ", {"mod-setting-name.ymm-enable-slag"}},
+    localised_name = {"", "[item=slag]", " - ", {"mod-setting-name.ymm-enable-slag"}},
     setting_type = "startup",
     default_value = true,
     order = "bb"
